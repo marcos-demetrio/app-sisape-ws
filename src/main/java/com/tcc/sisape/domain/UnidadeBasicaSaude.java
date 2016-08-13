@@ -39,16 +39,7 @@ public class UnidadeBasicaSaude {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "i_tipo_estabelecimento", referencedColumnName = "i_tipo_estabelecimento", nullable = false)
 	private UnidadeBasicaSaudeTipoEstabelecimento tipoEstabelecimento;
-	
-	@Column(nullable = false)
-	private boolean complexidadeAtencaoBasica;
-	
-	@Column(nullable = false)
-	private boolean complexidadeMedia;
-	
-	@Column(nullable = false)
-	private boolean complexidadeAlta;
-		
+			
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 12)
 	private String telefonePrincipal;
@@ -127,30 +118,6 @@ public class UnidadeBasicaSaude {
 
 	public void setTipoEstabelecimento(UnidadeBasicaSaudeTipoEstabelecimento tipoEstabelecimento) {
 		this.tipoEstabelecimento = tipoEstabelecimento;
-	}
-
-	public boolean isComplexidadeAtencaoBasica() {
-		return this.complexidadeAtencaoBasica;
-	}
-
-	public void setComplexidadeAtencaoBasica(boolean complexidadeAtencaoBasica) {
-		this.complexidadeAtencaoBasica = complexidadeAtencaoBasica;
-	}
-
-	public boolean isComplexidadeMedia() {
-		return this.complexidadeMedia;
-	}
-
-	public void setComplexidadeMedia(boolean complexidadeMedia) {
-		this.complexidadeMedia = complexidadeMedia;
-	}
-
-	public boolean isComplexidadeAlta() {
-		return this.complexidadeAlta;
-	}
-
-	public void setComplexidadeAlta(boolean complexidadeAlta) {
-		this.complexidadeAlta = complexidadeAlta;
 	}
 
 	public String getTelefonePrincipal() {

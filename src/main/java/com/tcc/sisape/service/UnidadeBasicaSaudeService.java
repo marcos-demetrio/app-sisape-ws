@@ -49,13 +49,13 @@ public class UnidadeBasicaSaudeService {
 	}
 	
 	public UnidadeBasicaSaude criar(UnidadeBasicaSaude unidadeBasicaSaude){
-		unidadeBasicaSaude.setId(null);
+		unidadeBasicaSaude.setiUnidadeBasicaSaude(null);
 		
 		return unidadeBasicaSaudeRepository.save(unidadeBasicaSaude);
 	}
 	
 	public void alterar(UnidadeBasicaSaude unidadeBasicaSaude){
-		findById(unidadeBasicaSaude.getId());
+		findById(unidadeBasicaSaude.getiUnidadeBasicaSaude());
 		
 		unidadeBasicaSaudeRepository.save(unidadeBasicaSaude);
 	}
