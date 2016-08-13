@@ -89,11 +89,11 @@ public class UnidadeBasicaSaude {
 	@Column(length = 255, nullable = false)
 	private String bairro;
 	
-	public Long getId() {
+	public Long getiUnidadeBasicaSaude() {
 		return this.iUnidadeBasicaSaude;
 	}
 
-	public void setId(Long iUnidadeBasicaSaude) {
+	public void setiUnidadeBasicaSaude(Long iUnidadeBasicaSaude) {
 		this.iUnidadeBasicaSaude = iUnidadeBasicaSaude;
 	}
 
@@ -111,6 +111,134 @@ public class UnidadeBasicaSaude {
 
 	public void setCodigoCnes(Long codigoCnes) {
 		this.codigoCnes = codigoCnes;
+	}
+
+	public String getCnpj() {
+		return this.cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public UnidadeBasicaSaudeTipoEstabelecimento getTipoEstabelecimento() {
+		return this.tipoEstabelecimento;
+	}
+
+	public void setTipoEstabelecimento(UnidadeBasicaSaudeTipoEstabelecimento tipoEstabelecimento) {
+		this.tipoEstabelecimento = tipoEstabelecimento;
+	}
+
+	public boolean isComplexidadeAtencaoBasica() {
+		return this.complexidadeAtencaoBasica;
+	}
+
+	public void setComplexidadeAtencaoBasica(boolean complexidadeAtencaoBasica) {
+		this.complexidadeAtencaoBasica = complexidadeAtencaoBasica;
+	}
+
+	public boolean isComplexidadeMedia() {
+		return this.complexidadeMedia;
+	}
+
+	public void setComplexidadeMedia(boolean complexidadeMedia) {
+		this.complexidadeMedia = complexidadeMedia;
+	}
+
+	public boolean isComplexidadeAlta() {
+		return this.complexidadeAlta;
+	}
+
+	public void setComplexidadeAlta(boolean complexidadeAlta) {
+		this.complexidadeAlta = complexidadeAlta;
+	}
+
+	public String getTelefonePrincipal() {
+		return this.telefonePrincipal;
+	}
+
+	public void setTelefonePrincipal(String telefonePrincipal) {
+		this.telefonePrincipal = telefonePrincipal;
+	}
+
+	public String getTelefoneSecundario() {
+		return this.telefoneSecundario;
+	}
+
+	public void setTelefoneSecundario(String telefoneSecundario) {
+		this.telefoneSecundario = telefoneSecundario;
+	}
+
+	public String getTelefoneFax() {
+		return this.telefoneFax;
+	}
+
+	public void setTelefoneFax(String telefoneFax) {
+		this.telefoneFax = telefoneFax;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCep() {
+		return this.cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getLogradouro() {
+		return this.logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public Long getNumero() {
+		return this.numero;
+	}
+
+	public void setNumero(Long numero) {
+		this.numero = numero;
+	}
+
+	public boolean isSemNumero() {
+		return this.semNumero;
+	}
+
+	public void setSemNumero(boolean semNumero) {
+		this.semNumero = semNumero;
+	}
+
+	public String getComplemento() {
+		return this.complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getPontoReferencia() {
+		return this.pontoReferencia;
+	}
+
+	public void setPontoReferencia(String pontoReferencia) {
+		this.pontoReferencia = pontoReferencia;
+	}
+
+	public Cidade getCidade() {
+		return this.cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 
 	public String getBairro() {
