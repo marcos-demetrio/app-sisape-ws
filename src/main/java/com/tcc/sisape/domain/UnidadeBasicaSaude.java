@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -52,6 +53,7 @@ public class UnidadeBasicaSaude {
 	@Column(length = 12)
 	private String telefoneFax;
 	
+	@Email
 	@Column(length = 255, nullable = false)
 	private String email;
 	

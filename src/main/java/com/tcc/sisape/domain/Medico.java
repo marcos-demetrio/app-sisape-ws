@@ -1,11 +1,22 @@
 package com.tcc.sisape.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.tcc.sisape.domain.enumdados.Sexo;
@@ -22,41 +33,62 @@ public class Medico {
 	private Long id;
 	
 	@JsonInclude(Include.NON_EMPTY)
-	@NotEmpty(message = "O campo Nome é obrigatório.")
 	@Column(length = 255, nullable = false)
 	private String nome;
 	
+	@CPF
 	@JsonInclude(Include.NON_EMPTY)
-	@NotEmpty(message = "O campo CPF é obrigatório.")
 	@Column(length = 11, nullable = false)
 	private String cpf;
 	
-	private String cns;
+	//private String cns;//duvida
 	
-	private String dataNascimento;//date
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
 	
+	@Enumerated(EnumType.STRING)//, columnDefinition = "char(1) default 'M'"
+	@Column(length = 1, nullable = false)
 	private Sexo sexo;
 	
-	private String conselhoClasse;//duvida
-	private String orgaoEmissor;//duvida
-	private String registroConselhoClasse;//duvida
-	private String email;
-	private String telefone;
+	//private String conselhoClasse;//duvida
+	//private String orgaoEmissor;//duvida
+	//private String registroConselhoClasse;//duvida
 	
+	@Email
+	@Column(length = 255, nullable = false)
+	private String email;
+	
+	@JsonInclude(Include.NON_EMPTY)
+	@Column(length = 12)
+	private String telefonePrincipal;
+	
+	@JsonInclude(Include.NON_EMPTY)
+	@Column(length = 12)
+	private String telefoneSecundario;
+	
+	@Column(length = 8, nullable = false)
 	private String cep;
 	
-	//private Cidade cidade;
-	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "i_cidade", referencedColumnName = "i_cidade", nullable = false)
+	private Cidade cidade;
+
+	@Column(length = 255, nullable = false)
 	private String bairro;
 	
+	@Column(length = 255, nullable = false)
 	private String logradouro;
 	
+	@JsonInclude(Include.NON_EMPTY)
 	private Long numero;
-	
+
+	@Column(nullable = false)
 	private boolean semNumero;
 	
+	@Column(length = 255, nullable = false)
 	private String complemento;
 	
+	@Column(length = 255, nullable = false)
 	private String pontoReferencia;
 	
 	public Long getId() {

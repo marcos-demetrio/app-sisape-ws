@@ -23,7 +23,7 @@ public class MedicoParametro {
 	private Long iMedicoParametro;
 	
 	@Column(nullable = false)
-	private boolean horarioMatutino;
+	private boolean horarioMatutino = false;
 	
 	@Temporal(TemporalType.TIME)
 	private Date horarioMatutinoInicio;
@@ -32,7 +32,7 @@ public class MedicoParametro {
 	private Date horarioMatutinoFim;
 	
 	@Column(nullable = false)
-	private boolean horarioVespertino;
+	private boolean horarioVespertino = false;
 	
 	@Temporal(TemporalType.TIME)
 	private Date horarioVespertinoInicio;
@@ -41,7 +41,7 @@ public class MedicoParametro {
 	private Date horarioVespertinoFim;
 	
 	@Column(nullable = false)
-	private boolean horarioNoturno;
+	private boolean horarioNoturno = false;
 	
 	@Temporal(TemporalType.TIME)
 	private Date horarioNoturnoInicio;
