@@ -284,4 +284,30 @@ public class UnidadeBasicaSaudeParametro {
 	public void setDuracaoPadraoAtendimento(Long duracaoPadraoAtendimento) {
 		this.duracaoPadraoAtendimento = duracaoPadraoAtendimento;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((iUnidadeBasicaSaudeParametro == null) ? 0 : iUnidadeBasicaSaudeParametro.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UnidadeBasicaSaudeParametro other = (UnidadeBasicaSaudeParametro) obj;
+		if (iUnidadeBasicaSaudeParametro == null) {
+			if (other.iUnidadeBasicaSaudeParametro != null)
+				return false;
+		} else if (!iUnidadeBasicaSaudeParametro.equals(other.iUnidadeBasicaSaudeParametro))
+			return false;
+		return true;
+	}
 }
