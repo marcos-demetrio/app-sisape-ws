@@ -3,29 +3,16 @@ package com.tcc.sisape.domain;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class UnidadeBasicaSaudeParametro {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty("i_unidade_basica_saude_parametro")
-	@Column(name = "i_unidade_basica_saude_parametro")
-	private Long iUnidadeBasicaSaudeParametro;
-	
-	@OneToOne(optional = false)
-	@JoinColumn(name = "i_unidade_basica_saude", referencedColumnName = "i_unidade_basica_saude", nullable = false)
-	private UnidadeBasicaSaude unidadeBasicaSaude;
+	@EmbeddedId
+	private UnidadeBasicaSaudeParametroId id;
 	
 	@Column(nullable = false)
 	private boolean complexidadeAtencaoBasica;
@@ -92,7 +79,15 @@ public class UnidadeBasicaSaudeParametro {
 	
 	@Column(nullable = false)	
 	private Long duracaoPadraoAtendimento;
-	
+		
+	public UnidadeBasicaSaudeParametroId getId() {
+		return this.id;
+	}
+
+	public void setId(UnidadeBasicaSaudeParametroId id) {
+		this.id = id;
+	}
+
 	public boolean isComplexidadeAtencaoBasica() {
 		return this.complexidadeAtencaoBasica;
 	}
@@ -115,22 +110,6 @@ public class UnidadeBasicaSaudeParametro {
 
 	public void setComplexidadeAlta(boolean complexidadeAlta) {
 		this.complexidadeAlta = complexidadeAlta;
-	}
-
-	public Long getiUnidadeBasicaSaudeParametro() {
-		return this.iUnidadeBasicaSaudeParametro;
-	}
-
-	public void setiUnidadeBasicaSaudeParametro(Long iUnidadeBasicaSaudeParametro) {
-		this.iUnidadeBasicaSaudeParametro = iUnidadeBasicaSaudeParametro;
-	}
-
-	public UnidadeBasicaSaude getUnidadeBasicaSaude() {
-		return this.unidadeBasicaSaude;
-	}
-
-	public void setUnidadeBasicaSaude(UnidadeBasicaSaude unidadeBasicaSaude) {
-		this.unidadeBasicaSaude = unidadeBasicaSaude;
 	}
 
 	public boolean isTipoServicoAdm() {
@@ -283,31 +262,5 @@ public class UnidadeBasicaSaudeParametro {
 
 	public void setDuracaoPadraoAtendimento(Long duracaoPadraoAtendimento) {
 		this.duracaoPadraoAtendimento = duracaoPadraoAtendimento;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((iUnidadeBasicaSaudeParametro == null) ? 0 : iUnidadeBasicaSaudeParametro.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UnidadeBasicaSaudeParametro other = (UnidadeBasicaSaudeParametro) obj;
-		if (iUnidadeBasicaSaudeParametro == null) {
-			if (other.iUnidadeBasicaSaudeParametro != null)
-				return false;
-		} else if (!iUnidadeBasicaSaudeParametro.equals(other.iUnidadeBasicaSaudeParametro))
-			return false;
-		return true;
 	}
 }
