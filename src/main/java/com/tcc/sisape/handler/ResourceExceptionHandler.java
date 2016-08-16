@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.tcc.sisape.domain.DetalhesErro;
-import com.tcc.sisape.service.exceptions.PacienteNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.CidadaoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.UnidadeBasicaSaudeNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.UsuarioNaoEncontradoException;
 
@@ -28,9 +28,9 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
 	
-	@ExceptionHandler(PacienteNaoEncontradoException.class)
+	@ExceptionHandler(CidadaoNaoEncontradoException.class)
 	public ResponseEntity<DetalhesErro> handlePacienteNaoEncontradoException
-		(PacienteNaoEncontradoException e, HttpServletRequest request){
+		(CidadaoNaoEncontradoException e, HttpServletRequest request){
 		
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(404l);

@@ -18,48 +18,48 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tcc.sisape.domain.Cidadao;
-import com.tcc.sisape.service.PacientesService;
+import com.tcc.sisape.service.CidadaoService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/pacientes")
-public class PacientesResource {
+@RequestMapping("/cidadao")
+public class CidadaoResource {
 	
 	@Autowired
-	private PacientesService pacientesService;
+	private CidadaoService cidadaoService;
 
 	@RequestMapping(method = RequestMethod.GET)//produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
 	public ResponseEntity<List<Cidadao>> buscarTodos(){
-		return ResponseEntity.status(HttpStatus.OK).body(pacientesService.findAll());
+		return ResponseEntity.status(HttpStatus.OK).body(cidadaoService.findAll());
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Cidadao> buscarPorId(@PathVariable("id") Long id){
-		return ResponseEntity.status(HttpStatus.OK).body(pacientesService.findById(id));
+		return ResponseEntity.status(HttpStatus.OK).body(cidadaoService.findById(id));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deletar(@PathVariable("id") Long id){
-		pacientesService.deletar(id);
+		cidadaoService.deletar(id);
 		
 		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> salvar(@Valid @RequestBody Cidadao paciente){
-		paciente = pacientesService.criar(paciente);
+	public ResponseEntity<Void> salvar(@Valid @RequestBody Cidadao cidadao){
+		cidadao = cidadaoService.criar(cidadao);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(paciente.getId()).toUri();
+				.path("/{id}").buildAndExpand(cidadao.getId()).toUri();
 		
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> alterar(@RequestBody Cidadao paciente, @PathVariable Long id){
-		paciente.setId(id);
+	public ResponseEntity<Void> alterar(@RequestBody Cidadao cidadao, @PathVariable Long id){
+		cidadao.setId(id);
 		
-		pacientesService.alterar(paciente);
+		cidadaoService.alterar(cidadao);
 		
 		return ResponseEntity.noContent().build();
 	}
