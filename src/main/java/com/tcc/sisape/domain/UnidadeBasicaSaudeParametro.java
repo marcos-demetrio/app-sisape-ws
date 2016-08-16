@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class UnidadeBasicaSaudeParametro implements Serializable {
-	
+
 	private static final long serialVersionUID = -4283912034998816980L;
 
 	@Id
@@ -30,73 +30,89 @@ public class UnidadeBasicaSaudeParametro implements Serializable {
 	@OneToOne(optional = false)
 	@JoinColumn(name = "i_unidade_basica_saude", referencedColumnName = "i_unidade_basica_saude", nullable = false)
 	private UnidadeBasicaSaude unidadeBasicaSaude;
-	
+
 	@Column(nullable = false)
 	private boolean complexidadeAtencaoBasica;
-	
+
 	@Column(nullable = false)
 	private boolean complexidadeMedia;
-	
+
 	@Column(nullable = false)
 	private boolean complexidadeAlta;
-	
+
 	@Column(nullable = false)
 	private boolean tipoServicoAdm;
-	
+
 	@Column(nullable = false)
 	private boolean tipoServicoCurativo;
-	
+
 	@Column(nullable = false)
 	private boolean tipoServicoDemanda;
-	
+
 	@Column(nullable = false)
 	private boolean tipoServicoEscuta;
-	
+
 	@Column(nullable = false)
 	private boolean tipoServicoExame;
-	
+
 	@Column(nullable = false)
 	private boolean tipoServicoNebulizacao;
-	
+
 	@Column(nullable = false)
 	private boolean tipoServicoOdontologia;
-	
+
 	@Column(nullable = false)
 	private boolean tipoServicoProcedimento;
-	
+
 	@Column(nullable = false)
 	private boolean tipoServicoVacina;
-	
-	@Column(nullable = false)	
+
+	@Column(nullable = false)
 	private boolean horarioMatutino;
-	
+
 	@Temporal(TemporalType.TIME)
 	private Date horarioMatutinoInicio;
-	
+
 	@Temporal(TemporalType.TIME)
 	private Date horarioMatutinoFim;
-	
-	@Column(nullable = false)	
+
+	@Column(nullable = false)
 	private boolean horarioVespertino;
-	
+
 	@Temporal(TemporalType.TIME)
 	private Date horarioVespertinoInicio;
-	
+
 	@Temporal(TemporalType.TIME)
 	private Date horarioVespertinoFim;
-	
-	@Column(nullable = false)	
+
+	@Column(nullable = false)
 	private boolean horarioNoturno;
-	
+
 	@Temporal(TemporalType.TIME)
 	private Date horarioNoturnoInicio;
-	
+
 	@Temporal(TemporalType.TIME)
 	private Date horarioNoturnoFim;
-	
-	@Column(nullable = false)	
+
+	@Column(nullable = false)
 	private Long duracaoPadraoAtendimento;
-		
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public UnidadeBasicaSaude getUnidadeBasicaSaude() {
+		return this.unidadeBasicaSaude;
+	}
+
+	public void setUnidadeBasicaSaude(UnidadeBasicaSaude unidadeBasicaSaude) {
+		this.unidadeBasicaSaude = unidadeBasicaSaude;
+	}
+
 	public boolean isComplexidadeAtencaoBasica() {
 		return this.complexidadeAtencaoBasica;
 	}
@@ -271,5 +287,36 @@ public class UnidadeBasicaSaudeParametro implements Serializable {
 
 	public void setDuracaoPadraoAtendimento(Long duracaoPadraoAtendimento) {
 		this.duracaoPadraoAtendimento = duracaoPadraoAtendimento;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((unidadeBasicaSaude == null) ? 0 : unidadeBasicaSaude.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UnidadeBasicaSaudeParametro other = (UnidadeBasicaSaudeParametro) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (unidadeBasicaSaude == null) {
+			if (other.unidadeBasicaSaude != null)
+				return false;
+		} else if (!unidadeBasicaSaude.equals(other.unidadeBasicaSaude))
+			return false;
+		return true;
 	}
 }
