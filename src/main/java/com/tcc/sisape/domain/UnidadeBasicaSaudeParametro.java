@@ -1,18 +1,35 @@
 package com.tcc.sisape.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
-public class UnidadeBasicaSaudeParametro {
+public class UnidadeBasicaSaudeParametro implements Serializable {
 	
-	@EmbeddedId
-	private UnidadeBasicaSaudeParametroId id;
+	private static final long serialVersionUID = -4283912034998816980L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty("i_unidade_basica_saude_parametro")
+	@Column(name = "i_unidade_basica_saude_parametro")
+	private Long id;
+
+	@Id
+	@OneToOne(optional = false)
+	@JoinColumn(name = "i_unidade_basica_saude", referencedColumnName = "i_unidade_basica_saude", nullable = false)
+	private UnidadeBasicaSaude unidadeBasicaSaude;
 	
 	@Column(nullable = false)
 	private boolean complexidadeAtencaoBasica;
@@ -80,14 +97,6 @@ public class UnidadeBasicaSaudeParametro {
 	@Column(nullable = false)	
 	private Long duracaoPadraoAtendimento;
 		
-	public UnidadeBasicaSaudeParametroId getId() {
-		return this.id;
-	}
-
-	public void setId(UnidadeBasicaSaudeParametroId id) {
-		this.id = id;
-	}
-
 	public boolean isComplexidadeAtencaoBasica() {
 		return this.complexidadeAtencaoBasica;
 	}

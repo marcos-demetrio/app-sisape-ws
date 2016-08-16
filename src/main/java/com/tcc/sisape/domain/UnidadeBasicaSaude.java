@@ -241,5 +241,5 @@ public class UnidadeBasicaSaude {
 		} else if (!iUnidadeBasicaSaude.equals(other.iUnidadeBasicaSaude))
 			return false;
 		return true;
-	}	
+	}
 }
