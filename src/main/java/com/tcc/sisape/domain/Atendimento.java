@@ -1,6 +1,6 @@
 package com.tcc.sisape.domain;
 
 public class Atendimento {
-	private Paciente paciente;
+	private Cidadao paciente;
 	private MedicoParametro medico;
 }

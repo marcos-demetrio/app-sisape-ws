@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.tcc.sisape.domain.Paciente;
+import com.tcc.sisape.domain.Cidadao;
 import com.tcc.sisape.service.PacientesService;
 
 @CrossOrigin
@@ -29,12 +29,12 @@ public class PacientesResource {
 	private PacientesService pacientesService;
 
 	@RequestMapping(method = RequestMethod.GET)//produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-	public ResponseEntity<List<Paciente>> buscarTodos(){
+	public ResponseEntity<List<Cidadao>> buscarTodos(){
 		return ResponseEntity.status(HttpStatus.OK).body(pacientesService.findAll());
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Paciente> buscarPorId(@PathVariable("id") Long id){
+	public ResponseEntity<Cidadao> buscarPorId(@PathVariable("id") Long id){
 		return ResponseEntity.status(HttpStatus.OK).body(pacientesService.findById(id));
 	}
 
@@ -46,7 +46,7 @@ public class PacientesResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> salvar(@Valid @RequestBody Paciente paciente){
+	public ResponseEntity<Void> salvar(@Valid @RequestBody Cidadao paciente){
 		paciente = pacientesService.criar(paciente);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -56,7 +56,7 @@ public class PacientesResource {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> alterar(@RequestBody Paciente paciente, @PathVariable Long id){
+	public ResponseEntity<Void> alterar(@RequestBody Cidadao paciente, @PathVariable Long id){
 		paciente.setId(id);
 		
 		pacientesService.alterar(paciente);

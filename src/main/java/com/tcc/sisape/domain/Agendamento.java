@@ -1,7 +1,7 @@
 package com.tcc.sisape.domain;
 
 public class Agendamento {
-	private Paciente paciente;
+	private Cidadao paciente;
 	private MedicoParametro medico;
 	private ProfissionalAcolhimento profissionalAcolhimento;
 	

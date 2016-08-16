@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.tcc.sisape.domain.Paciente;
+import com.tcc.sisape.domain.Cidadao;
 import com.tcc.sisape.repository.PacientesRepository;
 import com.tcc.sisape.service.exceptions.PacienteNaoEncontradoException;
 
@@ -16,12 +16,12 @@ public class PacientesService {
 	@Autowired
 	private PacientesRepository pacientesRepository;
 	
-	public List<Paciente> findAll(){
+	public List<Cidadao> findAll(){
 		return pacientesRepository.findAll();
 	}
 	
-	public Paciente findByNome(String nome){
-		Paciente paciente = pacientesRepository.findByNomeContaining(nome);
+	public Cidadao findByNome(String nome){
+		Cidadao paciente = pacientesRepository.findByNomeContaining(nome);
 		
 		if(paciente == null){
 			throw new PacienteNaoEncontradoException("Paciente não encontrado.");
@@ -30,8 +30,8 @@ public class PacientesService {
 		return paciente;
 	}
 	
-	public Paciente findById(Long id){
-		Paciente paciente = pacientesRepository.findOne(id);
+	public Cidadao findById(Long id){
+		Cidadao paciente = pacientesRepository.findOne(id);
 		
 		if(paciente == null){
 			throw new PacienteNaoEncontradoException("Paciente não encontrado.");
@@ -48,13 +48,13 @@ public class PacientesService {
 		}
 	}
 	
-	public Paciente criar(Paciente paciente){
+	public Cidadao criar(Cidadao paciente){
 		paciente.setId(null);
 		
 		return pacientesRepository.save(paciente);
 	}
 	
-	public void alterar(Paciente paciente){
+	public void alterar(Cidadao paciente){
 		findById(paciente.getId());
 		
 		pacientesRepository.save(paciente);
