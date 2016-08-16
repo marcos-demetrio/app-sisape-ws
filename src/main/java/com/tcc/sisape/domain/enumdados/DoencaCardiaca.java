@@ -1,7 +1,7 @@
 package com.tcc.sisape.domain.enumdados;
 
 public enum DoencaCardiaca {
-	INSUFICIENCIA_CARDIACA(117), OUTROS(117), NAO_SABE(117);
+	INSUFICIENCIA_CARDIACA(24), OUTROS(25), NAO_SABE(26);
 
 	private int doencaCardiaca;
 
