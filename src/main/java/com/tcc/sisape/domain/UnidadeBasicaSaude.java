@@ -17,71 +17,71 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class UnidadeBasicaSaude {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonProperty("i_unidade_basica_saude")
 	@Column(name = "i_unidade_basica_saude")
 	private Long iUnidadeBasicaSaude;
-	
+
 	@Column(length = 255, nullable = false)
 	private String nome;
-		
+
 	@JsonProperty("codigo_cnes")
 	@Column(nullable = false)
 	private Long codigoCnes;
-	
+
 	@CNPJ
 	@Column(length = 14, nullable = false)
 	private String cnpj;
-	
-	//private EsferaAdministrativa esferaAdministrativa;
-	
+
+	// private EsferaAdministrativa esferaAdministrativa;
+
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "i_tipo_estabelecimento", referencedColumnName = "i_tipo_estabelecimento", nullable = false)
 	private UnidadeBasicaSaudeTipoEstabelecimento tipoEstabelecimento;
-			
+
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 12)
 	private String telefonePrincipal;
-	
+
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 12)
 	private String telefoneSecundario;
-	
+
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 12)
 	private String telefoneFax;
-	
+
 	@Email
 	@Column(length = 255, nullable = false)
 	private String email;
-	
+
 	@Column(length = 8, nullable = false)
 	private String cep;
-	
+
 	@Column(length = 255, nullable = false)
 	private String logradouro;
-	
+
 	@JsonInclude(Include.NON_EMPTY)
 	private Long numero;
 
 	@Column(nullable = false)
 	private boolean semNumero;
-	
+
 	@Column(length = 255, nullable = false)
 	private String complemento;
-	
+
 	@Column(length = 255, nullable = false)
 	private String pontoReferencia;
-	
+
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "i_cidade", referencedColumnName = "i_cidade", nullable = false)
 	private Cidade cidade;
 
 	@Column(length = 255, nullable = false)
 	private String bairro;
-	
+
 	public Long getiUnidadeBasicaSaude() {
 		return this.iUnidadeBasicaSaude;
 	}

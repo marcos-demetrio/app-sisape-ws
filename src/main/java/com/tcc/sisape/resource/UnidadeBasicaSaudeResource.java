@@ -24,43 +24,45 @@ import com.tcc.sisape.service.UnidadeBasicaSaudeService;
 @RestController
 @RequestMapping("/ubs")
 public class UnidadeBasicaSaudeResource {
-	
+
 	@Autowired
 	private UnidadeBasicaSaudeService unidadeBasicaSaudeService;
 
-	@RequestMapping(method = RequestMethod.GET)//produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-	public ResponseEntity<List<UnidadeBasicaSaude>> buscarTodos(){
+	@RequestMapping(method = RequestMethod.GET) // produces =
+												// {MediaType.APPLICATION_JSON_VALUE,
+												// MediaType.APPLICATION_XML_VALUE}
+	public ResponseEntity<List<UnidadeBasicaSaude>> buscarTodos() {
 		return ResponseEntity.status(HttpStatus.OK).body(unidadeBasicaSaudeService.findAll());
 	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<UnidadeBasicaSaude> buscarPorId(@PathVariable("id") Long id){
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<UnidadeBasicaSaude> buscarPorId(@PathVariable("id") Long id) {
 		return ResponseEntity.status(HttpStatus.OK).body(unidadeBasicaSaudeService.findById(id));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deletar(@PathVariable("id") Long id){
+	public ResponseEntity<Void> deletar(@PathVariable("id") Long id) {
 		unidadeBasicaSaudeService.deletar(id);
-		
+
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> salvar(@Valid @RequestBody UnidadeBasicaSaude unidadeBasicaSaude){
+	public ResponseEntity<Void> salvar(@Valid @RequestBody UnidadeBasicaSaude unidadeBasicaSaude) {
 		unidadeBasicaSaude = unidadeBasicaSaudeService.criar(unidadeBasicaSaude);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(unidadeBasicaSaude.getiUnidadeBasicaSaude()).toUri();
-		
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(unidadeBasicaSaude.getiUnidadeBasicaSaude()).toUri();
+
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> alterar(@RequestBody UnidadeBasicaSaude unidadeBasicaSaude, @PathVariable Long id){
+	public ResponseEntity<Void> alterar(@RequestBody UnidadeBasicaSaude unidadeBasicaSaude, @PathVariable Long id) {
 		unidadeBasicaSaude.setiUnidadeBasicaSaude(id);
-		
+
 		unidadeBasicaSaudeService.alterar(unidadeBasicaSaude);
-		
+
 		return ResponseEntity.noContent().build();
 	}
 }

@@ -15,13 +15,13 @@ import com.tcc.sisape.service.UsuariosService;
 @RestController
 @RequestMapping("/usuario")
 public class UsuariosResource {
-	
+
 	@Autowired
 	private UsuariosService usuariosService;
 
-	@RequestMapping(value = "/{nome}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Usuario> findByNome(@PathVariable("nome") String nome){
+	@RequestMapping(value = "/{nome}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Usuario> findByNome(@PathVariable("nome") String nome) {
 		return ResponseEntity.status(HttpStatus.OK).body(usuariosService.findByNome(nome));
 	}
-	
+
 }

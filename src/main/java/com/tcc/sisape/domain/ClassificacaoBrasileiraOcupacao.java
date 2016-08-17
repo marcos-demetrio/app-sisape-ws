@@ -15,7 +15,7 @@ public class ClassificacaoBrasileiraOcupacao {
 	@JsonProperty("i_cbo")
 	@Column(name = "i_cbo")
 	private Long iCbo;
-	
+
 	@Column(length = 255, nullable = false)
 	private String nome;
 

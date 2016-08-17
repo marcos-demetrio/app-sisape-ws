@@ -10,16 +10,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Cidade {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonProperty("i_cidade")
 	@Column(name = "i_cidade")
 	private Long iCidade;
-	
+
 	@Column(length = 255, nullable = false)
 	private String nome;
-	
+
 	@Column(name = "sigla_uf", length = 2, nullable = false)
 	private String siglaUf;
 

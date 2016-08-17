@@ -2,11 +2,11 @@ package com.tcc.sisape.domain;
 
 public class DetalhesErro {
 	private String titulo;
-	
+
 	private Long status;
-	
+
 	private Long timestamp;
-	
+
 	private String mensagemDesenvolvedor;
 
 	public String getTitulo() {
@@ -40,5 +40,5 @@ public class DetalhesErro {
 	public void setMensagemDesenvolvedor(String mensagemDesenvolvedor) {
 		this.mensagemDesenvolvedor = mensagemDesenvolvedor;
 	}
-		
+
 }

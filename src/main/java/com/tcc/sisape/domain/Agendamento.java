@@ -4,7 +4,7 @@ public class Agendamento {
 	private Cidadao paciente;
 	private MedicoParametro medico;
 	private ProfissionalAcolhimento profissionalAcolhimento;
-	
-	private String dataHoraInicio;//DateTime
-	private String dataHoraFim;//DateTime
+
+	private String dataHoraInicio;// DateTime
+	private String dataHoraFim;// DateTime
 }

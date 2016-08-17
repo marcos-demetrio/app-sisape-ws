@@ -24,43 +24,45 @@ import com.tcc.sisape.service.CidadaoService;
 @RestController
 @RequestMapping("/cidadao")
 public class CidadaoResource {
-	
+
 	@Autowired
 	private CidadaoService cidadaoService;
 
-	@RequestMapping(method = RequestMethod.GET)//produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
-	public ResponseEntity<List<Cidadao>> buscarTodos(){
+	@RequestMapping(method = RequestMethod.GET) // produces =
+												// {MediaType.APPLICATION_JSON_VALUE,
+												// MediaType.APPLICATION_XML_VALUE}
+	public ResponseEntity<List<Cidadao>> buscarTodos() {
 		return ResponseEntity.status(HttpStatus.OK).body(cidadaoService.findAll());
 	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Cidadao> buscarPorId(@PathVariable("id") Long id){
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Cidadao> buscarPorId(@PathVariable("id") Long id) {
 		return ResponseEntity.status(HttpStatus.OK).body(cidadaoService.findById(id));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deletar(@PathVariable("id") Long id){
+	public ResponseEntity<Void> deletar(@PathVariable("id") Long id) {
 		cidadaoService.deletar(id);
-		
+
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> salvar(@Valid @RequestBody Cidadao cidadao){
+	public ResponseEntity<Void> salvar(@Valid @RequestBody Cidadao cidadao) {
 		cidadao = cidadaoService.criar(cidadao);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(cidadao.getId()).toUri();
-		
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cidadao.getId())
+				.toUri();
+
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> alterar(@RequestBody Cidadao cidadao, @PathVariable Long id){
+	public ResponseEntity<Void> alterar(@RequestBody Cidadao cidadao, @PathVariable Long id) {
 		cidadao.setId(id);
-		
+
 		cidadaoService.alterar(cidadao);
-		
+
 		return ResponseEntity.noContent().build();
 	}
 }
