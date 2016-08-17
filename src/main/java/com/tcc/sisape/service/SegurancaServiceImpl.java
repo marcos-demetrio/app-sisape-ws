@@ -7,24 +7,23 @@ import com.tcc.sisape.domain.Usuario;
 import com.tcc.sisape.repository.UsuariosRepository;
 
 @Service("segurancaService")
-public class SegurancaServiceImpl /*implements UserDetailsService*/{
-	
+public class SegurancaServiceImpl /* implements UserDetailsService */ {
+
 	@Autowired
 	private UsuariosRepository usuariosRepository;
-	
-	public void setUsuarioRepository(UsuariosRepository usuariosDao){
+
+	public void setUsuarioRepository(UsuariosRepository usuariosDao) {
 		this.usuariosRepository = usuariosDao;
 	}
-	
-	/*@Override
-	public UserDetails loadUserByUsername(String userName)
-		throws UsernameNotFoundException{
-		Usuario usuario = usuariosRepository.findByNomeContaining(userName);
-		
-		if(usuario == null){
-			throw new UsernameNotFoundException("Usuário não encontrado");
-		}
-		
-		return usuario;
-	}*/
+
+	/*
+	 * @Override public UserDetails loadUserByUsername(String userName) throws
+	 * UsernameNotFoundException{ Usuario usuario =
+	 * usuariosRepository.findByNomeContaining(userName);
+	 * 
+	 * if(usuario == null){ throw new UsernameNotFoundException(
+	 * "Usuário não encontrado"); }
+	 * 
+	 * return usuario; }
+	 */
 }

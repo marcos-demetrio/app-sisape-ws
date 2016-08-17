@@ -12,14 +12,14 @@ public class UsuariosService {
 
 	@Autowired
 	private UsuariosRepository usuariosRepository;
-	
-	public Usuario findByNome(String nome){
+
+	public Usuario findByNome(String nome) {
 		Usuario usuario = usuariosRepository.findByNomeContaining(nome);
-		
-		if(usuario == null){
+
+		if (usuario == null) {
 			throw new UsuarioNaoEncontradoException("Usuário não encontrado.");
 		}
-		
+
 		return usuario;
 	}
 }

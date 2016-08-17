@@ -8,8 +8,8 @@ public enum EsferaAdministrativa {
 	EsferaAdministrativa(String esferaAdministrativa) {
 		this.esferaAdministrativa = esferaAdministrativa;
 	}
-	
-	public String getDescricao(){
+
+	public String getDescricao() {
 		return this.esferaAdministrativa;
 	}
 }

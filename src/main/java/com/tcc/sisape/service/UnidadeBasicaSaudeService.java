@@ -15,48 +15,48 @@ public class UnidadeBasicaSaudeService {
 
 	@Autowired
 	private UnidadeBasicaSaudeRepository unidadeBasicaSaudeRepository;
-	
-	public List<UnidadeBasicaSaude> findAll(){
+
+	public List<UnidadeBasicaSaude> findAll() {
 		return unidadeBasicaSaudeRepository.findAll();
 	}
-	
-	public UnidadeBasicaSaude findByNome(String nome){
+
+	public UnidadeBasicaSaude findByNome(String nome) {
 		UnidadeBasicaSaude unidadeBasicaSaude = unidadeBasicaSaudeRepository.findByNomeContaining(nome);
-		
-		if(unidadeBasicaSaude == null){
+
+		if (unidadeBasicaSaude == null) {
 			throw new UnidadeBasicaSaudeNaoEncontradoException("Unidade Básica de Saúde não encontrada.");
 		}
-		
+
 		return unidadeBasicaSaude;
 	}
-	
-	public UnidadeBasicaSaude findById(Long id){
+
+	public UnidadeBasicaSaude findById(Long id) {
 		UnidadeBasicaSaude unidadeBasicaSaude = unidadeBasicaSaudeRepository.findOne(id);
-		
-		if(unidadeBasicaSaude == null){
+
+		if (unidadeBasicaSaude == null) {
 			throw new UnidadeBasicaSaudeNaoEncontradoException("Unidade Básica de Saúde não encontrada.");
 		}
-		
+
 		return unidadeBasicaSaude;
 	}
-	
-	public void deletar(Long id){
+
+	public void deletar(Long id) {
 		try {
 			unidadeBasicaSaudeRepository.delete(id);
 		} catch (EmptyResultDataAccessException e) {
 			throw new UnidadeBasicaSaudeNaoEncontradoException("Unidade Básica de Saúde não encontrado.");
 		}
 	}
-	
-	public UnidadeBasicaSaude criar(UnidadeBasicaSaude unidadeBasicaSaude){
+
+	public UnidadeBasicaSaude criar(UnidadeBasicaSaude unidadeBasicaSaude) {
 		unidadeBasicaSaude.setiUnidadeBasicaSaude(null);
-		
+
 		return unidadeBasicaSaudeRepository.save(unidadeBasicaSaude);
 	}
-	
-	public void alterar(UnidadeBasicaSaude unidadeBasicaSaude){
+
+	public void alterar(UnidadeBasicaSaude unidadeBasicaSaude) {
 		findById(unidadeBasicaSaude.getiUnidadeBasicaSaude());
-		
+
 		unidadeBasicaSaudeRepository.save(unidadeBasicaSaude);
 	}
 }
