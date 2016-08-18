@@ -30,5 +30,4 @@ public enum MotivoVisita {
 	public int getMotivoVisita() {
 		return this.motivoVisita;
 	}
-
 }

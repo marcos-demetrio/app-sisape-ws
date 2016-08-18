@@ -14,5 +14,4 @@ public enum PraticasIntegrativasComplementares {
 	public int getPraticasIntegrativasComplementares() {
 		return this.praticasIntegrativasComplementares;
 	}
-
 }

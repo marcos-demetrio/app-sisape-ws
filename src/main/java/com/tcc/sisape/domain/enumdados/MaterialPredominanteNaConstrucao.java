@@ -14,5 +14,4 @@ public enum MaterialPredominanteNaConstrucao {
 	public int getMaterialPredominanteNaConstrucao() {
 		return this.materialPredominanteNaConstrucao;
 	}
-
 }

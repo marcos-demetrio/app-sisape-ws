@@ -12,5 +12,4 @@ public enum FornecimentoOdonto {
 	public int getFornecimentoOdonto() {
 		return this.fornecimentoOdonto;
 	}
-
 }

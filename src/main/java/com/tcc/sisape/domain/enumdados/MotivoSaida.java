@@ -12,5 +12,4 @@ public enum MotivoSaida {
 	public int getMotivoSaida() {
 		return this.motivoSaida;
 	}
-
 }

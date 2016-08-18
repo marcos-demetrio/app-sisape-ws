@@ -12,5 +12,4 @@ public enum NASF {
 	public int getNASF() {
 		return this.nasf;
 	}
-
 }

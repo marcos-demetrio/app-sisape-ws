@@ -12,5 +12,4 @@ public enum LocalizacaoDaMoradia {
 	public int getLocalizacaoDaMoradia() {
 		return this.localizacaoDaMoradia;
 	}
-
 }

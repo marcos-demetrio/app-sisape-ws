@@ -12,5 +12,4 @@ public enum DoencaCardiaca {
 	public int getDoencaCardiaca() {
 		return this.doencaCardiaca;
 	}
-
 }

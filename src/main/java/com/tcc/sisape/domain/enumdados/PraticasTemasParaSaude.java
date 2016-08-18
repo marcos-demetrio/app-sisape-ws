@@ -28,5 +28,4 @@ public enum PraticasTemasParaSaude {
 	public int getPraticasTemasParaSaude() {
 		return this.praticasTemasParaSaude;
 	}
-
 }

@@ -12,5 +12,4 @@ public enum OrientacaoSexual {
 	public int getOrientacaoSexual() {
 		return this.orientacaoSexual;
 	}
-
 }

@@ -12,5 +12,4 @@ public enum Desfecho {
 	public int getDesfecho() {
 		return this.desfecho;
 	}
-
 }

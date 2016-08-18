@@ -12,5 +12,4 @@ public enum OrigemAlimentacao {
 	public int getOrigemAlimentacao() {
 		return this.origemAlimentacao;
 	}
-
 }

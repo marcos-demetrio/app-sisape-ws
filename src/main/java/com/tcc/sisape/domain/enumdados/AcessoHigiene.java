@@ -12,5 +12,4 @@ public enum AcessoHigiene {
 	public int getAcessoHigiene() {
 		return this.acessoHigiene;
 	}
-
 }

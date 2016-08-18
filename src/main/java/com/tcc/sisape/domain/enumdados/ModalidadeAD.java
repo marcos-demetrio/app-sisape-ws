@@ -12,5 +12,4 @@ public enum ModalidadeAD {
 	public int getModalidadeAD() {
 		return this.modalidadeAD;
 	}
-
 }

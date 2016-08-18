@@ -12,5 +12,4 @@ public enum DestinoDoLixo {
 	public int getDestinoDoLixo() {
 		return this.destinoDoLixo;
 	}
-
 }

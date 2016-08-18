@@ -15,5 +15,4 @@ public enum LocalDeAtendimento {
 	public int getLocalDeAtendimento() {
 		return this.localDeAtendimento;
 	}
-
 }

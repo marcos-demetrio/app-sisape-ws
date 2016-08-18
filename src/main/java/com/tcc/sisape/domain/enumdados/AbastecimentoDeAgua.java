@@ -12,5 +12,4 @@ public enum AbastecimentoDeAgua {
 	public int getAbastecimentoDeAgua() {
 		return this.abastecimentoDeAgua;
 	}
-
 }

@@ -12,5 +12,4 @@ public enum Nacionalidade {
 	public int getNacionalidade() {
 		return this.nacionalidade;
 	}
-
 }

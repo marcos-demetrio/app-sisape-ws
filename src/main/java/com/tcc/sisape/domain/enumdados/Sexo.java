@@ -1,15 +1,15 @@
 package com.tcc.sisape.domain.enumdados;
 
 public enum Sexo {
-	MASCULINO("M"), FEMININO("F");
+	MASCULINO(0), FEMININO(1);
 
-	private String sexo;
+	private int sexo;
 
-	Sexo(String sexo) {
+	Sexo(int sexo) {
 		this.sexo = sexo;
 	}
 
-	public String getDescricao() {
+	public int getSexo() {
 		return this.sexo;
 	}
 }
