@@ -21,7 +21,7 @@ public class CidadaoService {
 	}
 
 	public Cidadao findByNome(String nome) {
-		Cidadao cidadao = cidadaoRepository.findByNomeContaining(nome);
+		Cidadao cidadao = cidadaoRepository.findByNomeCompletoContaining(nome);
 
 		if (cidadao == null) {
 			throw new CidadaoNaoEncontradoException("Cidadão não encontrado.");

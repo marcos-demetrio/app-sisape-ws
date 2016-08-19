@@ -9,26 +9,26 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-public class Cidade {
+public class Pais {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty("i_cidade")
-	@Column(name = "i_cidade")
-	private Long iCidade;
+	@JsonProperty("i_pais")
+	@Column(name = "i_pais")
+	private Long id;
 
-	@Column(length = 255, nullable = false)
+	@Column(length = 100, nullable = false)
 	private String nome;
 
-	@Column(name = "sigla_uf", length = 2, nullable = false)
-	private String siglaUf;
+	@Column(length = 3, nullable = false)
+	private String sigla;
 
 	public Long getId() {
-		return this.iCidade;
+		return this.id;
 	}
 
-	public void setId(Long iCidade) {
-		this.iCidade = iCidade;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -39,19 +39,19 @@ public class Cidade {
 		this.nome = nome;
 	}
 
-	public String getSiglaUf() {
-		return this.siglaUf;
+	public String getSigla() {
+		return this.sigla;
 	}
 
-	public void setSiglaUf(String siglaUf) {
-		this.siglaUf = siglaUf;
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((iCidade == null) ? 0 : iCidade.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -63,11 +63,11 @@ public class Cidade {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cidade other = (Cidade) obj;
-		if (iCidade == null) {
-			if (other.iCidade != null)
+		Pais other = (Pais) obj;
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!iCidade.equals(other.iCidade))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

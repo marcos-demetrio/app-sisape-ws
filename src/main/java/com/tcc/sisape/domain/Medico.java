@@ -69,10 +69,10 @@ public class Medico {
 	@Column(length = 8, nullable = false)
 	private String cep;
 
-	@ManyToOne(optional = false)
+	/*@ManyToOne(optional = false)
 	@JoinColumn(name = "i_cidade", referencedColumnName = "i_cidade", nullable = false)
-	private Cidade cidade;
-
+	private Municipio cidade;
+*/
 	@Column(length = 255, nullable = false)
 	private String bairro;
 
