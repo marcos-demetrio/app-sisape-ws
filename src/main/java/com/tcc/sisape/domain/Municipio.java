@@ -29,6 +29,14 @@ public class Municipio {
 	@JoinColumn(name = "i_estado", referencedColumnName = "i_estado", nullable = false)
 	private Estado estado;
 
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getNome() {
 		return this.nome;
 	}
