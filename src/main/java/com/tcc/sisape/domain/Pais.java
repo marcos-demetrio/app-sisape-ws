@@ -35,16 +35,16 @@ public class Pais {
 		return this.nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String aNome) {
+		this.nome = aNome.toUpperCase();
 	}
 
 	public String getSigla() {
 		return this.sigla;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setSigla(String aSigla) {
+		this.sigla = aSigla.toUpperCase();
 	}
 
 	@Override
