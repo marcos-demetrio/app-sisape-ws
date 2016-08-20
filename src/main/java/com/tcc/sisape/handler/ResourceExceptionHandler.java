@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.tcc.sisape.domain.DetalhesErro;
 import com.tcc.sisape.service.exceptions.CidadaoNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.EstadoNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.PaisNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.UnidadeBasicaSaudeNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.UsuarioNaoEncontradoException;
 
@@ -22,6 +24,32 @@ public class ResourceExceptionHandler {
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(404l);
 		erro.setTitulo("Usuário não encontrado.");
+		erro.setMensagemDesenvolvedor("http://erros.sisape.com/404");
+		erro.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+
+	@ExceptionHandler(PaisNaoEncontradoException.class)
+	public ResponseEntity<DetalhesErro> handlePaisNaoEncontradoException(PaisNaoEncontradoException e,
+			HttpServletRequest request) {
+
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(404l);
+		erro.setTitulo("País não encontrado.");
+		erro.setMensagemDesenvolvedor("http://erros.sisape.com/404");
+		erro.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+
+	@ExceptionHandler(EstadoNaoEncontradoException.class)
+	public ResponseEntity<DetalhesErro> handleEstadoNaoEncontradoException(EstadoNaoEncontradoException e,
+			HttpServletRequest request) {
+
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(404l);
+		erro.setTitulo("Estado não encontrado.");
 		erro.setMensagemDesenvolvedor("http://erros.sisape.com/404");
 		erro.setTimestamp(System.currentTimeMillis());
 

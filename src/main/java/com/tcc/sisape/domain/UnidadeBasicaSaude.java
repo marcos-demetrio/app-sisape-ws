@@ -75,10 +75,12 @@ public class UnidadeBasicaSaude {
 	@Column(length = 255, nullable = false)
 	private String pontoReferencia;
 
-	/*@ManyToOne(optional = false)
-	@JoinColumn(name = "i_cidade", referencedColumnName = "i_cidade", nullable = false)
-	private Municipio cidade;
-*/
+	/*
+	 * @ManyToOne(optional = false)
+	 * 
+	 * @JoinColumn(name = "i_cidade", referencedColumnName = "i_cidade",
+	 * nullable = false) private Municipio cidade;
+	 */
 	@Column(length = 255, nullable = false)
 	private String bairro;
 
@@ -202,13 +204,11 @@ public class UnidadeBasicaSaude {
 		this.pontoReferencia = pontoReferencia;
 	}
 
-	/*public Municipio getCidade() {
-		return this.cidade;
-	}
-
-	public void setCidade(Municipio cidade) {
-		this.cidade = cidade;
-	}*/
+	/*
+	 * public Municipio getCidade() { return this.cidade; }
+	 * 
+	 * public void setCidade(Municipio cidade) { this.cidade = cidade; }
+	 */
 
 	public String getBairro() {
 		return this.bairro;

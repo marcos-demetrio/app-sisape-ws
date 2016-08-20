@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.tcc.sisape.domain.Pais;
 
 public interface PaisRepository extends JpaRepository<Pais, Long> {
-	public List<Pais> findByNomeContaining(String aSource);
+	public List<Pais> findByNomeContaining(String aNome);
 }

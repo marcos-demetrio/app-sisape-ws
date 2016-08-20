@@ -20,8 +20,8 @@ public class PaisService {
 		return paisRepository.findAll();
 	}
 
-	public List<Pais> findByNomeOuSigla(String aSource) {
-		List<Pais> listPaises = paisRepository.findByNomeContaining(aSource);
+	public List<Pais> findByNome(String aNome) {
+		List<Pais> listPaises = paisRepository.findByNomeContaining(aNome);
 
 		if (listPaises.isEmpty()) {
 			throw new PaisNaoEncontradoException("País não encontrado.");

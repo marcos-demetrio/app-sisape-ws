@@ -1,5 +1,7 @@
 package com.tcc.sisape.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,9 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-public class Estado {
+public class Estado implements Serializable {
+
+	private static final long serialVersionUID = 5562510416323640747L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,24 +45,24 @@ public class Estado {
 		return this.nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String aNome) {
+		this.nome = aNome.toUpperCase();
 	}
 
 	public String getSigla() {
 		return this.sigla;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setSigla(String aSigla) {
+		this.sigla = aSigla.toUpperCase();
 	}
 
 	public Pais getPais() {
 		return this.pais;
 	}
 
-	public void setPais(Pais pais) {
-		this.pais = pais;
+	public void setPais(Pais aPais) {
+		this.pais = aPais;
 	}
 
 	@Override

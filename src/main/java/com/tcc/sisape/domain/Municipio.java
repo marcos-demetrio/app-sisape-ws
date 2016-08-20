@@ -18,7 +18,7 @@ public class Municipio {
 	@JsonProperty("i_municipio")
 	@Column(name = "i_municipio")
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private Long codigoIbge;
 

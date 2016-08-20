@@ -1,5 +1,7 @@
 package com.tcc.sisape.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,9 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-public class Pais {
+public class Pais implements Serializable {
+
+	private static final long serialVersionUID = -7247309179188023955L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
