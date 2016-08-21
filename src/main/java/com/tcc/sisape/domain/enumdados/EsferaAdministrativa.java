@@ -1,15 +1,16 @@
 package com.tcc.sisape.domain.enumdados;
 
 public enum EsferaAdministrativa {
-	FEDERAL("F"), ESTADUAL("E"), MUNICIPAL("M");
+	PUBLICO_FEDERAL(1), PUBLICO_ESTADUAL(3), PUBLICO_MUNICIPAL(3), PRIVADO_COM_FINS_LUCRATIVOS_SOMENTE_EM_2002(
+			4), PRIVADO_SEM_FINS_LUCRATIVOS_SOMENTE_EM_2002(5);
 
-	private String esferaAdministrativa;
+	private int esferaAdministrativa;
 
-	EsferaAdministrativa(String esferaAdministrativa) {
+	EsferaAdministrativa(int esferaAdministrativa) {
 		this.esferaAdministrativa = esferaAdministrativa;
 	}
 
-	public String getDescricao() {
+	public int getEsferaAdministrativa() {
 		return this.esferaAdministrativa;
 	}
 }

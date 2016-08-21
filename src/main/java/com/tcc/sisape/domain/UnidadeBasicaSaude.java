@@ -2,6 +2,8 @@ package com.tcc.sisape.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +16,7 @@ import org.hibernate.validator.constraints.br.CNPJ;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tcc.sisape.domain.enumdados.EsferaAdministrativa;
 
 @Entity
 public class UnidadeBasicaSaude {
@@ -22,7 +25,7 @@ public class UnidadeBasicaSaude {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonProperty("i_unidade_basica_saude")
 	@Column(name = "i_unidade_basica_saude")
-	private Long iUnidadeBasicaSaude;
+	private Long id;
 
 	@Column(length = 255, nullable = false)
 	private String nome;
@@ -35,11 +38,9 @@ public class UnidadeBasicaSaude {
 	@Column(length = 14, nullable = false)
 	private String cnpj;
 
-	// private EsferaAdministrativa esferaAdministrativa;
-
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "i_tipo_estabelecimento", referencedColumnName = "i_tipo_estabelecimento", nullable = false)
-	private UnidadeBasicaSaudeTipoEstabelecimento tipoEstabelecimento;
+	@Enumerated(EnumType.ORDINAL)
+	@Column(nullable = false)
+	private EsferaAdministrativa esferaAdministrativa;
 
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 12)
@@ -75,21 +76,19 @@ public class UnidadeBasicaSaude {
 	@Column(length = 255, nullable = false)
 	private String pontoReferencia;
 
-	/*
-	 * @ManyToOne(optional = false)
-	 * 
-	 * @JoinColumn(name = "i_cidade", referencedColumnName = "i_cidade",
-	 * nullable = false) private Municipio cidade;
-	 */
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "i_municipio", referencedColumnName = "i_municipio", nullable = false)
+	private Municipio municipio;
+
 	@Column(length = 255, nullable = false)
 	private String bairro;
 
-	public Long getiUnidadeBasicaSaude() {
-		return this.iUnidadeBasicaSaude;
+	public Long getId() {
+		return this.id;
 	}
 
-	public void setiUnidadeBasicaSaude(Long iUnidadeBasicaSaude) {
-		this.iUnidadeBasicaSaude = iUnidadeBasicaSaude;
+	public void setId(Long aId) {
+		this.id = aId;
 	}
 
 	public String getNome() {
@@ -114,14 +113,6 @@ public class UnidadeBasicaSaude {
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
-	}
-
-	public UnidadeBasicaSaudeTipoEstabelecimento getTipoEstabelecimento() {
-		return this.tipoEstabelecimento;
-	}
-
-	public void setTipoEstabelecimento(UnidadeBasicaSaudeTipoEstabelecimento tipoEstabelecimento) {
-		this.tipoEstabelecimento = tipoEstabelecimento;
 	}
 
 	public String getTelefonePrincipal() {
@@ -204,11 +195,13 @@ public class UnidadeBasicaSaude {
 		this.pontoReferencia = pontoReferencia;
 	}
 
-	/*
-	 * public Municipio getCidade() { return this.cidade; }
-	 * 
-	 * public void setCidade(Municipio cidade) { this.cidade = cidade; }
-	 */
+	public Municipio getMunicipio() {
+		return this.municipio;
+	}
+
+	public void setCidade(Municipio aMunicipio) {
+		this.municipio = aMunicipio;
+	}
 
 	public String getBairro() {
 		return this.bairro;
@@ -222,7 +215,7 @@ public class UnidadeBasicaSaude {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((iUnidadeBasicaSaude == null) ? 0 : iUnidadeBasicaSaude.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -235,10 +228,10 @@ public class UnidadeBasicaSaude {
 		if (getClass() != obj.getClass())
 			return false;
 		UnidadeBasicaSaude other = (UnidadeBasicaSaude) obj;
-		if (iUnidadeBasicaSaude == null) {
-			if (other.iUnidadeBasicaSaude != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!iUnidadeBasicaSaude.equals(other.iUnidadeBasicaSaude))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
