@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.TipoLogradouro;
 import com.tcc.sisape.repository.TipoLogradouroRepository;
-import com.tcc.sisape.service.exceptions.PaisNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.TipoLogradouroNaoEncontradoException;
 
 @Service
@@ -35,7 +34,7 @@ public class TipoLogradouroService {
 		TipoLogradouro tipoLogradouro = tipoLogradouroRepository.findOne(aId);
 
 		if (tipoLogradouro == null) {
-			throw new PaisNaoEncontradoException("Tipo de Logradouro não encontrado.");
+			throw new TipoLogradouroNaoEncontradoException("Tipo de Logradouro não encontrado.");
 		}
 
 		return tipoLogradouro;
