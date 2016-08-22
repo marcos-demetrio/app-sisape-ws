@@ -34,8 +34,8 @@ public class ClassificacaoBrasileiraOcupacao {
 		return this.nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String aNome) {
+		this.nome = aNome.toUpperCase();
 	}
 	
 	public Long getCodigoCbo() {
