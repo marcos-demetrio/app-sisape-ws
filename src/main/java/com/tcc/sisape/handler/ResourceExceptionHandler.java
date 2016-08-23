@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.tcc.sisape.domain.DetalhesErro;
 import com.tcc.sisape.service.exceptions.CidadaoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.ClassificacaoBrasileiraOcupacaoNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.ClassificacaoInternacionalDoencaNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.EstadoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.MunicipioNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.PaisNaoEncontradoException;
@@ -114,6 +115,19 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(ClassificacaoBrasileiraOcupacaoNaoEncontradoException.class)
 	public ResponseEntity<DetalhesErro> handleClassificacaoBrasileiraOcupacaoNaoEncontradoException(
 			ClassificacaoBrasileiraOcupacaoNaoEncontradoException e, HttpServletRequest request) {
+
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(404l);
+		erro.setTitulo(e.getMessage());
+		erro.setMensagemDesenvolvedor("http://erros.sisape.com/404");
+		erro.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+
+	@ExceptionHandler(ClassificacaoInternacionalDoencaNaoEncontradoException.class)
+	public ResponseEntity<DetalhesErro> handleClassificacaoInternacionalDoencaNaoEncontradoException(
+			ClassificacaoInternacionalDoencaNaoEncontradoException e, HttpServletRequest request) {
 
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(404l);
