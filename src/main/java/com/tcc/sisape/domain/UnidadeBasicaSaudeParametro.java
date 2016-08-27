@@ -26,9 +26,8 @@ public class UnidadeBasicaSaudeParametro implements Serializable {
 	@Column(name = "i_unidade_basica_saude_parametro")
 	private Long id;
 
-	@Id
 	@OneToOne(optional = false)
-	@JoinColumn(name = "i_unidade_basica_saude", referencedColumnName = "i_unidade_basica_saude", nullable = false)
+	@JoinColumn(name = "i_unidade_basica_saude", nullable = false)
 	private UnidadeBasicaSaude unidadeBasicaSaude;
 
 	@Column(nullable = false)

@@ -1,14 +1,20 @@
 package com.tcc.sisape.domain;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.br.CNPJ;
@@ -80,8 +86,11 @@ public class UnidadeBasicaSaude {
 	@JoinColumn(name = "i_municipio", referencedColumnName = "i_municipio", nullable = false)
 	private Municipio municipio;
 
-	@Column(length = 255, nullable = false)
-	private String bairro;
+	@OneToMany(mappedBy = "unidadeBasicaSaude", targetEntity = UnidadeBasicaSaudeZonaAtendimento.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<UnidadeBasicaSaudeZonaAtendimento> zonaAtendimento;
+
+	@OneToOne(mappedBy = "unidadeBasicaSaude", targetEntity = UnidadeBasicaSaudeParametro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private UnidadeBasicaSaudeParametro parametroUbs;
 
 	public Long getId() {
 		return this.id;
@@ -203,12 +212,32 @@ public class UnidadeBasicaSaude {
 		this.municipio = aMunicipio;
 	}
 
-	public String getBairro() {
-		return this.bairro;
+	public EsferaAdministrativa getEsferaAdministrativa() {
+		return this.esferaAdministrativa;
 	}
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
+	public void setEsferaAdministrativa(EsferaAdministrativa esferaAdministrativa) {
+		this.esferaAdministrativa = esferaAdministrativa;
+	}
+
+	public Set<UnidadeBasicaSaudeZonaAtendimento> getZonaAtendimento() {
+		return this.zonaAtendimento;
+	}
+
+	public void setZonaAtendimento(Set<UnidadeBasicaSaudeZonaAtendimento> zonaAtendimento) {
+		this.zonaAtendimento = zonaAtendimento;
+	}
+
+	public UnidadeBasicaSaudeParametro getParametroUbs() {
+		return this.parametroUbs;
+	}
+
+	public void setParametroUbs(UnidadeBasicaSaudeParametro parametroUbs) {
+		this.parametroUbs = parametroUbs;
+	}
+
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
 	}
 
 	@Override

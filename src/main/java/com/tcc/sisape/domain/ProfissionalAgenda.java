@@ -18,22 +18,15 @@ import com.tcc.sisape.domain.enumdados.DiaSemana;
 import com.tcc.sisape.domain.enumdados.PeriodoDia;
 
 @Entity
-public class MedicoAgenda implements Serializable {
+public class ProfissionalAgenda implements Serializable {
 
 	private static final long serialVersionUID = -1149180357096558979L;
 
-	/*
-	 * @Id
-	 * 
-	 * @ManyToOne(optional = false)
-	 * 
-	 * @JoinColumns(value = { @JoinColumn(name = "i_medico",
-	 * referencedColumnName = "i_medico", nullable = false),
-	 * 
-	 * @JoinColumn(name = "i_unidade_basica_saude", referencedColumnName =
-	 * "i_unidade_basica_saude", nullable = false) })
-	 */
-	private MedicoParametro medicoParametro;
+	@Id
+	@ManyToOne(optional = false)
+	@JoinColumns(value = { @JoinColumn(name = "i_profissional", referencedColumnName = "i_profissional", nullable = false),
+			@JoinColumn(name = "i_unidade_basica_saude", referencedColumnName = "i_unidade_basica_saude", nullable = false) })
+	private ProfissionalParametro profissionalParametro;
 
 	@Id
 	@Column(nullable = false)
@@ -52,5 +45,4 @@ public class MedicoAgenda implements Serializable {
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIME)
 	private Date horarioFim;
-
 }

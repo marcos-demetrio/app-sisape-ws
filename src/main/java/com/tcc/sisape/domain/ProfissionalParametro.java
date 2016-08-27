@@ -12,18 +12,18 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class MedicoParametro implements Serializable {
+public class ProfissionalParametro implements Serializable {
 
 	private static final long serialVersionUID = 753403245883235686L;
 
 	@Id
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "i_medico", referencedColumnName = "i_medico", nullable = false)
-	private Medico medico;
+	@JoinColumn(name = "i_profissional", nullable = false)
+	private Profissional profissional;
 
 	@Id
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "i_unidade_basica_saude", referencedColumnName = "i_unidade_basica_saude", nullable = false)
+	@JoinColumn(name = "i_unidade_basica_saude", nullable = false)
 	private UnidadeBasicaSaude unidadeBasicaSaude;
 
 	@Column(nullable = false)
@@ -57,7 +57,7 @@ public class MedicoParametro implements Serializable {
 	private Long duracaoPadraoAtendimento;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "i_cbo", referencedColumnName = "i_cbo", nullable = false)
+	@JoinColumn(name = "i_cbo", nullable = false)
 	private ClassificacaoBrasileiraOcupacao cbo;
 
 	public boolean isHorarioMatutino() {
@@ -148,14 +148,6 @@ public class MedicoParametro implements Serializable {
 		this.cbo = cbo;
 	}
 
-	public Medico getMedico() {
-		return this.medico;
-	}
-
-	public void setMedico(Medico medico) {
-		this.medico = medico;
-	}
-
 	public UnidadeBasicaSaude getUnidadeBasicaSaude() {
 		return this.unidadeBasicaSaude;
 	}
@@ -168,7 +160,7 @@ public class MedicoParametro implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((medico == null) ? 0 : medico.hashCode());
+		result = prime * result + ((profissional == null) ? 0 : profissional.hashCode());
 		result = prime * result + ((unidadeBasicaSaude == null) ? 0 : unidadeBasicaSaude.hashCode());
 		return result;
 	}
@@ -181,11 +173,11 @@ public class MedicoParametro implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MedicoParametro other = (MedicoParametro) obj;
-		if (medico == null) {
-			if (other.medico != null)
+		ProfissionalParametro other = (ProfissionalParametro) obj;
+		if (profissional == null) {
+			if (other.profissional != null)
 				return false;
-		} else if (!medico.equals(other.medico))
+		} else if (!profissional.equals(other.profissional))
 			return false;
 		if (unidadeBasicaSaude == null) {
 			if (other.unidadeBasicaSaude != null)
