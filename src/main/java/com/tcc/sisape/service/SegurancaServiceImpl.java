@@ -3,7 +3,6 @@ package com.tcc.sisape.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tcc.sisape.domain.Usuario;
 import com.tcc.sisape.repository.UsuariosRepository;
 
 @Service("segurancaService")
