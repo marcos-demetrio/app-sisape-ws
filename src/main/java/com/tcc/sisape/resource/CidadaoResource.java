@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tcc.sisape.domain.Cidadao;
+import com.tcc.sisape.domain.enumdados.GrauEscolaridade;
 import com.tcc.sisape.service.CidadaoService;
 
 @CrossOrigin
@@ -28,11 +29,15 @@ public class CidadaoResource {
 	@Autowired
 	private CidadaoService cidadaoService;
 
-	@RequestMapping(method = RequestMethod.GET) // produces =
-												// {MediaType.APPLICATION_JSON_VALUE,
-												// MediaType.APPLICATION_XML_VALUE}
+	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Cidadao>> buscarTodos() {
 		return ResponseEntity.status(HttpStatus.OK).body(cidadaoService.findAll());
+	}
+
+	@RequestMapping(value = "/grauescolaridade", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<List<GrauEscolaridade>> buscarEnumGrauEscolaridade() {
+		return ResponseEntity.status(HttpStatus.OK).body(cidadaoService.getGrauEscolaridade());
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
