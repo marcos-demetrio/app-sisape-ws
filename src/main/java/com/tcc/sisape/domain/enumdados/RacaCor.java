@@ -1,7 +1,7 @@
 package com.tcc.sisape.domain.enumdados;
 
 public enum RacaCor {
-	BRANCA(1), PRETA(2), PARDA(3), AMARELA(4), INDIGENA(5);
+	BRANCA(0), PRETA(1), PARDA(2), AMARELA(3), INDIGENA(4);
 
 	private int racaCor;
 

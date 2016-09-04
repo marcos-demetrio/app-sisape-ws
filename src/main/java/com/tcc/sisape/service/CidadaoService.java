@@ -63,7 +63,7 @@ public class CidadaoService {
 		cidadaoRepository.save(cidadao);
 	}
 
-	public List<GrauEscolaridade> getGrauEscolaridade() {
+	public List<GrauEscolaridade> getGrauEscolaridadeList() {
 		List<GrauEscolaridade> grauEscolaridadeList = new ArrayList<GrauEscolaridade>(
 				EnumSet.allOf(GrauEscolaridade.class));
 

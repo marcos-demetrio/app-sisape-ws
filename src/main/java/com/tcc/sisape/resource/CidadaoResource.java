@@ -37,7 +37,7 @@ public class CidadaoResource {
 	@RequestMapping(value = "/grauescolaridade", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<GrauEscolaridade>> buscarEnumGrauEscolaridade() {
-		return ResponseEntity.status(HttpStatus.OK).body(cidadaoService.getGrauEscolaridade());
+		return ResponseEntity.status(HttpStatus.OK).body(cidadaoService.getGrauEscolaridadeList());
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
