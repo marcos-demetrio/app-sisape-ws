@@ -20,14 +20,8 @@ public class CidadaoService {
 		return cidadaoRepository.findAll();
 	}
 
-	public Cidadao findByNome(String nome) {
-		Cidadao cidadao = cidadaoRepository.findByNomeCompletoContaining(nome);
-
-		if (cidadao == null) {
-			throw new CidadaoNaoEncontradoException("Cidadão não encontrado.");
-		}
-
-		return cidadao;
+	public List<Cidadao> findByNome(String aNome) {
+		return cidadaoRepository.findByNomeCompletoContaining(aNome);
 	}
 
 	public Cidadao findById(Long id) {
