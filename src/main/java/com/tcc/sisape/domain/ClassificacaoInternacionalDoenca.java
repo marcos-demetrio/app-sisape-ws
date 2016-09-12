@@ -35,7 +35,7 @@ public class ClassificacaoInternacionalDoenca {
 	}
 
 	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+		this.descricao = descricao.toUpperCase();
 	}
 
 	public String getCodigoCid() {
@@ -43,7 +43,7 @@ public class ClassificacaoInternacionalDoenca {
 	}
 
 	public void setCodigoCid(String codigoCid) {
-		this.codigoCid = codigoCid;
+		this.codigoCid = codigoCid.toUpperCase();
 	}
 
 	@Override

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -36,6 +37,14 @@ public class ClassificacaoInternacionalDoencaResource {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ClassificacaoInternacionalDoenca> findById(@PathVariable("id") Long aId) {
 		return ResponseEntity.status(HttpStatus.OK).body(classificacaoInternacionalDoencaService.findById(aId));
+	}
+
+	@RequestMapping(value = "/descricao", method = RequestMethod.GET)
+	public ResponseEntity<List<ClassificacaoInternacionalDoenca>> pesquisar(
+			@RequestParam(value = "codigoCid", defaultValue = "") String aCodigoCid,
+			@RequestParam(value = "descricao", defaultValue = "") String aDescricao) {
+		return ResponseEntity.status(HttpStatus.OK).body(classificacaoInternacionalDoencaService
+				.findByDescricaoContainingOrCodigoCidContaining(aDescricao, aCodigoCid));
 	}
 
 	@RequestMapping(value = "/cid/{codigoCid}", method = RequestMethod.GET, produces = {

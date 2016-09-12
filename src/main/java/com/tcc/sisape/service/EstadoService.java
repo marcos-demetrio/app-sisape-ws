@@ -21,13 +21,7 @@ public class EstadoService {
 	}
 
 	public List<Estado> findByNome(String aNome) {
-		List<Estado> listEstados = estadoRepository.findByNomeContaining(aNome);
-
-		if (listEstados.isEmpty()) {
-			throw new EstadoNaoEncontradoException("Estado não encontrado.");
-		}
-
-		return listEstados;
+		return estadoRepository.findByNomeContaining(aNome);
 	}
 
 	public Estado findById(Long aId) {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -37,10 +38,20 @@ public class ClassificacaoBrasileiraOcupacaoResource {
 	public ResponseEntity<ClassificacaoBrasileiraOcupacao> findById(@PathVariable("id") Long aId) {
 		return ResponseEntity.status(HttpStatus.OK).body(classificacaoBrasileiraOcupacaoService.findById(aId));
 	}
-	
-	@RequestMapping(value = "/cbo/{codigoCbo}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+
+	@RequestMapping(value = "/cbo/{codigoCbo}", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ClassificacaoBrasileiraOcupacao> findByCodigoCbo(@PathVariable("codigoCbo") Long aCodigoCbo) {
-		return ResponseEntity.status(HttpStatus.OK).body(classificacaoBrasileiraOcupacaoService.findByCodigoCbo(aCodigoCbo));
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(classificacaoBrasileiraOcupacaoService.findByCodigoCbo(aCodigoCbo));
+	}
+
+	@RequestMapping(value = "/nome", method = RequestMethod.GET)
+	public ResponseEntity<List<ClassificacaoBrasileiraOcupacao>> pesquisar(
+			@RequestParam(value = "codigoCbo", defaultValue = "0") Long aCodigoCbo,
+			@RequestParam(value = "nome", defaultValue = "") String aNome) {
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(classificacaoBrasileiraOcupacaoService.findByNomeContainingOrCodigoCbo(aNome, aCodigoCbo));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

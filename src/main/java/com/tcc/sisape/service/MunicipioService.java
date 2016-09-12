@@ -21,13 +21,7 @@ public class MunicipioService {
 	}
 
 	public List<Municipio> findByNome(String aNome) {
-		List<Municipio> listMunicipios = municipioRepository.findByNomeContaining(aNome);
-
-		if (listMunicipios.isEmpty()) {
-			throw new MunicipioNaoEncontradoException("Município não encontrado.");
-		}
-
-		return listMunicipios;
+		return municipioRepository.findByNomeContaining(aNome);
 	}
 
 	public Municipio findById(Long aId) {

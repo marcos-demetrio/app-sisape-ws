@@ -21,13 +21,7 @@ public class PaisService {
 	}
 
 	public List<Pais> findByNome(String aNome) {
-		List<Pais> listPaises = paisRepository.findByNomeContaining(aNome);
-
-		if (listPaises.isEmpty()) {
-			throw new PaisNaoEncontradoException("País não encontrado.");
-		}
-
-		return listPaises;
+		return paisRepository.findByNomeContaining(aNome);
 	}
 
 	public Pais findById(Long aId) {

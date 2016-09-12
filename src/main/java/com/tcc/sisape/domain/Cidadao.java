@@ -198,7 +198,7 @@ public class Cidadao {
 	}
 
 	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
+		this.nomeCompleto = nomeCompleto.toUpperCase();
 	}
 
 	public String getNomeSocial() {
@@ -206,7 +206,7 @@ public class Cidadao {
 	}
 
 	public void setNomeSocial(String nomeSocial) {
-		this.nomeSocial = nomeSocial;
+		this.nomeSocial = nomeSocial.toUpperCase();
 	}
 
 	public Date getDataNascimento() {
@@ -246,7 +246,7 @@ public class Cidadao {
 	}
 
 	public void setNomeMae(String nomeMae) {
-		this.nomeMae = nomeMae;
+		this.nomeMae = nomeMae.toUpperCase();
 	}
 
 	public boolean isDesconheceNomeMae() {
@@ -294,7 +294,7 @@ public class Cidadao {
 	}
 
 	public void setBairro(String bairro) {
-		this.bairro = bairro;
+		this.bairro = bairro.toUpperCase();
 	}
 
 	public TipoLogradouro getTipoLogradouro() {

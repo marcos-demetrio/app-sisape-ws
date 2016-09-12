@@ -20,16 +20,9 @@ public class ClassificacaoInternacionalDoencaService {
 		return classificacaoInternacionalDoencaRepository.findAll();
 	}
 
-	public List<ClassificacaoInternacionalDoenca> findByDescricao(String aDescricao) {
-		List<ClassificacaoInternacionalDoenca> listClassificacaoInternacionalDoenca = classificacaoInternacionalDoencaRepository
-				.findByDescricaoContaining(aDescricao);
-
-		if (listClassificacaoInternacionalDoenca.isEmpty()) {
-			throw new ClassificacaoInternacionalDoencaNaoEncontradoException(
-					"Classificação Internacional de Doença não encontrado.");
-		}
-
-		return listClassificacaoInternacionalDoenca;
+	public List<ClassificacaoInternacionalDoenca> findByDescricaoContainingOrCodigoCidContaining(String aDescricao, String aCodigoCid) {
+		return classificacaoInternacionalDoencaRepository.findByDescricaoContainingOrCodigoCidContaining(aDescricao,
+				aCodigoCid);
 	}
 
 	public ClassificacaoInternacionalDoenca findByCodigoCid(String aCodigoCid) {

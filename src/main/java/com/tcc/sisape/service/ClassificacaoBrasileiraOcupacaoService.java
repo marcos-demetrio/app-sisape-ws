@@ -20,16 +20,8 @@ public class ClassificacaoBrasileiraOcupacaoService {
 		return classificacaoBrasileiraOcupacaoRepository.findAll();
 	}
 
-	public List<ClassificacaoBrasileiraOcupacao> findByNome(String aNome) {
-		List<ClassificacaoBrasileiraOcupacao> listClassificacaoBrasileiraOcupacao = classificacaoBrasileiraOcupacaoRepository
-				.findByNomeContaining(aNome);
-
-		if (listClassificacaoBrasileiraOcupacao.isEmpty()) {
-			throw new ClassificacaoBrasileiraOcupacaoNaoEncontradoException(
-					"Classificação Brasileira de Ocupação não encontrado.");
-		}
-
-		return listClassificacaoBrasileiraOcupacao;
+	public List<ClassificacaoBrasileiraOcupacao> findByNomeContainingOrCodigoCbo(String aNome, Long aCodigoCbo) {
+		return classificacaoBrasileiraOcupacaoRepository.findByNomeContainingOrCodigoCbo(aNome, aCodigoCbo);
 	}
 
 	public ClassificacaoBrasileiraOcupacao findByCodigoCbo(Long aCodigoCbo) {
