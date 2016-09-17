@@ -20,14 +20,8 @@ public class UnidadeBasicaSaudeService {
 		return unidadeBasicaSaudeRepository.findAll();
 	}
 
-	public UnidadeBasicaSaude findByNome(String nome) {
-		UnidadeBasicaSaude unidadeBasicaSaude = unidadeBasicaSaudeRepository.findByNomeContaining(nome);
-
-		if (unidadeBasicaSaude == null) {
-			throw new UnidadeBasicaSaudeNaoEncontradoException("Unidade Básica de Saúde não encontrada.");
-		}
-
-		return unidadeBasicaSaude;
+	public List<UnidadeBasicaSaude> findByNome(String aNome) {
+		return unidadeBasicaSaudeRepository.findByNomeContaining(aNome);
 	}
 
 	public UnidadeBasicaSaude findById(Long id) {

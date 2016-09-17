@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class UnidadeBasicaSaudeParametro implements Serializable {
 
-	private static final long serialVersionUID = -4283912034998816980L;
+	private static final long serialVersionUID = -6552751571731222036L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

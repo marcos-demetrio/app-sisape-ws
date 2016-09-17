@@ -7,10 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -23,8 +24,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tcc.sisape.domain.enumdados.EsferaAdministrativa;
+import com.tcc.sisape.domain.enumdados.Status;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class UnidadeBasicaSaude {
 
 	@Id
@@ -41,12 +44,16 @@ public class UnidadeBasicaSaude {
 	private Long codigoCnes;
 
 	@CNPJ
-	@Column(length = 14, nullable = false)
+	@Column(length = 14)
 	private String cnpj;
 
 	@Enumerated(EnumType.ORDINAL)
 	@Column(nullable = false)
 	private EsferaAdministrativa esferaAdministrativa;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "i_unidade_basica_saude_tipo_estabelecimento", referencedColumnName = "i_unidade_basica_saude_tipo_estabelecimento", nullable = false)
+	private UnidadeBasicaSaudeTipoEstabelecimento tipoEstabelecimento;
 
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 12)
@@ -76,20 +83,28 @@ public class UnidadeBasicaSaude {
 	@Column(nullable = false)
 	private boolean semNumero;
 
+	@JsonInclude(Include.NON_EMPTY)
+	@Column(length = 100)
+	private String bairro;
+
 	@Column(length = 255, nullable = false)
 	private String complemento;
 
 	@Column(length = 255, nullable = false)
 	private String pontoReferencia;
 
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private Status status;
+
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "i_municipio", referencedColumnName = "i_municipio", nullable = false)
 	private Municipio municipio;
 
-	@OneToMany(mappedBy = "unidadeBasicaSaude", targetEntity = UnidadeBasicaSaudeZonaAtendimento.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "unidadeBasicaSaude", cascade = CascadeType.ALL)
 	private Set<UnidadeBasicaSaudeZonaAtendimento> zonaAtendimento;
 
-	@OneToOne(mappedBy = "unidadeBasicaSaude", targetEntity = UnidadeBasicaSaudeParametro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "unidadeBasicaSaude", cascade = CascadeType.ALL)
 	private UnidadeBasicaSaudeParametro parametroUbs;
 
 	public Long getId() {
@@ -228,16 +243,40 @@ public class UnidadeBasicaSaude {
 		this.zonaAtendimento = zonaAtendimento;
 	}
 
-	public UnidadeBasicaSaudeParametro getParametroUbs() {
-		return this.parametroUbs;
-	}
-
-	public void setParametroUbs(UnidadeBasicaSaudeParametro parametroUbs) {
-		this.parametroUbs = parametroUbs;
-	}
+	/*
+	 * public UnidadeBasicaSaudeParametro getParametroUbs() { return
+	 * this.parametroUbs; }
+	 * 
+	 * public void setParametroUbs(UnidadeBasicaSaudeParametro parametroUbs) {
+	 * this.parametroUbs = parametroUbs; }
+	 */
 
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
+	}
+
+	public UnidadeBasicaSaudeTipoEstabelecimento getTipoEstabelecimento() {
+		return this.tipoEstabelecimento;
+	}
+
+	public void setTipoEstabelecimento(UnidadeBasicaSaudeTipoEstabelecimento tipoEstabelecimento) {
+		this.tipoEstabelecimento = tipoEstabelecimento;
+	}
+
+	public String getBairro() {
+		return this.bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public Status getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override

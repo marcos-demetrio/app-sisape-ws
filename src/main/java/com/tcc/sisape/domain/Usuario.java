@@ -41,7 +41,7 @@ public class Usuario /* implements UserDetails */ {
 	private String senha;
 
 	@ManyToMany
-	@JoinTable(name = "uruario_perfil", joinColumns = { @JoinColumn(name = "i_usuario") }, inverseJoinColumns = {
+	@JoinTable(name = "usuario_perfil", joinColumns = { @JoinColumn(name = "i_usuario") }, inverseJoinColumns = {
 			@JoinColumn(name = "i_perfil") })
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Perfil> perfis = new ArrayList<Perfil>();
