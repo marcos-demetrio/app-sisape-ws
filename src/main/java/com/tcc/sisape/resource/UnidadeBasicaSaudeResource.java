@@ -60,14 +60,19 @@ public class UnidadeBasicaSaudeResource {
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(unidadeBasicaSaude.getId()).toUri();
-
+			
 		return ResponseEntity.created(uri).build();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> alterar(@RequestBody UnidadeBasicaSaude unidadeBasicaSaude, @PathVariable Long id) {
 		unidadeBasicaSaude.setId(id);
-
+		unidadeBasicaSaude.getParametroUbs().setUnidadeBasicaSaude(unidadeBasicaSaude);
+		
+		System.out.println("Inicio");
+		System.out.println(unidadeBasicaSaude.getParametroUbs().toString());
+		System.out.println("Fim");
+		
 		unidadeBasicaSaudeService.alterar(unidadeBasicaSaude);
 
 		return ResponseEntity.noContent().build();

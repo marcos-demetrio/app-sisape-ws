@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tcc.sisape.domain.enumdados.EsferaAdministrativa;
-import com.tcc.sisape.domain.enumdados.Status;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -47,8 +46,8 @@ public class UnidadeBasicaSaude {
 	@Column(length = 14)
 	private String cnpj;
 
-	@Enumerated(EnumType.ORDINAL)
-	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 17)
 	private EsferaAdministrativa esferaAdministrativa;
 
 	@ManyToOne(optional = false)
@@ -93,9 +92,8 @@ public class UnidadeBasicaSaude {
 	@Column(length = 255, nullable = false)
 	private String pontoReferencia;
 
-	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private Status status;
+	private boolean ativo;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "i_municipio", referencedColumnName = "i_municipio", nullable = false)
@@ -120,7 +118,7 @@ public class UnidadeBasicaSaude {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = nome.toUpperCase();
 	}
 
 	public Long getCodigoCnes() {
@@ -243,13 +241,13 @@ public class UnidadeBasicaSaude {
 		this.zonaAtendimento = zonaAtendimento;
 	}
 
-	/*
-	 * public UnidadeBasicaSaudeParametro getParametroUbs() { return
-	 * this.parametroUbs; }
-	 * 
-	 * public void setParametroUbs(UnidadeBasicaSaudeParametro parametroUbs) {
-	 * this.parametroUbs = parametroUbs; }
-	 */
+	public UnidadeBasicaSaudeParametro getParametroUbs() {
+		return this.parametroUbs;
+	}
+
+	public void setParametroUbs(UnidadeBasicaSaudeParametro parametroUbs) {
+		this.parametroUbs = parametroUbs;
+	}
 
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
@@ -268,15 +266,15 @@ public class UnidadeBasicaSaude {
 	}
 
 	public void setBairro(String bairro) {
-		this.bairro = bairro;
+		this.bairro = bairro.toUpperCase();
 	}
 
-	public Status getStatus() {
-		return this.status;
+	public boolean getAtivo() {
+		return this.ativo;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setAtivo(boolean aAtivo) {
+		this.ativo = aAtivo;
 	}
 
 	@Override

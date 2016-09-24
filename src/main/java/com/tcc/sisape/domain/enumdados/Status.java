@@ -1,15 +1,15 @@
 package com.tcc.sisape.domain.enumdados;
 
 public enum Status {
-	ATIVO("A"), INATIVO("I");
+	ATIVO(1), INATIVO(0);
 
-	private String status;
+	private int status;
 
-	Status(String aStatus) {
+	Status(int aStatus) {
 		this.status = aStatus;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return this.status;
 	}
 }

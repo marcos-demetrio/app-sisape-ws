@@ -104,10 +104,6 @@ public class UnidadeBasicaSaudeParametro implements Serializable {
 		this.id = id;
 	}
 
-	public UnidadeBasicaSaude getUnidadeBasicaSaude() {
-		return this.unidadeBasicaSaude;
-	}
-
 	public void setUnidadeBasicaSaude(UnidadeBasicaSaude unidadeBasicaSaude) {
 		this.unidadeBasicaSaude = unidadeBasicaSaude;
 	}
@@ -317,5 +313,22 @@ public class UnidadeBasicaSaudeParametro implements Serializable {
 		} else if (!unidadeBasicaSaude.equals(other.unidadeBasicaSaude))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "UnidadeBasicaSaudeParametro [id=" + id + ", unidadeBasicaSaude=" + unidadeBasicaSaude
+				+ ", complexidadeAtencaoBasica=" + complexidadeAtencaoBasica + ", complexidadeMedia="
+				+ complexidadeMedia + ", complexidadeAlta=" + complexidadeAlta + ", tipoServicoAdm=" + tipoServicoAdm
+				+ ", tipoServicoCurativo=" + tipoServicoCurativo + ", tipoServicoDemanda=" + tipoServicoDemanda
+				+ ", tipoServicoEscuta=" + tipoServicoEscuta + ", tipoServicoExame=" + tipoServicoExame
+				+ ", tipoServicoNebulizacao=" + tipoServicoNebulizacao + ", tipoServicoOdontologia="
+				+ tipoServicoOdontologia + ", tipoServicoProcedimento=" + tipoServicoProcedimento
+				+ ", tipoServicoVacina=" + tipoServicoVacina + ", horarioMatutino=" + horarioMatutino
+				+ ", horarioMatutinoInicio=" + horarioMatutinoInicio + ", horarioMatutinoFim=" + horarioMatutinoFim
+				+ ", horarioVespertino=" + horarioVespertino + ", horarioVespertinoInicio=" + horarioVespertinoInicio
+				+ ", horarioVespertinoFim=" + horarioVespertinoFim + ", horarioNoturno=" + horarioNoturno
+				+ ", horarioNoturnoInicio=" + horarioNoturnoInicio + ", horarioNoturnoFim=" + horarioNoturnoFim
+				+ ", duracaoPadraoAtendimento=" + duracaoPadraoAtendimento + "]";
 	}
 }
