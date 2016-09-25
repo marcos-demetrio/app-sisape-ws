@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tcc.sisape.domain.UnidadeBasicaSaude;
+import com.tcc.sisape.domain.UnidadeBasicaSaudeParametro;
 import com.tcc.sisape.service.UnidadeBasicaSaudeService;
 
 @CrossOrigin
@@ -56,11 +57,21 @@ public class UnidadeBasicaSaudeResource {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> salvar(@Valid @RequestBody UnidadeBasicaSaude unidadeBasicaSaude) {
+
+		UnidadeBasicaSaudeParametro ubsParametro = unidadeBasicaSaude.getParametroUbs();
+		unidadeBasicaSaude.setParametroUbs(null);
+
 		unidadeBasicaSaude = unidadeBasicaSaudeService.criar(unidadeBasicaSaude);
+
+		ubsParametro.setUnidadeBasicaSaude(unidadeBasicaSaude);
+
+		unidadeBasicaSaude.setParametroUbs(ubsParametro);
+
+		unidadeBasicaSaudeService.alterar(unidadeBasicaSaude);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(unidadeBasicaSaude.getId()).toUri();
-			
+
 		return ResponseEntity.created(uri).build();
 	}
 
@@ -68,7 +79,7 @@ public class UnidadeBasicaSaudeResource {
 	public ResponseEntity<Void> alterar(@RequestBody UnidadeBasicaSaude unidadeBasicaSaude, @PathVariable Long id) {
 		unidadeBasicaSaude.setId(id);
 		unidadeBasicaSaude.getParametroUbs().setUnidadeBasicaSaude(unidadeBasicaSaude);
-		
+
 		unidadeBasicaSaudeService.alterar(unidadeBasicaSaude);
 
 		return ResponseEntity.noContent().build();

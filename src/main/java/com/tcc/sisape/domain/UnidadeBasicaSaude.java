@@ -301,4 +301,9 @@ public class UnidadeBasicaSaude {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "UnidadeBasicaSaude [id=" + id + ", nome=" + nome + "]";
+	}
 }
