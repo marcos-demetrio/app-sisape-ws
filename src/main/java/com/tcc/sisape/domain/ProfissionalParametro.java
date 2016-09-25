@@ -1,27 +1,32 @@
 package com.tcc.sisape.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
-public class ProfissionalParametro implements Serializable {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-	private static final long serialVersionUID = 753403245883235686L;
+@Entity
+public class ProfissionalParametro {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty("i_profissional_parametro")
+	@Column(name = "i_profissional_parametro")
+	private Long id;
+
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "i_profissional", nullable = false)
 	private Profissional profissional;
 
-	@Id
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "i_unidade_basica_saude", nullable = false)
 	private UnidadeBasicaSaude unidadeBasicaSaude;
@@ -59,6 +64,30 @@ public class ProfissionalParametro implements Serializable {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "i_cbo", nullable = false)
 	private ClassificacaoBrasileiraOcupacao cbo;
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Profissional getProfissional() {
+		return this.profissional;
+	}
+
+	public void setProfissional(Profissional profissional) {
+		this.profissional = profissional;
+	}
+
+	public UnidadeBasicaSaude getUnidadeBasicaSaude() {
+		return this.unidadeBasicaSaude;
+	}
+
+	public void setUnidadeBasicaSaude(UnidadeBasicaSaude unidadeBasicaSaude) {
+		this.unidadeBasicaSaude = unidadeBasicaSaude;
+	}
 
 	public boolean isHorarioMatutino() {
 		return this.horarioMatutino;
@@ -148,20 +177,11 @@ public class ProfissionalParametro implements Serializable {
 		this.cbo = cbo;
 	}
 
-	public UnidadeBasicaSaude getUnidadeBasicaSaude() {
-		return this.unidadeBasicaSaude;
-	}
-
-	public void setUnidadeBasicaSaude(UnidadeBasicaSaude unidadeBasicaSaude) {
-		this.unidadeBasicaSaude = unidadeBasicaSaude;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((profissional == null) ? 0 : profissional.hashCode());
-		result = prime * result + ((unidadeBasicaSaude == null) ? 0 : unidadeBasicaSaude.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -174,15 +194,10 @@ public class ProfissionalParametro implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ProfissionalParametro other = (ProfissionalParametro) obj;
-		if (profissional == null) {
-			if (other.profissional != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!profissional.equals(other.profissional))
-			return false;
-		if (unidadeBasicaSaude == null) {
-			if (other.unidadeBasicaSaude != null)
-				return false;
-		} else if (!unidadeBasicaSaude.equals(other.unidadeBasicaSaude))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
