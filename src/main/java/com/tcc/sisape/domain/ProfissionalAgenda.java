@@ -97,6 +97,78 @@ public class ProfissionalAgenda {
 		this.diaSemana = diaSemana;
 	}
 
+	public boolean isHorarioMatutino() {
+		return this.horarioMatutino;
+	}
+
+	public void setHorarioMatutino(boolean horarioMatutino) {
+		this.horarioMatutino = horarioMatutino;
+	}
+
+	public Date getHorarioMatutinoInicio() {
+		return this.horarioMatutinoInicio;
+	}
+
+	public void setHorarioMatutinoInicio(Date horarioMatutinoInicio) {
+		this.horarioMatutinoInicio = horarioMatutinoInicio;
+	}
+
+	public Date getHorarioMatutinoFim() {
+		return this.horarioMatutinoFim;
+	}
+
+	public void setHorarioMatutinoFim(Date horarioMatutinoFim) {
+		this.horarioMatutinoFim = horarioMatutinoFim;
+	}
+
+	public boolean isHorarioVespertino() {
+		return this.horarioVespertino;
+	}
+
+	public void setHorarioVespertino(boolean horarioVespertino) {
+		this.horarioVespertino = horarioVespertino;
+	}
+
+	public Date getHorarioVespertinoInicio() {
+		return this.horarioVespertinoInicio;
+	}
+
+	public void setHorarioVespertinoInicio(Date horarioVespertinoInicio) {
+		this.horarioVespertinoInicio = horarioVespertinoInicio;
+	}
+
+	public Date getHorarioVespertinoFim() {
+		return this.horarioVespertinoFim;
+	}
+
+	public void setHorarioVespertinoFim(Date horarioVespertinoFim) {
+		this.horarioVespertinoFim = horarioVespertinoFim;
+	}
+
+	public boolean isHorarioNoturno() {
+		return this.horarioNoturno;
+	}
+
+	public void setHorarioNoturno(boolean horarioNoturno) {
+		this.horarioNoturno = horarioNoturno;
+	}
+
+	public Date getHorarioNoturnoInicio() {
+		return this.horarioNoturnoInicio;
+	}
+
+	public void setHorarioNoturnoInicio(Date horarioNoturnoInicio) {
+		this.horarioNoturnoInicio = horarioNoturnoInicio;
+	}
+
+	public Date getHorarioNoturnoFim() {
+		return this.horarioNoturnoFim;
+	}
+
+	public void setHorarioNoturnoFim(Date horarioNoturnoFim) {
+		this.horarioNoturnoFim = horarioNoturnoFim;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
