@@ -15,12 +15,12 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-public class ProfissionalParametro {
+public class ProfissionalLotacao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty("i_profissional_parametro")
-	@Column(name = "i_profissional_parametro")
+	@JsonProperty("i_profissional_lotacao")
+	@Column(name = "i_profissional_lotacao")
 	private Long id;
 
 	@ManyToOne(optional = false)
@@ -193,7 +193,7 @@ public class ProfissionalParametro {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProfissionalParametro other = (ProfissionalParametro) obj;
+		ProfissionalLotacao other = (ProfissionalLotacao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -16,7 +16,6 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tcc.sisape.domain.enumdados.DiaSemana;
-import com.tcc.sisape.domain.enumdados.PeriodoDia;
 
 @Entity
 public class ProfissionalAgenda {
@@ -40,16 +39,31 @@ public class ProfissionalAgenda {
 	private DiaSemana diaSemana;
 
 	@Column(nullable = false)
-	@Enumerated(EnumType.ORDINAL)
-	private PeriodoDia periodoDia;
+	private boolean horarioMatutino = false;
+
+	@Temporal(TemporalType.TIME)
+	private Date horarioMatutinoInicio;
+
+	@Temporal(TemporalType.TIME)
+	private Date horarioMatutinoFim;
 
 	@Column(nullable = false)
+	private boolean horarioVespertino = false;
+
 	@Temporal(TemporalType.TIME)
-	private Date horarioInicio;
+	private Date horarioVespertinoInicio;
+
+	@Temporal(TemporalType.TIME)
+	private Date horarioVespertinoFim;
 
 	@Column(nullable = false)
+	private boolean horarioNoturno = false;
+
 	@Temporal(TemporalType.TIME)
-	private Date horarioFim;
+	private Date horarioNoturnoInicio;
+
+	@Temporal(TemporalType.TIME)
+	private Date horarioNoturnoFim;
 
 	public Long getId() {
 		return this.id;
@@ -81,30 +95,6 @@ public class ProfissionalAgenda {
 
 	public void setDiaSemana(DiaSemana diaSemana) {
 		this.diaSemana = diaSemana;
-	}
-
-	public PeriodoDia getPeriodoDia() {
-		return this.periodoDia;
-	}
-
-	public void setPeriodoDia(PeriodoDia periodoDia) {
-		this.periodoDia = periodoDia;
-	}
-
-	public Date getHorarioInicio() {
-		return this.horarioInicio;
-	}
-
-	public void setHorarioInicio(Date horarioInicio) {
-		this.horarioInicio = horarioInicio;
-	}
-
-	public Date getHorarioFim() {
-		return this.horarioFim;
-	}
-
-	public void setHorarioFim(Date horarioFim) {
-		this.horarioFim = horarioFim;
 	}
 
 	@Override

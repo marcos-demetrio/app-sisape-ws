@@ -2,7 +2,7 @@ package com.tcc.sisape.domain;
 
 public class Agendamento {
 	private Cidadao paciente;
-	private ProfissionalParametro medico;
+	private ProfissionalLotacao medico;
 	private Profissional profissionalAcolhimento;
 
 	private String dataHoraInicio;// DateTime
