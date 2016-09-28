@@ -1,7 +1,5 @@
 package com.tcc.sisape.domain;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,36 +26,6 @@ public class ProfissionalLotacao {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "i_unidade_basica_saude", nullable = false)
 	private UnidadeBasicaSaude unidadeBasicaSaude;
-
-	@Column(nullable = false)
-	private boolean horarioMatutino = false;
-
-	@Temporal(TemporalType.TIME)
-	private Date horarioMatutinoInicio;
-
-	@Temporal(TemporalType.TIME)
-	private Date horarioMatutinoFim;
-
-	@Column(nullable = false)
-	private boolean horarioVespertino = false;
-
-	@Temporal(TemporalType.TIME)
-	private Date horarioVespertinoInicio;
-
-	@Temporal(TemporalType.TIME)
-	private Date horarioVespertinoFim;
-
-	@Column(nullable = false)
-	private boolean horarioNoturno = false;
-
-	@Temporal(TemporalType.TIME)
-	private Date horarioNoturnoInicio;
-
-	@Temporal(TemporalType.TIME)
-	private Date horarioNoturnoFim;
-
-	@Column(nullable = false)
-	private Long duracaoPadraoAtendimento;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "i_cbo", nullable = false)
@@ -87,86 +53,6 @@ public class ProfissionalLotacao {
 
 	public void setUnidadeBasicaSaude(UnidadeBasicaSaude unidadeBasicaSaude) {
 		this.unidadeBasicaSaude = unidadeBasicaSaude;
-	}
-
-	public boolean isHorarioMatutino() {
-		return this.horarioMatutino;
-	}
-
-	public void setHorarioMatutino(boolean horarioMatutino) {
-		this.horarioMatutino = horarioMatutino;
-	}
-
-	public Date getHorarioMatutinoInicio() {
-		return this.horarioMatutinoInicio;
-	}
-
-	public void setHorarioMatutinoInicio(Date horarioMatutinoInicio) {
-		this.horarioMatutinoInicio = horarioMatutinoInicio;
-	}
-
-	public Date getHorarioMatutinoFim() {
-		return this.horarioMatutinoFim;
-	}
-
-	public void setHorarioMatutinoFim(Date horarioMatutinoFim) {
-		this.horarioMatutinoFim = horarioMatutinoFim;
-	}
-
-	public boolean isHorarioVespertino() {
-		return this.horarioVespertino;
-	}
-
-	public void setHorarioVespertino(boolean horarioVespertino) {
-		this.horarioVespertino = horarioVespertino;
-	}
-
-	public Date getHorarioVespertinoInicio() {
-		return this.horarioVespertinoInicio;
-	}
-
-	public void setHorarioVespertinoInicio(Date horarioVespertinoInicio) {
-		this.horarioVespertinoInicio = horarioVespertinoInicio;
-	}
-
-	public Date getHorarioVespertinoFim() {
-		return this.horarioVespertinoFim;
-	}
-
-	public void setHorarioVespertinoFim(Date horarioVespertinoFim) {
-		this.horarioVespertinoFim = horarioVespertinoFim;
-	}
-
-	public boolean isHorarioNoturno() {
-		return this.horarioNoturno;
-	}
-
-	public void setHorarioNoturno(boolean horarioNoturno) {
-		this.horarioNoturno = horarioNoturno;
-	}
-
-	public Date getHorarioNoturnoInicio() {
-		return this.horarioNoturnoInicio;
-	}
-
-	public void setHorarioNoturnoInicio(Date horarioNoturnoInicio) {
-		this.horarioNoturnoInicio = horarioNoturnoInicio;
-	}
-
-	public Date getHorarioNoturnoFim() {
-		return this.horarioNoturnoFim;
-	}
-
-	public void setHorarioNoturnoFim(Date horarioNoturnoFim) {
-		this.horarioNoturnoFim = horarioNoturnoFim;
-	}
-
-	public Long getDuracaoPadraoAtendimento() {
-		return this.duracaoPadraoAtendimento;
-	}
-
-	public void setDuracaoPadraoAtendimento(Long duracaoPadraoAtendimento) {
-		this.duracaoPadraoAtendimento = duracaoPadraoAtendimento;
 	}
 
 	public ClassificacaoBrasileiraOcupacao getCbo() {

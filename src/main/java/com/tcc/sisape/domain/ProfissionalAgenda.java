@@ -27,12 +27,8 @@ public class ProfissionalAgenda {
 	private Long id;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "i_profissional", nullable = false)
-	private Profissional profissional;
-
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "i_unidade_basica_saude", nullable = false)
-	private UnidadeBasicaSaude unidadeBasicaSaude;
+	@JoinColumn(name = "i_profissional_lotacao", nullable = false)
+	private ProfissionalLotacao lotacao;
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.ORDINAL)
@@ -73,20 +69,12 @@ public class ProfissionalAgenda {
 		this.id = id;
 	}
 
-	public Profissional getProfissional() {
-		return this.profissional;
+	public ProfissionalLotacao getLotacao() {
+		return lotacao;
 	}
 
-	public void setProfissional(Profissional profissional) {
-		this.profissional = profissional;
-	}
-
-	public UnidadeBasicaSaude getUnidadeBasicaSaude() {
-		return this.unidadeBasicaSaude;
-	}
-
-	public void setUnidadeBasicaSaude(UnidadeBasicaSaude unidadeBasicaSaude) {
-		this.unidadeBasicaSaude = unidadeBasicaSaude;
+	public void setLotacao(ProfissionalLotacao lotacao) {
+		this.lotacao = lotacao;
 	}
 
 	public DiaSemana getDiaSemana() {

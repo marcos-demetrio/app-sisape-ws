@@ -14,6 +14,9 @@ import com.tcc.sisape.service.exceptions.ClassificacaoInternacionalDoencaNaoEnco
 import com.tcc.sisape.service.exceptions.EstadoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.MunicipioNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.PaisNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.ProfissionalAgendaNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.ProfissionalLotacaoNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.ProfissionalNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.TipoLogradouroNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.UnidadeBasicaSaudeNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.UnidadeBasicaSaudeTipoEstabelecimentoNaoEncontradoException;
@@ -22,6 +25,45 @@ import com.tcc.sisape.service.exceptions.UsuarioNaoEncontradoException;
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
+	@ExceptionHandler(ProfissionalAgendaNaoEncontradoException.class)
+	public ResponseEntity<DetalhesErro> handleProfissionalAgendaNaoEncontradoException(ProfissionalAgendaNaoEncontradoException e,
+			HttpServletRequest request) {
+
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(404l);
+		erro.setTitulo(e.getMessage());
+		erro.setMensagemDesenvolvedor("http://erros.sisape.com/404");
+		erro.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+	
+	@ExceptionHandler(ProfissionalLotacaoNaoEncontradoException.class)
+	public ResponseEntity<DetalhesErro> handleProfissionalLotacaoNaoEncontradoException(ProfissionalLotacaoNaoEncontradoException e,
+			HttpServletRequest request) {
+
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(404l);
+		erro.setTitulo(e.getMessage());
+		erro.setMensagemDesenvolvedor("http://erros.sisape.com/404");
+		erro.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+	
+	@ExceptionHandler(ProfissionalNaoEncontradoException.class)
+	public ResponseEntity<DetalhesErro> handleProfissionalNaoEncontradoException(ProfissionalNaoEncontradoException e,
+			HttpServletRequest request) {
+
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(404l);
+		erro.setTitulo(e.getMessage());
+		erro.setMensagemDesenvolvedor("http://erros.sisape.com/404");
+		erro.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+	
 	@ExceptionHandler(UsuarioNaoEncontradoException.class)
 	public ResponseEntity<DetalhesErro> handleUsuarioNaoEncontradoException(UsuarioNaoEncontradoException e,
 			HttpServletRequest request) {
