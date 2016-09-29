@@ -53,20 +53,30 @@ public class ProfissionalAgendaResource {
 		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> salvar(@Valid @RequestBody Set<ProfissionalAgenda> profissionalAgendaList) {
+	@RequestMapping(value = "/{id}", method = { RequestMethod.POST })
+	public ResponseEntity<Void> salvar(@Valid @RequestBody List<ProfissionalAgenda> profissionalAgendaList,
+			@PathVariable("id") Long aIdLotacao) {
+
+		ProfissionalLotacao lotacao = profissionalLotacaoService.findById(aIdLotacao);
+
 		for (ProfissionalAgenda profissionalAgenda : profissionalAgendaList) {
+			profissionalAgenda.setId(null);
+			profissionalAgenda.setLotacao(lotacao);
+
 			profissionalAgendaService.criar(profissionalAgenda);
 		}
 
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(value = "/{id}", method = { RequestMethod.PUT })
+	public ResponseEntity<Void> alterar(@Valid @RequestBody List<ProfissionalAgenda> profissionalAgendaList,
+			@PathVariable("id") Long aIdLotacao) {
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> alterar(@RequestBody Set<ProfissionalAgenda> profissionalAgendaList,
-			@PathVariable("id") Long aId) {
+		ProfissionalLotacao lotacao = profissionalLotacaoService.findById(aIdLotacao);
+
 		for (ProfissionalAgenda profissionalAgenda : profissionalAgendaList) {
-			// profissionalAgenda.setId(aId);
+			profissionalAgenda.setLotacao(lotacao);
 
 			profissionalAgendaService.alterar(profissionalAgenda);
 		}
