@@ -1,5 +1,7 @@
 package com.tcc.sisape.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tcc.sisape.domain.enumdados.DiaSemana;
@@ -33,29 +37,29 @@ public class ProfissionalAgenda {
 	@Column(nullable = false)
 	private boolean horarioMatutino = false;
 
-	@Column(length = 8)
-	private String horarioMatutinoInicio;
+	@Temporal(TemporalType.TIME)
+	private Date horarioMatutinoInicio;
 
-	@Column(length = 8)
-	private String horarioMatutinoFim;
+	@Temporal(TemporalType.TIME)
+	private Date horarioMatutinoFim;
 
 	@Column(nullable = false)
 	private boolean horarioVespertino = false;
 
-	@Column(length = 8)
-	private String horarioVespertinoInicio;
+	@Temporal(TemporalType.TIME)
+	private Date horarioVespertinoInicio;
 
-	@Column(length = 8)
-	private String horarioVespertinoFim;
+	@Temporal(TemporalType.TIME)
+	private Date horarioVespertinoFim;
 
 	@Column(nullable = false)
 	private boolean horarioNoturno = false;
 
-	@Column(length = 8)
-	private String horarioNoturnoInicio;
+	@Temporal(TemporalType.TIME)
+	private Date horarioNoturnoInicio;
 
-	@Column(length = 8)
-	private String horarioNoturnoFim;
+	@Temporal(TemporalType.TIME)
+	private Date horarioNoturnoFim;
 
 	public Long getId() {
 		return this.id;
@@ -89,19 +93,19 @@ public class ProfissionalAgenda {
 		this.horarioMatutino = horarioMatutino;
 	}
 
-	public String getHorarioMatutinoInicio() {
+	public Date getHorarioMatutinoInicio() {
 		return this.horarioMatutinoInicio;
 	}
 
-	public void setHorarioMatutinoInicio(String horarioMatutinoInicio) {
+	public void setHorarioMatutinoInicio(Date horarioMatutinoInicio) {
 		this.horarioMatutinoInicio = horarioMatutinoInicio;
 	}
 
-	public String getHorarioMatutinoFim() {
+	public Date getHorarioMatutinoFim() {
 		return this.horarioMatutinoFim;
 	}
 
-	public void setHorarioMatutinoFim(String horarioMatutinoFim) {
+	public void setHorarioMatutinoFim(Date horarioMatutinoFim) {
 		this.horarioMatutinoFim = horarioMatutinoFim;
 	}
 
@@ -113,19 +117,19 @@ public class ProfissionalAgenda {
 		this.horarioVespertino = horarioVespertino;
 	}
 
-	public String getHorarioVespertinoInicio() {
+	public Date getHorarioVespertinoInicio() {
 		return this.horarioVespertinoInicio;
 	}
 
-	public void setHorarioVespertinoInicio(String horarioVespertinoInicio) {
+	public void setHorarioVespertinoInicio(Date horarioVespertinoInicio) {
 		this.horarioVespertinoInicio = horarioVespertinoInicio;
 	}
 
-	public String getHorarioVespertinoFim() {
+	public Date getHorarioVespertinoFim() {
 		return this.horarioVespertinoFim;
 	}
 
-	public void setHorarioVespertinoFim(String horarioVespertinoFim) {
+	public void setHorarioVespertinoFim(Date horarioVespertinoFim) {
 		this.horarioVespertinoFim = horarioVespertinoFim;
 	}
 
@@ -137,19 +141,19 @@ public class ProfissionalAgenda {
 		this.horarioNoturno = horarioNoturno;
 	}
 
-	public String getHorarioNoturnoInicio() {
+	public Date getHorarioNoturnoInicio() {
 		return this.horarioNoturnoInicio;
 	}
 
-	public void setHorarioNoturnoInicio(String horarioNoturnoInicio) {
+	public void setHorarioNoturnoInicio(Date horarioNoturnoInicio) {
 		this.horarioNoturnoInicio = horarioNoturnoInicio;
 	}
 
-	public String getHorarioNoturnoFim() {
+	public Date getHorarioNoturnoFim() {
 		return this.horarioNoturnoFim;
 	}
 
-	public void setHorarioNoturnoFim(String horarioNoturnoFim) {
+	public void setHorarioNoturnoFim(Date horarioNoturnoFim) {
 		this.horarioNoturnoFim = horarioNoturnoFim;
 	}
 
