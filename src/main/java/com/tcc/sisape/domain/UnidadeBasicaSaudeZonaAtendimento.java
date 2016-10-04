@@ -41,6 +41,10 @@ public class UnidadeBasicaSaudeZonaAtendimento {
 	public void setDescricao(String aDescricao) {
 		this.descricao = aDescricao;
 	}
+	
+	public void setUnidadeBasicaSaude(UnidadeBasicaSaude aUnidadeBasicaSaude) {
+		this.unidadeBasicaSaude = aUnidadeBasicaSaude;
+	}
 
 	@Override
 	public int hashCode() {

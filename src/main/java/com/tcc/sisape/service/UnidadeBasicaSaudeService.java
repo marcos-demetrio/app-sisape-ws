@@ -8,13 +8,18 @@ import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.UnidadeBasicaSaude;
 import com.tcc.sisape.repository.UnidadeBasicaSaudeRepository;
+import com.tcc.sisape.repository.UnidadeBasicaSaudeZonaAtendimentoRepository;
 import com.tcc.sisape.service.exceptions.UnidadeBasicaSaudeNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.UnidadeBasicaSaudeZonaAtendimentoNaoEncontradoException;
 
 @Service
 public class UnidadeBasicaSaudeService {
 
 	@Autowired
 	private UnidadeBasicaSaudeRepository unidadeBasicaSaudeRepository;
+
+	@Autowired
+	private UnidadeBasicaSaudeZonaAtendimentoRepository unidadeBasicaSaudeZonaAtendimentoRepository;
 
 	public List<UnidadeBasicaSaude> findAll() {
 		return unidadeBasicaSaudeRepository.findAll();
@@ -39,6 +44,15 @@ public class UnidadeBasicaSaudeService {
 			unidadeBasicaSaudeRepository.delete(id);
 		} catch (EmptyResultDataAccessException e) {
 			throw new UnidadeBasicaSaudeNaoEncontradoException("Unidade Básica de Saúde não encontrado.");
+		}
+	}
+
+	public void deletarZonaAtendimento(Long id) {
+		try {
+			unidadeBasicaSaudeZonaAtendimentoRepository.delete(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new UnidadeBasicaSaudeZonaAtendimentoNaoEncontradoException(
+					"Zona de Atendimento da Unidade Básica de Saúde não encontrado.");
 		}
 	}
 

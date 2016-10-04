@@ -20,6 +20,7 @@ import com.tcc.sisape.service.exceptions.ProfissionalNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.TipoLogradouroNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.UnidadeBasicaSaudeNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.UnidadeBasicaSaudeTipoEstabelecimentoNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.UnidadeBasicaSaudeZonaAtendimentoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.UsuarioNaoEncontradoException;
 
 @ControllerAdvice
@@ -184,6 +185,19 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(UnidadeBasicaSaudeTipoEstabelecimentoNaoEncontradoException.class)
 	public ResponseEntity<DetalhesErro> handleUnidadeBasicaSaudeTipoEstabelecimentoNaoEncontradoException(
 			UnidadeBasicaSaudeTipoEstabelecimentoNaoEncontradoException e, HttpServletRequest request) {
+
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(404l);
+		erro.setTitulo(e.getMessage());
+		erro.setMensagemDesenvolvedor("http://erros.sisape.com/404");
+		erro.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+	
+	@ExceptionHandler(UnidadeBasicaSaudeZonaAtendimentoNaoEncontradoException.class)
+	public ResponseEntity<DetalhesErro> handleUnidadeBasicaSaudeZonaAtendimentoNaoEncontradoException(
+			UnidadeBasicaSaudeZonaAtendimentoNaoEncontradoException e, HttpServletRequest request) {
 
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(404l);

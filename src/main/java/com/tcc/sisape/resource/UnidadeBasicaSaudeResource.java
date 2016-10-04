@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tcc.sisape.domain.UnidadeBasicaSaude;
 import com.tcc.sisape.domain.UnidadeBasicaSaudeParametro;
+import com.tcc.sisape.domain.UnidadeBasicaSaudeZonaAtendimento;
 import com.tcc.sisape.service.UnidadeBasicaSaudeService;
 
 @CrossOrigin
@@ -54,6 +55,13 @@ public class UnidadeBasicaSaudeResource {
 
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(value = "/zona/{idZona}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deletarZonaAtendimento(@PathVariable("idZona") Long aIdZona) {
+		unidadeBasicaSaudeService.deletarZonaAtendimento(aIdZona);
+
+		return ResponseEntity.noContent().build();
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> salvar(@Valid @RequestBody UnidadeBasicaSaude unidadeBasicaSaude) {
@@ -67,6 +75,10 @@ public class UnidadeBasicaSaudeResource {
 
 		unidadeBasicaSaude.setParametroUbs(ubsParametro);
 
+		for (UnidadeBasicaSaudeZonaAtendimento zonaAtendimento : unidadeBasicaSaude.getZonaAtendimento()) {
+			zonaAtendimento.setUnidadeBasicaSaude(unidadeBasicaSaude);
+		}
+		
 		unidadeBasicaSaudeService.alterar(unidadeBasicaSaude);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -79,7 +91,11 @@ public class UnidadeBasicaSaudeResource {
 	public ResponseEntity<Void> alterar(@RequestBody UnidadeBasicaSaude unidadeBasicaSaude, @PathVariable Long id) {
 		unidadeBasicaSaude.setId(id);
 		unidadeBasicaSaude.getParametroUbs().setUnidadeBasicaSaude(unidadeBasicaSaude);
-
+		
+		for (UnidadeBasicaSaudeZonaAtendimento zonaAtendimento : unidadeBasicaSaude.getZonaAtendimento()) {
+			zonaAtendimento.setUnidadeBasicaSaude(unidadeBasicaSaude);
+		}
+		
 		unidadeBasicaSaudeService.alterar(unidadeBasicaSaude);
 
 		return ResponseEntity.noContent().build();
