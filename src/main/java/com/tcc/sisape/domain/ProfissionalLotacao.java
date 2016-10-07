@@ -1,5 +1,7 @@
 package com.tcc.sisape.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,9 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-public class ProfissionalLotacao {
+public class ProfissionalLotacao implements Serializable {
+
+	private static final long serialVersionUID = -7890230304668288880L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

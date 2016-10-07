@@ -31,8 +31,8 @@ public class Agendamento implements Serializable {
 	private Cidadao cidadao;
 
 	@ManyToOne
-	@JoinColumn(name = "i_profissional", referencedColumnName = "i_profissional")
-	private ProfissionalLotacao profissional;
+	@JoinColumn(name = "i_profissional_lotacao", referencedColumnName = "i_profissional_lotacao")
+	private ProfissionalLotacao profissionalLotacao;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
@@ -57,12 +57,12 @@ public class Agendamento implements Serializable {
 		this.cidadao = cidadao;
 	}
 
-	public ProfissionalLotacao getProfissional() {
-		return this.profissional;
+	public ProfissionalLotacao getProfissionalLotacao() {
+		return this.profissionalLotacao;
 	}
 
-	public void setProfissional(ProfissionalLotacao profissional) {
-		this.profissional = profissional;
+	public void setProfissionalLotacao(ProfissionalLotacao profissionalLotacao) {
+		this.profissionalLotacao = profissionalLotacao;
 	}
 
 	public Date getDataAgendamento() {

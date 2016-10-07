@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.tcc.sisape.domain.DetalhesErro;
+import com.tcc.sisape.service.exceptions.AgendamentoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.CidadaoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.ClassificacaoBrasileiraOcupacaoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.ClassificacaoInternacionalDoencaNaoEncontradoException;
@@ -41,6 +42,19 @@ public class ResourceExceptionHandler {
 	
 	@ExceptionHandler(ProfissionalLotacaoNaoEncontradoException.class)
 	public ResponseEntity<DetalhesErro> handleProfissionalLotacaoNaoEncontradoException(ProfissionalLotacaoNaoEncontradoException e,
+			HttpServletRequest request) {
+
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(404l);
+		erro.setTitulo(e.getMessage());
+		erro.setMensagemDesenvolvedor("http://erros.sisape.com/404");
+		erro.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+	
+	@ExceptionHandler(AgendamentoNaoEncontradoException.class)
+	public ResponseEntity<DetalhesErro> handleAgendamentoNaoEncontradoException(AgendamentoNaoEncontradoException e,
 			HttpServletRequest request) {
 
 		DetalhesErro erro = new DetalhesErro();
