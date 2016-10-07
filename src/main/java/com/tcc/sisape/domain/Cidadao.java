@@ -75,7 +75,7 @@ public class Cidadao {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "i_municipio_nascimento", referencedColumnName = "i_municipio", nullable = false)
 	private Municipio municipioNascimento;
-	
+
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "i_unidade_basica_saude", nullable = false)
 	private UnidadeBasicaSaude unidadeBasicaSaude;
@@ -436,7 +436,7 @@ public class Cidadao {
 	public void setNumeroProntuario(Long numeroProntuario) {
 		this.numeroProntuario = numeroProntuario;
 	}
-	
+
 	public UnidadeBasicaSaude getUnidadeBasicaSaude() {
 		return this.unidadeBasicaSaude;
 	}
