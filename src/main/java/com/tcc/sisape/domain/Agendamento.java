@@ -39,7 +39,7 @@ public class Agendamento implements Serializable {
 	private Date dataAgendamento;
 
 	@Column(length = 1024, nullable = false)
-	private String observacao;
+	private String queixaPrincipal;
 
 	public Long getId() {
 		return this.id;
@@ -73,12 +73,12 @@ public class Agendamento implements Serializable {
 		this.dataAgendamento = dataAgendamento;
 	}
 
-	public String getObservacao() {
-		return this.observacao;
+	public String getQueixaPrincipal() {
+		return this.queixaPrincipal;
 	}
 
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
+	public void setQueixaPrincipal(String aQueixaPrincipal) {
+		this.queixaPrincipal = aQueixaPrincipal;
 	}
 
 	@Override

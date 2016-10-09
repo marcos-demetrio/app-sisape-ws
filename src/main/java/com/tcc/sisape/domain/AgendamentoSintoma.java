@@ -31,6 +31,9 @@ public class AgendamentoSintoma implements Serializable {
 	@JoinColumn(name = "i_cid", referencedColumnName = "i_cid", nullable = false)
 	private ClassificacaoInternacionalDoenca cid;
 
+	@Column(length = 255)
+	private String descricao;
+
 	public Long getId() {
 		return this.id;
 	}
@@ -53,6 +56,14 @@ public class AgendamentoSintoma implements Serializable {
 
 	public void setCid(ClassificacaoInternacionalDoenca cid) {
 		this.cid = cid;
+	}
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	@Override
