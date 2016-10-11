@@ -119,9 +119,6 @@ public class Cidadao {
 	@Column(length = 100)
 	private String pontoReferencia;
 
-	// area
-	// microArea
-
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 20)
 	private String telefoneResidencial;
@@ -137,6 +134,10 @@ public class Cidadao {
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 100)
 	private String email;
+	
+	@JsonInclude(Include.NON_EMPTY)
+	@Column(length = 32)
+	private String senha;
 
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 50)
@@ -219,6 +220,14 @@ public class Cidadao {
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public String getSenha() {
+		return this.senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public boolean isFaleceu() {

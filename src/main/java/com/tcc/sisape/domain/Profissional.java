@@ -54,6 +54,10 @@ public class Profissional {
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 100)
 	private String email;
+	
+	@JsonInclude(Include.NON_EMPTY)
+	@Column(length = 32)
+	private String senha;
 
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 8)
@@ -113,6 +117,14 @@ public class Profissional {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public String getSenha() {
+		return this.senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getNome() {
