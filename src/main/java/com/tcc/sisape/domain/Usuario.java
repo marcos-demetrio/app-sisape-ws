@@ -1,6 +1,9 @@
 package com.tcc.sisape.domain;
 
 public class Usuario {
+	
+	private Long id;
+	
 	private String nome;
 	
 	private String email;
@@ -8,6 +11,14 @@ public class Usuario {
 	private String senha;
 	
 	private String tipoUsuario;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return this.nome;
@@ -66,7 +77,8 @@ public class Usuario {
 		return true;
 	}
 
-	public Usuario(String aNome, String aEmail, String aSenha, String aTipoUsuario) {
+	public Usuario(Long aId, String aNome, String aEmail, String aSenha, String aTipoUsuario) {
+		this.setId(aId);
 		this.setNome(aNome);
 		this.setEmail(aEmail);
 		this.setSenha(aSenha);
