@@ -68,4 +68,16 @@ public class PaisResource {
 
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(value = "/print", method = RequestMethod.POST)
+	public ResponseEntity<Void> print() {
+		try {
+			paisService.print();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ResponseEntity.noContent().build();
+	}
 }
