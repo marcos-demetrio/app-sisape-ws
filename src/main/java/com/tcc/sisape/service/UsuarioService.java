@@ -26,13 +26,15 @@ public class UsuarioService {
 		Cidadao cidadao = cidadaoRepository.findByEmail(aEmail);
 
 		if (cidadao != null) {
-			usuario = new Usuario(cidadao.getNomeCompleto(), cidadao.getEmail(), cidadao.getSenha(), "C");
+			usuario = new Usuario(cidadao.getId(), cidadao.getNomeCompleto(), cidadao.getEmail(), cidadao.getSenha(),
+					"C");
 		}
 
 		Profissional profissional = profissionalRepository.findByEmail(aEmail);
 
 		if (profissional != null) {
-			usuario = new Usuario(profissional.getNome(), profissional.getEmail(), profissional.getSenha(), "P");
+			usuario = new Usuario(profissional.getId(), profissional.getNome(), profissional.getEmail(),
+					profissional.getSenha(), "P");
 		}
 
 		if (usuario == null) {
