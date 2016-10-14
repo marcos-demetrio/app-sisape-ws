@@ -1,6 +1,6 @@
 package com.tcc.sisape.service;
 
-import java.util.ArrayList;
+import java.io.OutputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,32 +56,13 @@ public class PaisService {
 		paisRepository.save(aPais);
 	}
 
-	public void print() {
+	public OutputStream print(String aNome) {
 		try {
-			Pais p1 = new Pais();
-			p1.setId(1L);
-			p1.setNome("Brasil");
-			p1.setSigla("BRA");
-
-			Pais p2 = new Pais();
-			p2.setId(2L);
-			p2.setNome("Argentina");
-			p2.setSigla("ARG");
-
-			Pais p3 = new Pais();
-			p3.setId(3L);
-			p3.setNome("Alemanha");
-			p3.setSigla("ALE");
-
-			List<Pais> paises = new ArrayList<Pais>();
-			paises.add(p1);
-			paises.add(p2);
-			paises.add(p3);
-
 			PaisReport p = new PaisReport();
-			p.imprimir(paises);
+			return p.imprimir(this.findByNome(aNome));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		return null;
 	}
 }

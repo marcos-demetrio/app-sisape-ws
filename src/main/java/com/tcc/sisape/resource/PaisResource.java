@@ -1,5 +1,6 @@
 package com.tcc.sisape.resource;
 
+import java.io.OutputStream;
 import java.net.URI;
 import java.util.List;
 
@@ -68,11 +69,12 @@ public class PaisResource {
 
 		return ResponseEntity.noContent().build();
 	}
-	
-	@RequestMapping(value = "/print", method = RequestMethod.POST)
-	public ResponseEntity<Void> print() {
+
+	@RequestMapping(value = "/print", method = RequestMethod.GET)
+	public ResponseEntity<Void> print(@RequestParam(value = "nome", defaultValue = "") String aNome) {
+		OutputStream outputStream = null;
 		try {
-			paisService.print();
+			outputStream = paisService.print(aNome);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
