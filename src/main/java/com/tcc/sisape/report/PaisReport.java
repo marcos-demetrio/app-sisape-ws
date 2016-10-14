@@ -16,7 +16,7 @@ public class PaisReport {
 	private String pathToReportPackage;
 
 	public PaisReport() {
-		this.pathToReportPackage = this.getClass().getClassLoader().getResource("").getPath() + "/com/tcc/sisape/jasper/";
+		this.pathToReportPackage = this.getClass().getClassLoader().getResource("").getPath() + "/jasper/";
 	}
 
 	public void imprimir(List<Pais> paises) throws Exception {
