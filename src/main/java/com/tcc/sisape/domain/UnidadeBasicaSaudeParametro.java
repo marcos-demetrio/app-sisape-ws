@@ -69,28 +69,28 @@ public class UnidadeBasicaSaudeParametro implements Serializable {
 	@Column(nullable = false)
 	private boolean horarioMatutino;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date horarioMatutinoInicio;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date horarioMatutinoFim;
 
 	@Column(nullable = false)
 	private boolean horarioVespertino;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date horarioVespertinoInicio;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date horarioVespertinoFim;
 
 	@Column(nullable = false)
 	private boolean horarioNoturno;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date horarioNoturnoInicio;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date horarioNoturnoFim;
 
 	@Column(nullable = false)
