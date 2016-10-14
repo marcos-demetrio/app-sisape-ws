@@ -22,7 +22,7 @@ public class PaisReport {
 	public void imprimir(List<Pais> paises) throws Exception {
 		Random rand = new Random();
 		
-		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "relatorioPais.jrxml");
+		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "reportPais.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(paises));
 
