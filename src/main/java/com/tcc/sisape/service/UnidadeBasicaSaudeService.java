@@ -7,6 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.UnidadeBasicaSaude;
+import com.tcc.sisape.report.UnidadeBasicaSaudeReport;
 import com.tcc.sisape.repository.UnidadeBasicaSaudeRepository;
 import com.tcc.sisape.repository.UnidadeBasicaSaudeZonaAtendimentoRepository;
 import com.tcc.sisape.service.exceptions.UnidadeBasicaSaudeNaoEncontradoException;
@@ -66,5 +67,14 @@ public class UnidadeBasicaSaudeService {
 		findById(unidadeBasicaSaude.getId());
 
 		unidadeBasicaSaudeRepository.save(unidadeBasicaSaude);
+	}
+	
+	public void print(String aNome) {
+		try {
+			UnidadeBasicaSaudeReport r = new UnidadeBasicaSaudeReport();
+			r.imprimir(this.findByNome(aNome));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

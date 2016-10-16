@@ -1,6 +1,5 @@
 package com.tcc.sisape.service;
 
-import java.io.OutputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +57,8 @@ public class PaisService {
 
 	public void print(String aNome) {
 		try {
-			PaisReport p = new PaisReport();
-			p.imprimir(this.findByNome(aNome));
+			PaisReport r = new PaisReport();
+			r.imprimir(this.findByNome(aNome));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

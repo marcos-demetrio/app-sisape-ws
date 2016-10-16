@@ -7,6 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.Estado;
+import com.tcc.sisape.report.EstadoReport;
 import com.tcc.sisape.repository.EstadoRepository;
 import com.tcc.sisape.service.exceptions.EstadoNaoEncontradoException;
 
@@ -52,5 +53,14 @@ public class EstadoService {
 		findById(aEstado.getId());
 
 		estadoRepository.save(aEstado);
+	}
+
+	public void print(String aNome) {
+		try {
+			EstadoReport r = new EstadoReport();
+			r.imprimir(this.findByNome(aNome));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

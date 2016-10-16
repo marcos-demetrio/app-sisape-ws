@@ -83,4 +83,18 @@ public class ClassificacaoInternacionalDoencaResource {
 
 		return ResponseEntity.noContent().build();
 	}
+
+	@RequestMapping(value = "/print", method = RequestMethod.GET)
+	public ResponseEntity<Void> print(
+			@RequestParam(value = "codigoCid", defaultValue = "") String aCodigoCid,
+			@RequestParam(value = "descricao", defaultValue = "") String aDescricao) {
+		try {
+			classificacaoInternacionalDoencaService.print(aDescricao, aCodigoCid);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.noContent().build();
+	}
 }

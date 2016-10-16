@@ -69,4 +69,16 @@ public class MunicipioResource {
 
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(value = "/print", method = RequestMethod.GET)
+	public ResponseEntity<Void> print(@RequestParam(value = "nome", defaultValue = "") String aNome) {
+		try {
+			municipioService.print(aNome);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.noContent().build();
+	}
 }

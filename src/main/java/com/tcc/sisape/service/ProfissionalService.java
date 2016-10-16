@@ -7,6 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.Profissional;
+import com.tcc.sisape.report.ProfissionalReport;
 import com.tcc.sisape.repository.ProfissionalRepository;
 import com.tcc.sisape.service.exceptions.ProfissionalNaoEncontradoException;
 
@@ -52,5 +53,14 @@ public class ProfissionalService {
 		findById(profissional.getId());
 
 		profissionalRepository.save(profissional);
+	}
+
+	public void print(String aNome) {
+		try {
+			ProfissionalReport r = new ProfissionalReport();
+			r.imprimir(this.findByNome(aNome));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

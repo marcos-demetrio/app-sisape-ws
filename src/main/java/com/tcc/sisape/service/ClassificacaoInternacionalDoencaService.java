@@ -7,6 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.ClassificacaoInternacionalDoenca;
+import com.tcc.sisape.report.ClassificacaoInternacionalDoencaReport;
 import com.tcc.sisape.repository.ClassificacaoInternacionalDoencaRepository;
 import com.tcc.sisape.service.exceptions.ClassificacaoInternacionalDoencaNaoEncontradoException;
 
@@ -68,5 +69,14 @@ public class ClassificacaoInternacionalDoencaService {
 		findById(aClassificacaoInternacionalDoenca.getId());
 
 		classificacaoInternacionalDoencaRepository.save(aClassificacaoInternacionalDoenca);
+	}
+	
+	public void print(String aDescricao, String aCodigoCid) {
+		try {
+			ClassificacaoInternacionalDoencaReport r = new ClassificacaoInternacionalDoencaReport();
+			r.imprimir(this.findByDescricaoContainingOrCodigoCidContaining(aDescricao, aCodigoCid));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

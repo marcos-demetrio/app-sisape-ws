@@ -1,6 +1,5 @@
 package com.tcc.sisape.resource;
 
-import java.io.OutputStream;
 import java.net.URI;
 import java.util.List;
 
