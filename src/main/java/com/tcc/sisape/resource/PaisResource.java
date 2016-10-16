@@ -72,14 +72,13 @@ public class PaisResource {
 
 	@RequestMapping(value = "/print", method = RequestMethod.GET)
 	public ResponseEntity<Void> print(@RequestParam(value = "nome", defaultValue = "") String aNome) {
-		OutputStream outputStream = null;
 		try {
-			outputStream = paisService.print(aNome);
+			paisService.print(aNome);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return ResponseEntity.noContent().build();
 	}
 }

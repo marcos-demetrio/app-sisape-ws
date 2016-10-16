@@ -56,13 +56,12 @@ public class PaisService {
 		paisRepository.save(aPais);
 	}
 
-	public OutputStream print(String aNome) {
+	public void print(String aNome) {
 		try {
 			PaisReport p = new PaisReport();
-			return p.imprimir(this.findByNome(aNome));
+			p.imprimir(this.findByNome(aNome));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return null;
 	}
 }
