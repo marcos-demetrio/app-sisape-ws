@@ -2,6 +2,7 @@ package com.tcc.sisape.resource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tcc.sisape.domain.Agendamento;
+import com.tcc.sisape.domain.AgendamentoSintoma;
 import com.tcc.sisape.service.AgendamentoService;
 
 @CrossOrigin
@@ -45,9 +47,28 @@ public class AgendamentoResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@RequestMapping(value = "/sintoma/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deletarSintoma(@PathVariable("id") Long aId) {
+		agendamentoService.deletarSintoma(aId);
+
+		return ResponseEntity.noContent().build();
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> save(@Valid @RequestBody Agendamento aAgendamento) {
+		Set<AgendamentoSintoma> setAgendamentoSintoma = aAgendamento.getAgendamentoSintoma();
+
+		aAgendamento.setAgendamentoSintoma(null);
+
 		aAgendamento = agendamentoService.create(aAgendamento);
+
+		for (AgendamentoSintoma agendamentoSintoma : setAgendamentoSintoma) {
+			agendamentoSintoma.setAgendamento(aAgendamento);
+		}
+
+		aAgendamento.setAgendamentoSintoma(setAgendamentoSintoma);
+
+		agendamentoService.update(aAgendamento);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aAgendamento.getId())
 				.toUri();
@@ -58,6 +79,10 @@ public class AgendamentoResource {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Agendamento aAgendamento, @PathVariable("id") Long aId) {
 		aAgendamento.setId(aId);
+
+		for (AgendamentoSintoma agendamentoSintoma : aAgendamento.getAgendamentoSintoma()) {
+			agendamentoSintoma.setAgendamento(aAgendamento);
+		}
 
 		agendamentoService.update(aAgendamento);
 

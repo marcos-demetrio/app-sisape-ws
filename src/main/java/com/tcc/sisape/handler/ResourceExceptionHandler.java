@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.tcc.sisape.domain.DetalhesErro;
 import com.tcc.sisape.service.exceptions.AgendamentoNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.AgendamentoSintomaNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.CidadaoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.ClassificacaoBrasileiraOcupacaoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.ClassificacaoInternacionalDoencaNaoEncontradoException;
@@ -28,8 +29,8 @@ import com.tcc.sisape.service.exceptions.UsuarioNaoEncontradoException;
 public class ResourceExceptionHandler {
 
 	@ExceptionHandler(ProfissionalAgendaNaoEncontradoException.class)
-	public ResponseEntity<DetalhesErro> handleProfissionalAgendaNaoEncontradoException(ProfissionalAgendaNaoEncontradoException e,
-			HttpServletRequest request) {
+	public ResponseEntity<DetalhesErro> handleProfissionalAgendaNaoEncontradoException(
+			ProfissionalAgendaNaoEncontradoException e, HttpServletRequest request) {
 
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(404l);
@@ -39,10 +40,10 @@ public class ResourceExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
-	
+
 	@ExceptionHandler(ProfissionalLotacaoNaoEncontradoException.class)
-	public ResponseEntity<DetalhesErro> handleProfissionalLotacaoNaoEncontradoException(ProfissionalLotacaoNaoEncontradoException e,
-			HttpServletRequest request) {
+	public ResponseEntity<DetalhesErro> handleProfissionalLotacaoNaoEncontradoException(
+			ProfissionalLotacaoNaoEncontradoException e, HttpServletRequest request) {
 
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(404l);
@@ -52,7 +53,7 @@ public class ResourceExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
-	
+
 	@ExceptionHandler(AgendamentoNaoEncontradoException.class)
 	public ResponseEntity<DetalhesErro> handleAgendamentoNaoEncontradoException(AgendamentoNaoEncontradoException e,
 			HttpServletRequest request) {
@@ -65,7 +66,7 @@ public class ResourceExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
-	
+
 	@ExceptionHandler(ProfissionalNaoEncontradoException.class)
 	public ResponseEntity<DetalhesErro> handleProfissionalNaoEncontradoException(ProfissionalNaoEncontradoException e,
 			HttpServletRequest request) {
@@ -78,7 +79,7 @@ public class ResourceExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
-	
+
 	@ExceptionHandler(UsuarioNaoEncontradoException.class)
 	public ResponseEntity<DetalhesErro> handleUsuarioNaoEncontradoException(UsuarioNaoEncontradoException e,
 			HttpServletRequest request) {
@@ -208,10 +209,23 @@ public class ResourceExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
-	
+
 	@ExceptionHandler(UnidadeBasicaSaudeZonaAtendimentoNaoEncontradoException.class)
 	public ResponseEntity<DetalhesErro> handleUnidadeBasicaSaudeZonaAtendimentoNaoEncontradoException(
 			UnidadeBasicaSaudeZonaAtendimentoNaoEncontradoException e, HttpServletRequest request) {
+
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(404l);
+		erro.setTitulo(e.getMessage());
+		erro.setMensagemDesenvolvedor("http://erros.sisape.com/404");
+		erro.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+
+	@ExceptionHandler(AgendamentoSintomaNaoEncontradoException.class)
+	public ResponseEntity<DetalhesErro> handleAgendamentoSintomaNaoEncontradoException(
+			AgendamentoSintomaNaoEncontradoException e, HttpServletRequest request) {
 
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(404l);

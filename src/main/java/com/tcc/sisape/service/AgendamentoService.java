@@ -8,13 +8,18 @@ import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.Agendamento;
 import com.tcc.sisape.repository.AgendamentoRepository;
+import com.tcc.sisape.repository.AgendamentoSintomaRepository;
 import com.tcc.sisape.service.exceptions.AgendamentoNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.AgendamentoSintomaNaoEncontradoException;
 
 @Service
 public class AgendamentoService {
 
 	@Autowired
 	private AgendamentoRepository agendamentoRepository;
+
+	@Autowired
+	private AgendamentoSintomaRepository agendamentoSintomaRepository;
 
 	public List<Agendamento> findAll() {
 		return agendamentoRepository.findAll();
@@ -35,6 +40,14 @@ public class AgendamentoService {
 			agendamentoRepository.delete(aId);
 		} catch (EmptyResultDataAccessException e) {
 			throw new AgendamentoNaoEncontradoException("Agendamento não encontrado.");
+		}
+	}
+
+	public void deletarSintoma(Long id) {
+		try {
+			agendamentoSintomaRepository.delete(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new AgendamentoSintomaNaoEncontradoException("Agendamento Sintoma não encontrado.");
 		}
 	}
 

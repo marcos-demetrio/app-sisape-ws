@@ -19,8 +19,8 @@ public class AgendamentoSintoma implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty("i_agendamento_sintoma")
-	@Column(name = "i_agendamento_sintoma")
+	@JsonProperty("i_sequencial")
+	@Column(name = "i_sequencial")
 	private Long id;
 
 	@ManyToOne(optional = false)
@@ -40,10 +40,6 @@ public class AgendamentoSintoma implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Agendamento getAgendamento() {
-		return this.agendamento;
 	}
 
 	public void setAgendamento(Agendamento agendamento) {

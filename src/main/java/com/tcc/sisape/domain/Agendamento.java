@@ -2,7 +2,9 @@ package com.tcc.sisape.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -40,6 +43,9 @@ public class Agendamento implements Serializable {
 
 	@Column(length = 1024, nullable = false)
 	private String queixaPrincipal;
+
+	@OneToMany(mappedBy = "agendamento", cascade = CascadeType.ALL)
+	private Set<AgendamentoSintoma> agendamentoSintoma;
 
 	public Long getId() {
 		return this.id;
@@ -79,6 +85,14 @@ public class Agendamento implements Serializable {
 
 	public void setQueixaPrincipal(String aQueixaPrincipal) {
 		this.queixaPrincipal = aQueixaPrincipal;
+	}
+
+	public Set<AgendamentoSintoma> getAgendamentoSintoma() {
+		return this.agendamentoSintoma;
+	}
+
+	public void setAgendamentoSintoma(Set<AgendamentoSintoma> agendamentoSintoma) {
+		this.agendamentoSintoma = agendamentoSintoma;
 	}
 
 	@Override
