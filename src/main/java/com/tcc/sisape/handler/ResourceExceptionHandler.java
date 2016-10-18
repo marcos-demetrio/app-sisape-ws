@@ -14,6 +14,8 @@ import com.tcc.sisape.service.exceptions.CidadaoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.ClassificacaoBrasileiraOcupacaoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.ClassificacaoInternacionalDoencaNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.EstadoNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.ExameNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.MedicamentoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.MunicipioNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.PaisNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.ProfissionalAgendaNaoEncontradoException;
@@ -226,6 +228,32 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(AgendamentoSintomaNaoEncontradoException.class)
 	public ResponseEntity<DetalhesErro> handleAgendamentoSintomaNaoEncontradoException(
 			AgendamentoSintomaNaoEncontradoException e, HttpServletRequest request) {
+
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(404l);
+		erro.setTitulo(e.getMessage());
+		erro.setMensagemDesenvolvedor("http://erros.sisape.com/404");
+		erro.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+	
+	@ExceptionHandler(ExameNaoEncontradoException.class)
+	public ResponseEntity<DetalhesErro> handleExameNaoEncontradoException(ExameNaoEncontradoException e,
+			HttpServletRequest request) {
+
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(404l);
+		erro.setTitulo(e.getMessage());
+		erro.setMensagemDesenvolvedor("http://erros.sisape.com/404");
+		erro.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+
+	@ExceptionHandler(MedicamentoNaoEncontradoException.class)
+	public ResponseEntity<DetalhesErro> handleMedicamentoNaoEncontradoException(MedicamentoNaoEncontradoException e,
+			HttpServletRequest request) {
 
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(404l);

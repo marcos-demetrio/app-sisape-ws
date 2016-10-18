@@ -7,27 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-public class Medicamento implements Serializable {
+public class Exame implements Serializable {
 
-	private static final long serialVersionUID = -6010182282805412350L;
+	private static final long serialVersionUID = 1095221918520524859L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty("i_medicamento")
-	@Column(name = "i_medicamento")
+	@JsonProperty("i_exame")
+	@Column(name = "i_exame")
 	private Long id;
 
 	@Column(length = 100, nullable = false)
 	private String nome;
-
-	@Column(nullable = false)
-	private boolean possuiEmEstoque;
 
 	public Long getId() {
 		return this.id;
@@ -36,21 +31,12 @@ public class Medicamento implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getNome() {
 		return this.nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public boolean isPossuiEmEstoque() {
-		return this.possuiEmEstoque;
-	}
-
-	public void setPossuiEmEstoque(boolean possuiEmEstoque) {
-		this.possuiEmEstoque = possuiEmEstoque;
 	}
 
 	@Override
@@ -69,7 +55,7 @@ public class Medicamento implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Medicamento other = (Medicamento) obj;
+		Exame other = (Exame) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
