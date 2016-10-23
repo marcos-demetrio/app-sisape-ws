@@ -37,9 +37,13 @@ public class Agendamento implements Serializable {
 	@JoinColumn(name = "i_profissional_lotacao", referencedColumnName = "i_profissional_lotacao")
 	private ProfissionalLotacao profissionalLotacao;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
 	private Date dataAgendamento;
+
+	@Temporal(TemporalType.TIME)
+	@Column(nullable = false)
+	private Date horaAgendamento;
 
 	@Column(length = 1024, nullable = false)
 	private String queixaPrincipal;
@@ -77,6 +81,14 @@ public class Agendamento implements Serializable {
 
 	public void setDataAgendamento(Date dataAgendamento) {
 		this.dataAgendamento = dataAgendamento;
+	}
+
+	public Date getHoraAgendamento() {
+		return this.horaAgendamento;
+	}
+
+	public void setHoraAgendamento(Date horaAgendamento) {
+		this.horaAgendamento = horaAgendamento;
 	}
 
 	public String getQueixaPrincipal() {
