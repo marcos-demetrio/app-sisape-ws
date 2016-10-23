@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tcc.sisape.domain.Agendamento;
 import com.tcc.sisape.domain.AgendamentoSintoma;
+import com.tcc.sisape.service.AgendamentoPeriodoDia;
 import com.tcc.sisape.service.AgendamentoService;
 
 @CrossOrigin
@@ -33,6 +34,12 @@ public class AgendamentoResource {
 	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Agendamento>> findAll() {
 		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.findAll());
+	}
+
+	@RequestMapping(value = "/horarios/{id}", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Set<AgendamentoPeriodoDia>> gerarHorarios(@PathVariable("id") Long aIdUbs) {
+		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.gerarHorarios(aIdUbs));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -53,7 +60,7 @@ public class AgendamentoResource {
 
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> save(@Valid @RequestBody Agendamento aAgendamento) {
 		Set<AgendamentoSintoma> setAgendamentoSintoma = aAgendamento.getAgendamentoSintoma();

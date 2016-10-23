@@ -27,8 +27,8 @@ public class AgendamentoSintoma implements Serializable {
 	@JoinColumn(name = "i_agendamento", referencedColumnName = "i_agendamento", nullable = false)
 	private Agendamento agendamento;
 
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "i_cid", referencedColumnName = "i_cid", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "i_cid", referencedColumnName = "i_cid")
 	private ClassificacaoInternacionalDoenca cid;
 
 	@Column(length = 255)
