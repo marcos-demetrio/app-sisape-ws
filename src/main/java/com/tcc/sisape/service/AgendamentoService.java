@@ -1,7 +1,6 @@
 package com.tcc.sisape.service;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,43 +34,37 @@ public class AgendamentoService {
 		return agendamentoRepository.findAll();
 	}
 
-	private AgendamentoPeriodoDia gerarHorarioPeriodo(UnidadeBasicaSaude aUnidadeBasicaSaude, PeriodoDia aPeriodoDia) {
+	private Set<AgendamentoSenha> gerarHorarioPeriodo(UnidadeBasicaSaude aUnidadeBasicaSaude, PeriodoDia aPeriodoDia,
+			int aNumeroSenha) {
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeZone(TimeZone.getTimeZone("GMT-0200"));
 
 		int tempoPadraoAtendimento = aUnidadeBasicaSaude.getParametroUbs().getDuracaoPadraoAtendimento().intValue();
 
-		Date horarioInicio = null;
-		Date horarioFim = null;
+		int numeroSenha = aNumeroSenha;
+		int horaInicio = 0;
+		int horaFim = 0;
 
 		switch (aPeriodoDia) {
 		case MATUTINO:
-			horarioInicio = aUnidadeBasicaSaude.getParametroUbs().getHorarioMatutinoInicio();
-			horarioFim = aUnidadeBasicaSaude.getParametroUbs().getHorarioMatutinoFim();
+			horaInicio = aUnidadeBasicaSaude.getParametroUbs().getHorarioMatutinoInicio();
+			horaFim = aUnidadeBasicaSaude.getParametroUbs().getHorarioMatutinoFim();
 
 			break;
 
 		case VESPERTINO:
-			horarioInicio = aUnidadeBasicaSaude.getParametroUbs().getHorarioVespertinoInicio();
-			horarioFim = aUnidadeBasicaSaude.getParametroUbs().getHorarioVespertinoFim();
+			horaInicio = aUnidadeBasicaSaude.getParametroUbs().getHorarioVespertinoInicio();
+			horaFim = aUnidadeBasicaSaude.getParametroUbs().getHorarioVespertinoFim();
 
 			break;
 
 		case NOTURNO:
-			horarioInicio = aUnidadeBasicaSaude.getParametroUbs().getHorarioNoturnoInicio();
-			horarioFim = aUnidadeBasicaSaude.getParametroUbs().getHorarioNoturnoFim();
+			horaInicio = aUnidadeBasicaSaude.getParametroUbs().getHorarioNoturnoInicio();
+			horaFim = aUnidadeBasicaSaude.getParametroUbs().getHorarioNoturnoFim();
 
 			break;
 		}
-
-		calendar.setTime(horarioInicio);
-		int horaInicio = calendar.get(Calendar.HOUR_OF_DAY);
-
-		calendar.setTime(horarioFim);
-		int horaFim = calendar.get(Calendar.HOUR_OF_DAY);
-
-		int numeroSenha = 0;
 
 		Set<AgendamentoSenha> agendamentoSenha = new HashSet<AgendamentoSenha>();
 
@@ -80,41 +73,58 @@ public class AgendamentoService {
 			for (int minutoIndex = 0; minutoIndex <= (60
 					- tempoPadraoAtendimento); minutoIndex += tempoPadraoAtendimento) {
 
-				numeroSenha++;
 				calendar.set(Calendar.HOUR_OF_DAY, horaIndex);
 				calendar.set(Calendar.MINUTE, minutoIndex);
 				calendar.setTimeZone(TimeZone.getTimeZone("GMT-0200"));
+
+				numeroSenha++;
 
 				agendamentoSenha.add(new AgendamentoSenha(calendar.getTime(), numeroSenha, true));
 			}
 		}
 
-		AgendamentoPeriodoDia horarioPeriodoDia = new AgendamentoPeriodoDia();
-
-		horarioPeriodoDia.setPeriodoDia(aPeriodoDia);
-		horarioPeriodoDia.setSenhas(agendamentoSenha);
-
-		return horarioPeriodoDia;
+		return agendamentoSenha;
 	}
 
-	public Set<AgendamentoPeriodoDia> gerarHorarios(Long aCodigoUbs) {
+	public Set<AgendamentoSenha> gerarHorarios(Long aCodigoUbs) {
 		UnidadeBasicaSaude unidadeBasicaSaude = unidadeBasicaSaudeService.findById(aCodigoUbs);
 
-		Set<AgendamentoPeriodoDia> horarioPeriodoDiaSet = new HashSet<AgendamentoPeriodoDia>();
+		Set<AgendamentoSenha> agendamentoSenhaSet = new HashSet<AgendamentoSenha>();
+
+		int numeroSenha = 0;
 
 		if (unidadeBasicaSaude.getParametroUbs().isHorarioMatutino()) {
-			horarioPeriodoDiaSet.add(this.gerarHorarioPeriodo(unidadeBasicaSaude, PeriodoDia.MATUTINO));
+			Set<AgendamentoSenha> agendamentoSenhaMatutino = this.gerarHorarioPeriodo(unidadeBasicaSaude,
+					PeriodoDia.MATUTINO, numeroSenha);
+
+			for (AgendamentoSenha agendamentoSenha : agendamentoSenhaMatutino) {
+				agendamentoSenhaSet.add(agendamentoSenha);
+			}
 		}
+
+		numeroSenha = agendamentoSenhaSet.size();
 
 		if (unidadeBasicaSaude.getParametroUbs().isHorarioVespertino()) {
-			horarioPeriodoDiaSet.add(this.gerarHorarioPeriodo(unidadeBasicaSaude, PeriodoDia.VESPERTINO));
+			Set<AgendamentoSenha> agendamentoSenhaVespertino = this.gerarHorarioPeriodo(unidadeBasicaSaude,
+					PeriodoDia.VESPERTINO, numeroSenha);
+
+			for (AgendamentoSenha agendamentoSenha : agendamentoSenhaVespertino) {
+				agendamentoSenhaSet.add(agendamentoSenha);
+			}
 		}
+
+		numeroSenha = agendamentoSenhaSet.size();
 
 		if (unidadeBasicaSaude.getParametroUbs().isHorarioNoturno()) {
-			horarioPeriodoDiaSet.add(this.gerarHorarioPeriodo(unidadeBasicaSaude, PeriodoDia.NOTURNO));
+			Set<AgendamentoSenha> agendamentoSenhaNoturno = this.gerarHorarioPeriodo(unidadeBasicaSaude,
+					PeriodoDia.NOTURNO, numeroSenha);
+
+			for (AgendamentoSenha agendamentoSenha : agendamentoSenhaNoturno) {
+				agendamentoSenhaSet.add(agendamentoSenha);
+			}
 		}
 
-		return horarioPeriodoDiaSet;
+		return agendamentoSenhaSet;
 	}
 
 	public Agendamento findById(Long aId) {

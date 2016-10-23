@@ -20,7 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tcc.sisape.domain.Agendamento;
 import com.tcc.sisape.domain.AgendamentoSintoma;
-import com.tcc.sisape.service.AgendamentoPeriodoDia;
+import com.tcc.sisape.service.AgendamentoSenha;
 import com.tcc.sisape.service.AgendamentoService;
 
 @CrossOrigin
@@ -38,7 +38,7 @@ public class AgendamentoResource {
 
 	@RequestMapping(value = "/horarios/{id}", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Set<AgendamentoPeriodoDia>> gerarHorarios(@PathVariable("id") Long aIdUbs) {
+	public ResponseEntity<Set<AgendamentoSenha>> gerarHorarios(@PathVariable("id") Long aIdUbs) {
 		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.gerarHorarios(aIdUbs));
 	}
 

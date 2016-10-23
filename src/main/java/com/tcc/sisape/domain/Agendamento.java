@@ -41,7 +41,7 @@ public class Agendamento implements Serializable {
 	@Column(nullable = false)
 	private Date dataAgendamento;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
 	private Date horaAgendamento;
 
