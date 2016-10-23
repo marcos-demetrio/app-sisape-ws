@@ -1,7 +1,6 @@
 package com.tcc.sisape.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -69,29 +66,23 @@ public class UnidadeBasicaSaudeParametro implements Serializable {
 	@Column(nullable = false)
 	private boolean horarioMatutino;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date horarioMatutinoInicio;
+	private int horarioMatutinoInicio;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date horarioMatutinoFim;
+	private int horarioMatutinoFim;
 
 	@Column(nullable = false)
 	private boolean horarioVespertino;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date horarioVespertinoInicio;
+	private int horarioVespertinoInicio;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date horarioVespertinoFim;
+	private int horarioVespertinoFim;
 
 	@Column(nullable = false)
 	private boolean horarioNoturno;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date horarioNoturnoInicio;
+	private int horarioNoturnoInicio;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date horarioNoturnoFim;
+	private int horarioNoturnoFim;
 
 	@Column(nullable = false)
 	private Long duracaoPadraoAtendimento;
@@ -212,19 +203,19 @@ public class UnidadeBasicaSaudeParametro implements Serializable {
 		this.horarioMatutino = horarioMatutino;
 	}
 
-	public Date getHorarioMatutinoInicio() {
+	public int getHorarioMatutinoInicio() {
 		return this.horarioMatutinoInicio;
 	}
 
-	public void setHorarioMatutinoInicio(Date horarioMatutinoInicio) {
+	public void setHorarioMatutinoInicio(int horarioMatutinoInicio) {
 		this.horarioMatutinoInicio = horarioMatutinoInicio;
 	}
 
-	public Date getHorarioMatutinoFim() {
+	public int getHorarioMatutinoFim() {
 		return this.horarioMatutinoFim;
 	}
 
-	public void setHorarioMatutinoFim(Date horarioMatutinoFim) {
+	public void setHorarioMatutinoFim(int horarioMatutinoFim) {
 		this.horarioMatutinoFim = horarioMatutinoFim;
 	}
 
@@ -236,19 +227,19 @@ public class UnidadeBasicaSaudeParametro implements Serializable {
 		this.horarioVespertino = horarioVespertino;
 	}
 
-	public Date getHorarioVespertinoInicio() {
+	public int getHorarioVespertinoInicio() {
 		return this.horarioVespertinoInicio;
 	}
 
-	public void setHorarioVespertinoInicio(Date horarioVespertinoInicio) {
+	public void setHorarioVespertinoInicio(int horarioVespertinoInicio) {
 		this.horarioVespertinoInicio = horarioVespertinoInicio;
 	}
 
-	public Date getHorarioVespertinoFim() {
+	public int getHorarioVespertinoFim() {
 		return this.horarioVespertinoFim;
 	}
 
-	public void setHorarioVespertinoFim(Date horarioVespertinoFim) {
+	public void setHorarioVespertinoFim(int horarioVespertinoFim) {
 		this.horarioVespertinoFim = horarioVespertinoFim;
 	}
 
@@ -260,19 +251,19 @@ public class UnidadeBasicaSaudeParametro implements Serializable {
 		this.horarioNoturno = horarioNoturno;
 	}
 
-	public Date getHorarioNoturnoInicio() {
+	public int getHorarioNoturnoInicio() {
 		return this.horarioNoturnoInicio;
 	}
 
-	public void setHorarioNoturnoInicio(Date horarioNoturnoInicio) {
+	public void setHorarioNoturnoInicio(int horarioNoturnoInicio) {
 		this.horarioNoturnoInicio = horarioNoturnoInicio;
 	}
 
-	public Date getHorarioNoturnoFim() {
+	public int getHorarioNoturnoFim() {
 		return this.horarioNoturnoFim;
 	}
 
-	public void setHorarioNoturnoFim(Date horarioNoturnoFim) {
+	public void setHorarioNoturnoFim(int horarioNoturnoFim) {
 		this.horarioNoturnoFim = horarioNoturnoFim;
 	}
 
