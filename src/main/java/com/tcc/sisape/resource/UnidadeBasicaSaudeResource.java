@@ -2,6 +2,7 @@ package com.tcc.sisape.resource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -55,7 +56,7 @@ public class UnidadeBasicaSaudeResource {
 
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(value = "/zona/{idZona}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deletarZonaAtendimento(@PathVariable("idZona") Long aIdZona) {
 		unidadeBasicaSaudeService.deletarZonaAtendimento(aIdZona);
@@ -67,18 +68,22 @@ public class UnidadeBasicaSaudeResource {
 	public ResponseEntity<Void> salvar(@Valid @RequestBody UnidadeBasicaSaude unidadeBasicaSaude) {
 
 		UnidadeBasicaSaudeParametro ubsParametro = unidadeBasicaSaude.getParametroUbs();
+		Set<UnidadeBasicaSaudeZonaAtendimento> setZonaAtendimento = unidadeBasicaSaude.getZonaAtendimento();
+
 		unidadeBasicaSaude.setParametroUbs(null);
+		unidadeBasicaSaude.setZonaAtendimento(null);
 
 		unidadeBasicaSaude = unidadeBasicaSaudeService.criar(unidadeBasicaSaude);
 
 		ubsParametro.setUnidadeBasicaSaude(unidadeBasicaSaude);
 
-		unidadeBasicaSaude.setParametroUbs(ubsParametro);
-
-		for (UnidadeBasicaSaudeZonaAtendimento zonaAtendimento : unidadeBasicaSaude.getZonaAtendimento()) {
+		for (UnidadeBasicaSaudeZonaAtendimento zonaAtendimento : setZonaAtendimento) {
 			zonaAtendimento.setUnidadeBasicaSaude(unidadeBasicaSaude);
 		}
-		
+
+		unidadeBasicaSaude.setParametroUbs(ubsParametro);
+		unidadeBasicaSaude.setZonaAtendimento(setZonaAtendimento);
+
 		unidadeBasicaSaudeService.alterar(unidadeBasicaSaude);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -91,16 +96,16 @@ public class UnidadeBasicaSaudeResource {
 	public ResponseEntity<Void> alterar(@RequestBody UnidadeBasicaSaude unidadeBasicaSaude, @PathVariable Long id) {
 		unidadeBasicaSaude.setId(id);
 		unidadeBasicaSaude.getParametroUbs().setUnidadeBasicaSaude(unidadeBasicaSaude);
-		
+
 		for (UnidadeBasicaSaudeZonaAtendimento zonaAtendimento : unidadeBasicaSaude.getZonaAtendimento()) {
 			zonaAtendimento.setUnidadeBasicaSaude(unidadeBasicaSaude);
 		}
-		
+
 		unidadeBasicaSaudeService.alterar(unidadeBasicaSaude);
 
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(value = "/print", method = RequestMethod.GET)
 	public ResponseEntity<Void> print(@RequestParam(value = "nome", defaultValue = "") String aNome) {
 		try {
