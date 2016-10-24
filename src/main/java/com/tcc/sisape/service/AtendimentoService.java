@@ -7,11 +7,14 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.Atendimento;
-import com.tcc.sisape.repository.AtendimentoRepository;
 import com.tcc.sisape.repository.AtendimentoExameRepository;
 import com.tcc.sisape.repository.AtendimentoMedicamentoRepository;
+import com.tcc.sisape.repository.AtendimentoRepository;
 import com.tcc.sisape.repository.AtendimentoSintomaRepository;
+import com.tcc.sisape.service.exceptions.AtendimentoExameNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.AtendimentoMedicamentoNaoEncontradoException;
 import com.tcc.sisape.service.exceptions.AtendimentoNaoEncontradoException;
+import com.tcc.sisape.service.exceptions.AtendimentoSintomaNaoEncontradoException;
 
 @Service
 public class AtendimentoService {
@@ -62,4 +65,29 @@ public class AtendimentoService {
 
 		atendimentoRepository.save(aAtendimento);
 	}
+	
+	public void deletarExame(Long id) {
+		try {
+			atendimentoExameRepository.delete(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new AtendimentoExameNaoEncontradoException("Atendimento Exame não encontrado.");
+		}
+	}
+
+	public void deletarMedicamento(Long id) {
+		try {
+			atendimentoMedicamentoRepository.delete(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new AtendimentoMedicamentoNaoEncontradoException("Atendimento Medicamento não encontrado.");
+		}
+	}
+
+	public void deletarSintoma(Long id) {
+		try {
+			atendimentoSintomaRepository.delete(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new AtendimentoSintomaNaoEncontradoException("Atendimento Sintoma não encontrado.");
+		}
+	}
+
 }

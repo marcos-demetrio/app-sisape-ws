@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.tcc.sisape.domain.AgendamentoSintoma;
 import com.tcc.sisape.domain.Atendimento;
 import com.tcc.sisape.domain.AtendimentoExame;
 import com.tcc.sisape.domain.AtendimentoMedicamento;
@@ -45,6 +46,27 @@ public class AtendimentoResource {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable("id") Long aId) {
 		atendimentoService.delete(aId);
+
+		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value = "/exame/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deletarExame(@PathVariable("id") Long aId) {
+		atendimentoService.deletarExame(aId);
+
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/medicamento/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deletarMedicamento(@PathVariable("id") Long aId) {
+		atendimentoService.deletarMedicamento(aId);
+
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/sintoma/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deletarSintoma(@PathVariable("id") Long aId) {
+		atendimentoService.deletarSintoma(aId);
 
 		return ResponseEntity.noContent().build();
 	}
@@ -87,6 +109,18 @@ public class AtendimentoResource {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Atendimento aAtendimento, @PathVariable("id") Long aId) {
 		aAtendimento.setId(aId);
+		
+		for (AtendimentoExame atendimentoExame : aAtendimento.getAtendimentoExame()) {
+			atendimentoExame.setAtendimento(aAtendimento);
+		}
+
+		for (AtendimentoMedicamento atendimentoMedicamento : aAtendimento.getAtendimentoMedicamento()) {
+			atendimentoMedicamento.setAtendimento(aAtendimento);
+		}
+
+		for (AtendimentoSintoma atendimentoSintoma : aAtendimento.getAtendimentoSintoma()) {
+			atendimentoSintoma.setAtendimento(aAtendimento);
+		}
 
 		atendimentoService.update(aAtendimento);
 
