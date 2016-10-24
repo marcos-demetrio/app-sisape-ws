@@ -11,8 +11,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-public class AtendimentoSintoma {
-
+public class AtendimentoExame {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonProperty("i_sequencial")
@@ -24,8 +23,8 @@ public class AtendimentoSintoma {
 	private Atendimento atendimento;
 
 	@ManyToOne
-	@JoinColumn(name = "i_cid", referencedColumnName = "i_cid")
-	private ClassificacaoInternacionalDoenca cid;
+	@JoinColumn(name = "i_exame", referencedColumnName = "i_exame")
+	private Exame exame;
 
 	public Long getId() {
 		return id;
@@ -41,14 +40,6 @@ public class AtendimentoSintoma {
 
 	public void setAtendimento(Atendimento atendimento) {
 		this.atendimento = atendimento;
-	}
-
-	public ClassificacaoInternacionalDoenca getCid() {
-		return cid;
-	}
-
-	public void setCid(ClassificacaoInternacionalDoenca cid) {
-		this.cid = cid;
 	}
 
 	@Override
@@ -67,7 +58,7 @@ public class AtendimentoSintoma {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AtendimentoSintoma other = (AtendimentoSintoma) obj;
+		AtendimentoExame other = (AtendimentoExame) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
