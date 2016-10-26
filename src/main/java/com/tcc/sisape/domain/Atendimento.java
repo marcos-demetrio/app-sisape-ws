@@ -72,7 +72,7 @@ public class Atendimento {
 
 	@Column(length = 5120, nullable = false)
 	private String plano;
-	
+
 	@OneToMany(mappedBy = "atendimento", cascade = CascadeType.ALL)
 	private Set<AtendimentoExame> atendimentoExame;
 
@@ -213,27 +213,27 @@ public class Atendimento {
 	public Set<AtendimentoExame> getAtendimentoExame() {
 		return this.atendimentoExame;
 	}
-	
+
 	public void setAtendimentoExame(Set<AtendimentoExame> atendimentoExame) {
 		this.atendimentoExame = atendimentoExame;
 	}
-	
+
 	public Set<AtendimentoMedicamento> getAtendimentoMedicamento() {
 		return this.atendimentoMedicamento;
 	}
-	
+
 	public void setAtendimentoMedicamento(Set<AtendimentoMedicamento> atendimentoMedicamento) {
 		this.atendimentoMedicamento = atendimentoMedicamento;
 	}
-	
+
 	public Set<AtendimentoSintoma> getAtendimentoSintoma() {
 		return this.atendimentoSintoma;
 	}
-	
+
 	public void setAtendimentoSintoma(Set<AtendimentoSintoma> atendimentoSintoma) {
 		this.atendimentoSintoma = atendimentoSintoma;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
