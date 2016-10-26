@@ -34,12 +34,16 @@ public class AtendimentoExame {
 		this.id = id;
 	}
 
-	public Atendimento getAtendimento() {
-		return atendimento;
-	}
-
 	public void setAtendimento(Atendimento atendimento) {
 		this.atendimento = atendimento;
+	}
+
+	public Exame getExame() {
+		return exame;
+	}
+
+	public void setExame(Exame exame) {
+		this.exame = exame;
 	}
 
 	@Override

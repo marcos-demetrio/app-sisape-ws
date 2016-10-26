@@ -35,10 +35,6 @@ public class AtendimentoSintoma {
 		this.id = id;
 	}
 
-	public Atendimento getAtendimento() {
-		return atendimento;
-	}
-
 	public void setAtendimento(Atendimento atendimento) {
 		this.atendimento = atendimento;
 	}
