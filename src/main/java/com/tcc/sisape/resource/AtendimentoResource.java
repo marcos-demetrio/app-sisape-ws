@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.tcc.sisape.domain.AgendamentoSintoma;
 import com.tcc.sisape.domain.Atendimento;
 import com.tcc.sisape.domain.AtendimentoExame;
 import com.tcc.sisape.domain.AtendimentoMedicamento;
@@ -49,7 +48,7 @@ public class AtendimentoResource {
 
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(value = "/exame/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deletarExame(@PathVariable("id") Long aId) {
 		atendimentoService.deletarExame(aId);
@@ -76,13 +75,13 @@ public class AtendimentoResource {
 		Set<AtendimentoExame> setAtendimentoExame = aAtendimento.getAtendimentoExame();
 		Set<AtendimentoMedicamento> setAtendimentoMedicamento = aAtendimento.getAtendimentoMedicamento();
 		Set<AtendimentoSintoma> setAtendimentoSintoma = aAtendimento.getAtendimentoSintoma();
-		
+
 		aAtendimento.setAtendimentoExame(null);
 		aAtendimento.setAtendimentoMedicamento(null);
 		aAtendimento.setAtendimentoSintoma(null);
-		
+
 		aAtendimento = atendimentoService.create(aAtendimento);
-		
+
 		for (AtendimentoExame atendimentoExame : setAtendimentoExame) {
 			atendimentoExame.setAtendimento(aAtendimento);
 		}
@@ -94,14 +93,15 @@ public class AtendimentoResource {
 		for (AtendimentoSintoma atendimentoSintoma : setAtendimentoSintoma) {
 			atendimentoSintoma.setAtendimento(aAtendimento);
 		}
-		
+
 		aAtendimento.setAtendimentoExame(setAtendimentoExame);
 		aAtendimento.setAtendimentoMedicamento(setAtendimentoMedicamento);
 		aAtendimento.setAtendimentoSintoma(setAtendimentoSintoma);
-		
+
 		atendimentoService.update(aAtendimento);
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aAtendimento.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aAtendimento.getId())
+				.toUri();
 
 		return ResponseEntity.created(uri).build();
 	}
@@ -109,7 +109,7 @@ public class AtendimentoResource {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Atendimento aAtendimento, @PathVariable("id") Long aId) {
 		aAtendimento.setId(aId);
-		
+
 		for (AtendimentoExame atendimentoExame : aAtendimento.getAtendimentoExame()) {
 			atendimentoExame.setAtendimento(aAtendimento);
 		}
