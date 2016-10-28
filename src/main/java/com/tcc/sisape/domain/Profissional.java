@@ -54,7 +54,7 @@ public class Profissional {
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 100)
 	private String email;
-	
+
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 32)
 	private String senha;

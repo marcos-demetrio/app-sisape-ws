@@ -21,8 +21,9 @@ public class MunicipioReport {
 
 	public void imprimir(List<Municipio> lista) throws Exception {
 		Random rand = new Random();
-		
-		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "reportMunicipio.jrxml");
+
+		JasperReport report = JasperCompileManager
+				.compileReport(this.getPathToReportPackage() + "reportMunicipio.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
 

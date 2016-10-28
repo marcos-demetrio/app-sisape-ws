@@ -82,10 +82,9 @@ public class ClassificacaoBrasileiraOcupacaoResource {
 
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(value = "/print", method = RequestMethod.GET)
-	public ResponseEntity<Void> print(
-			@RequestParam(value = "codigoCbo", defaultValue = "0") Long aCodigoCbo,
+	public ResponseEntity<Void> print(@RequestParam(value = "codigoCbo", defaultValue = "0") Long aCodigoCbo,
 			@RequestParam(value = "nome", defaultValue = "") String aNome) {
 		try {
 			classificacaoBrasileiraOcupacaoService.print(aNome, aCodigoCbo);

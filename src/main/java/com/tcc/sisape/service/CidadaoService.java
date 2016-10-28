@@ -54,7 +54,7 @@ public class CidadaoService {
 
 		cidadaoRepository.save(cidadao);
 	}
-	
+
 	public void print(String aNome) {
 		try {
 			CidadaoReport r = new CidadaoReport();

@@ -49,8 +49,8 @@ public class ProfissionalLotacaoResource {
 	public ResponseEntity<Void> salvar(@Valid @RequestBody ProfissionalLotacao profissionalLotacao) {
 		profissionalLotacao = profissionalLotacaoService.criar(profissionalLotacao);
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(profissionalLotacao.getId())
-				.toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(profissionalLotacao.getId()).toUri();
 
 		return ResponseEntity.created(uri).build();
 	}

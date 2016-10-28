@@ -14,7 +14,7 @@ public class Criptografia {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		
+
 		BigInteger hash = new BigInteger(1, messageDigest.digest(aSenha.getBytes()));
 		sen = hash.toString(16);
 

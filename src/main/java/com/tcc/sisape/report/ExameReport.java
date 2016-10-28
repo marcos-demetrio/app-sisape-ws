@@ -21,7 +21,7 @@ public class ExameReport {
 
 	public void imprimir(List<Exame> lista) throws Exception {
 		Random rand = new Random();
-		
+
 		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "reportExame.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));

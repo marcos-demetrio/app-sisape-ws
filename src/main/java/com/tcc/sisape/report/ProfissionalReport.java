@@ -21,8 +21,9 @@ public class ProfissionalReport {
 
 	public void imprimir(List<Profissional> lista) throws Exception {
 		Random rand = new Random();
-		
-		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "reportProfissional.jrxml");
+
+		JasperReport report = JasperCompileManager
+				.compileReport(this.getPathToReportPackage() + "reportProfissional.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
 

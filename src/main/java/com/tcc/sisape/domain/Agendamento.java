@@ -51,6 +51,9 @@ public class Agendamento implements Serializable {
 	@OneToMany(mappedBy = "agendamento", cascade = CascadeType.ALL)
 	private Set<AgendamentoSintoma> agendamentoSintoma;
 
+	@Column(nullable = false)
+	private boolean atendido;
+
 	public Long getId() {
 		return this.id;
 	}
@@ -105,6 +108,14 @@ public class Agendamento implements Serializable {
 
 	public void setAgendamentoSintoma(Set<AgendamentoSintoma> agendamentoSintoma) {
 		this.agendamentoSintoma = agendamentoSintoma;
+	}
+
+	public boolean isAtendido() {
+		return this.atendido;
+	}
+
+	public void setAtendido(boolean atendido) {
+		this.atendido = atendido;
 	}
 
 	@Override

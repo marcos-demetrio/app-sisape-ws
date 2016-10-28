@@ -241,7 +241,7 @@ public class ResourceExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
-	
+
 	@ExceptionHandler(ExameNaoEncontradoException.class)
 	public ResponseEntity<DetalhesErro> handleExameNaoEncontradoException(ExameNaoEncontradoException e,
 			HttpServletRequest request) {
@@ -267,7 +267,7 @@ public class ResourceExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
-	
+
 	@ExceptionHandler(AtendimentoNaoEncontradoException.class)
 	public ResponseEntity<DetalhesErro> handleAtendimentoNaoEncontradoException(AtendimentoNaoEncontradoException e,
 			HttpServletRequest request) {
@@ -282,8 +282,8 @@ public class ResourceExceptionHandler {
 	}
 
 	@ExceptionHandler(AtendimentoExameNaoEncontradoException.class)
-	public ResponseEntity<DetalhesErro> handleAtendimentoExameNaoEncontradoException(AtendimentoExameNaoEncontradoException e,
-			HttpServletRequest request) {
+	public ResponseEntity<DetalhesErro> handleAtendimentoExameNaoEncontradoException(
+			AtendimentoExameNaoEncontradoException e, HttpServletRequest request) {
 
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(404l);
@@ -295,8 +295,8 @@ public class ResourceExceptionHandler {
 	}
 
 	@ExceptionHandler(AtendimentoMedicamentoNaoEncontradoException.class)
-	public ResponseEntity<DetalhesErro> handleAtendimentoMedicamentoNaoEncontradoException(AtendimentoMedicamentoNaoEncontradoException e,
-			HttpServletRequest request) {
+	public ResponseEntity<DetalhesErro> handleAtendimentoMedicamentoNaoEncontradoException(
+			AtendimentoMedicamentoNaoEncontradoException e, HttpServletRequest request) {
 
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(404l);
@@ -308,8 +308,8 @@ public class ResourceExceptionHandler {
 	}
 
 	@ExceptionHandler(AtendimentoSintomaNaoEncontradoException.class)
-	public ResponseEntity<DetalhesErro> handleAtendimentoSintomaNaoEncontradoException(AtendimentoSintomaNaoEncontradoException e,
-			HttpServletRequest request) {
+	public ResponseEntity<DetalhesErro> handleAtendimentoSintomaNaoEncontradoException(
+			AtendimentoSintomaNaoEncontradoException e, HttpServletRequest request) {
 
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(404l);

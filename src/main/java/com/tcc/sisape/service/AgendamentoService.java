@@ -33,6 +33,10 @@ public class AgendamentoService {
 	public List<Agendamento> findAll() {
 		return agendamentoRepository.findAll();
 	}
+	
+	public List<Agendamento> findAgendamentoNaoAtendido() {
+		return agendamentoRepository.findByAtendido(false);
+	}
 
 	private Set<AgendamentoSenha> gerarHorarioPeriodo(UnidadeBasicaSaude aUnidadeBasicaSaude, PeriodoDia aPeriodoDia,
 			int aNumeroSenha) {

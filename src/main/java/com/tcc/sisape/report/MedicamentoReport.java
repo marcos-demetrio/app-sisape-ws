@@ -21,8 +21,9 @@ public class MedicamentoReport {
 
 	public void imprimir(List<Medicamento> lista) throws Exception {
 		Random rand = new Random();
-		
-		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "reportMedicamento.jrxml");
+
+		JasperReport report = JasperCompileManager
+				.compileReport(this.getPathToReportPackage() + "reportMedicamento.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
 

@@ -21,7 +21,7 @@ public class UnidadeBasicaSaudeReport {
 
 	public void imprimir(List<UnidadeBasicaSaude> lista) throws Exception {
 		Random rand = new Random();
-		
+
 		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "reportUBS.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));

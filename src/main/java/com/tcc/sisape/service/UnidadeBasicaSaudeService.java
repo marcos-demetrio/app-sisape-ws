@@ -68,7 +68,7 @@ public class UnidadeBasicaSaudeService {
 
 		unidadeBasicaSaudeRepository.save(unidadeBasicaSaude);
 	}
-	
+
 	public void print(String aNome) {
 		try {
 			UnidadeBasicaSaudeReport r = new UnidadeBasicaSaudeReport();

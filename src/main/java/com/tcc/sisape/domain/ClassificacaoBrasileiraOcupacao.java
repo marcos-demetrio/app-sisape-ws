@@ -18,7 +18,7 @@ public class ClassificacaoBrasileiraOcupacao {
 
 	@Column(length = 255, nullable = false)
 	private String nome;
-	
+
 	@Column(nullable = false)
 	private Long codigoCbo;
 
@@ -37,7 +37,7 @@ public class ClassificacaoBrasileiraOcupacao {
 	public void setNome(String aNome) {
 		this.nome = aNome.toUpperCase();
 	}
-	
+
 	public Long getCodigoCbo() {
 		return this.codigoCbo;
 	}

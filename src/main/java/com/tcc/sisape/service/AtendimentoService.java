@@ -22,16 +22,15 @@ public class AtendimentoService {
 	@Autowired
 	private AtendimentoRepository atendimentoRepository;
 
-
 	@Autowired
 	private AtendimentoExameRepository atendimentoExameRepository;
-	
+
 	@Autowired
 	private AtendimentoMedicamentoRepository atendimentoMedicamentoRepository;
-	
+
 	@Autowired
 	private AtendimentoSintomaRepository atendimentoSintomaRepository;
-	
+
 	public List<Atendimento> findAll() {
 		return atendimentoRepository.findAll();
 	}
@@ -65,7 +64,7 @@ public class AtendimentoService {
 
 		atendimentoRepository.save(aAtendimento);
 	}
-	
+
 	public void deletarExame(Long id) {
 		try {
 			atendimentoExameRepository.delete(id);

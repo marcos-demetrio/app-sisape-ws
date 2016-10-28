@@ -85,8 +85,7 @@ public class ClassificacaoInternacionalDoencaResource {
 	}
 
 	@RequestMapping(value = "/print", method = RequestMethod.GET)
-	public ResponseEntity<Void> print(
-			@RequestParam(value = "codigoCid", defaultValue = "") String aCodigoCid,
+	public ResponseEntity<Void> print(@RequestParam(value = "codigoCid", defaultValue = "") String aCodigoCid,
 			@RequestParam(value = "descricao", defaultValue = "") String aDescricao) {
 		try {
 			classificacaoInternacionalDoencaService.print(aDescricao, aCodigoCid);

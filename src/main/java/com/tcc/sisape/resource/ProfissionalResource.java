@@ -69,7 +69,7 @@ public class ProfissionalResource {
 
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(value = "/print", method = RequestMethod.GET)
 	public ResponseEntity<Void> print(@RequestParam(value = "nome", defaultValue = "") String aNome) {
 		try {

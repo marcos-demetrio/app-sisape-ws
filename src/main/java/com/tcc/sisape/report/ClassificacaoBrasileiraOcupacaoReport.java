@@ -21,7 +21,7 @@ public class ClassificacaoBrasileiraOcupacaoReport {
 
 	public void imprimir(List<ClassificacaoBrasileiraOcupacao> lista) throws Exception {
 		Random rand = new Random();
-		
+
 		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "reportCBO.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));

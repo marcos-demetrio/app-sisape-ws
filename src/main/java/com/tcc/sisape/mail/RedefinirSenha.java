@@ -19,7 +19,7 @@ public class RedefinirSenha {
 		mensagem.sendMail(fromAddress, toAddress, subject, msgBody);
 	}
 
-	public void novaSenha(String toAddress){
+	public void novaSenha(String toAddress) {
 		enviarEmail();
 	}
 }

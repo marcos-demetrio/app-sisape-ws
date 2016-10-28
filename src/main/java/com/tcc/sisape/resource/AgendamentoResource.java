@@ -36,6 +36,11 @@ public class AgendamentoResource {
 		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.findAll());
 	}
 
+	@RequestMapping(value = "/naoatendido", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<List<Agendamento>> findNaoAtendido() {
+		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.findAgendamentoNaoAtendido());
+	}
+
 	@RequestMapping(value = "/horarios/{id}", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Set<AgendamentoSenha>> gerarHorarios(@PathVariable("id") Long aIdUbs) {

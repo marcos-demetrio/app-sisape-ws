@@ -29,7 +29,7 @@ public class AgendamentoPeriodoDia {
 		this.setPeriodoDia(aPeriodoDia);
 		this.setSenhas(aSenhas);
 	}
-	
+
 	public AgendamentoPeriodoDia() {
 	}
 

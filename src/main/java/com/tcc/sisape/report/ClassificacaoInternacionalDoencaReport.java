@@ -21,7 +21,7 @@ public class ClassificacaoInternacionalDoencaReport {
 
 	public void imprimir(List<ClassificacaoInternacionalDoenca> lista) throws Exception {
 		Random rand = new Random();
-		
+
 		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "reportCID.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));

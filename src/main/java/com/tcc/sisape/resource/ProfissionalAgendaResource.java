@@ -68,7 +68,7 @@ public class ProfissionalAgendaResource {
 
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = { RequestMethod.PUT })
 	public ResponseEntity<Void> alterar(@Valid @RequestBody List<ProfissionalAgenda> profissionalAgendaList,
 			@PathVariable("id") Long aIdLotacao) {
