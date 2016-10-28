@@ -23,6 +23,7 @@ import com.tcc.sisape.domain.AtendimentoExame;
 import com.tcc.sisape.domain.AtendimentoMedicamento;
 import com.tcc.sisape.domain.AtendimentoSintoma;
 import com.tcc.sisape.service.AtendimentoService;
+import com.tcc.sisape.service.UnidadeBasicaSaudeService;
 
 @CrossOrigin
 @RestController
@@ -31,6 +32,9 @@ public class AtendimentoResource {
 
 	@Autowired
 	private AtendimentoService atendimentoService;
+
+	@Autowired
+	public UnidadeBasicaSaudeService unidadeBasicaSaudeService;
 
 	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Atendimento>> findAll() {
@@ -125,5 +129,15 @@ public class AtendimentoResource {
 		atendimentoService.update(aAtendimento);
 
 		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/relatorio/ubs/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<List<Atendimento>> findByUbsId(@PathVariable("id") Long aId) {
+		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findByUnidadeBasicaSaude(aId));
+	}
+
+	@RequestMapping(value = "/relatorio/profissional/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<List<Atendimento>> findByProfissionalId(@PathVariable("id") Long aId) {
+		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findByProfissional(aId));
 	}
 }

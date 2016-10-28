@@ -36,6 +36,7 @@ public class AtendimentoService {
 	}
 
 	public Atendimento findById(Long aId) {
+		
 		Atendimento atendimento = atendimentoRepository.findOne(aId);
 
 		if (atendimento == null) {
@@ -44,7 +45,27 @@ public class AtendimentoService {
 
 		return atendimento;
 	}
+	
+	public List<Atendimento> findByUnidadeBasicaSaude(Long aId) {
+		List<Atendimento> atendimento = atendimentoRepository.findByUnidadeBasicaSaude(aId);
 
+		if (atendimento == null) {
+			throw new AtendimentoNaoEncontradoException("Atendimento não encontrado.");
+		}
+
+		return atendimento;
+	}
+
+	public List<Atendimento> findByProfissional(Long aId) {
+		List<Atendimento> atendimento = atendimentoRepository.findByProfissional(aId);
+
+		if (atendimento == null) {
+			throw new AtendimentoNaoEncontradoException("Atendimento não encontrado.");
+		}
+
+		return atendimento;
+	}
+	
 	public void delete(Long aId) {
 		try {
 			atendimentoRepository.delete(aId);
