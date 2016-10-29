@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.tcc.sisape.domain.Agendamento;
 import com.tcc.sisape.domain.Atendimento;
 import com.tcc.sisape.domain.AtendimentoExame;
 import com.tcc.sisape.domain.AtendimentoMedicamento;
 import com.tcc.sisape.domain.AtendimentoSintoma;
+import com.tcc.sisape.service.AgendamentoService;
 import com.tcc.sisape.service.AtendimentoService;
 import com.tcc.sisape.service.UnidadeBasicaSaudeService;
 
@@ -32,6 +34,9 @@ public class AtendimentoResource {
 
 	@Autowired
 	private AtendimentoService atendimentoService;
+	
+	@Autowired
+	private AgendamentoService agendamentoService;
 
 	@Autowired
 	public UnidadeBasicaSaudeService unidadeBasicaSaudeService;
@@ -84,6 +89,13 @@ public class AtendimentoResource {
 		aAtendimento.setAtendimentoMedicamento(null);
 		aAtendimento.setAtendimentoSintoma(null);
 
+		Agendamento agendamento = aAtendimento.getAgendamento();
+		agendamento.setAtendido(true);
+		
+		agendamentoService.update(agendamento);
+		
+		aAtendimento.setAgendamento(agendamento);
+		
 		aAtendimento = atendimentoService.create(aAtendimento);
 
 		for (AtendimentoExame atendimentoExame : setAtendimentoExame) {
