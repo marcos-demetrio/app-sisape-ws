@@ -38,7 +38,7 @@ public class AtendimentoResource {
 
 	@Autowired
 	private AtendimentoService atendimentoService;
-	
+
 	@Autowired
 	private AgendamentoService agendamentoService;
 
@@ -83,6 +83,45 @@ public class AtendimentoResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@RequestMapping(value = "/adoecimento", method = RequestMethod.GET)
+	public ResponseEntity<List<Atendimento>> findAdoecimentoAll() {
+		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findAdoecimentoAll());
+	}
+
+	@RequestMapping(value = "/adoecimento/relatorio/municipio/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Atendimento>> findAdoecimentoByMunicipioId(@PathVariable("id") Long aId) {
+		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findAdoecimentoByMunicipioId(aId));
+	}
+
+	@RequestMapping(value = "/adoecimento/relatorio/ubs/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Atendimento>> findAdoecimentoByUbsId(@PathVariable("id") Long aId) {
+		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findAdoecimentoByUbsId(aId));
+	}
+
+	@RequestMapping(value = "/adoecimento/relatorio/periodo", method = RequestMethod.GET)
+	public ResponseEntity<List<Atendimento>> findAdoecimentoByDataAtendimentoBetween(
+			@RequestParam(value = "aDataInicio") String aDataInicio,
+			@RequestParam(value = "aDataFinal") String aDataFinal) {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataInicio = new Date();
+		Date dataFinal = new Date();
+
+		try {
+			dataInicio = formatter.parse(aDataInicio);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			dataFinal = formatter.parse(aDataFinal);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findAdoecimentoByDataAtendimentoBetween(dataInicio, dataFinal));
+	}
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> save(@Valid @RequestBody Atendimento aAtendimento) {
 		Set<AtendimentoExame> setAtendimentoExame = aAtendimento.getAtendimentoExame();
@@ -95,11 +134,11 @@ public class AtendimentoResource {
 
 		Agendamento agendamento = aAtendimento.getAgendamento();
 		agendamento.setAtendido(true);
-		
+
 		agendamentoService.update(agendamento);
-		
+
 		aAtendimento.setAgendamento(agendamento);
-		
+
 		aAtendimento = atendimentoService.create(aAtendimento);
 
 		for (AtendimentoExame atendimentoExame : setAtendimentoExame) {
@@ -147,43 +186,47 @@ public class AtendimentoResource {
 		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/relatorio/ubs/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/relatorio/ubs/{id}", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Atendimento>> findByUbsId(@PathVariable("id") Long aId) {
 		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findByUnidadeBasicaSaude(aId));
 	}
 
-	@RequestMapping(value = "/relatorio/profissional/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/relatorio/profissional/{id}", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Atendimento>> findByProfissionalId(@PathVariable("id") Long aId) {
 		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findByProfissional(aId));
 	}
-	
-	@RequestMapping(value = "/relatorio/cidadao/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE })
+
+	@RequestMapping(value = "/relatorio/cidadao/{id}", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Atendimento>> findByCidadaoId(@PathVariable("id") Long aId) {
 		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findByCidadao(aId));
 	}
-	
-	@RequestMapping(value = "/relatorio/periodo", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE })
-	/*public ResponseEntity<Void>findByDataAtendimentoBetween(@RequestParam(value = "aDataInicio") String aDataInicio,
-			  @RequestParam(value = "aDataFinal") String aDataFinal) {*/
-	public ResponseEntity<List<Atendimento>> findByDataAtendimentoBetween(@RequestParam(value = "aDataInicio") String aDataInicio,
-																		  @RequestParam(value = "aDataFinal") String aDataFinal) { 
-		
+
+	@RequestMapping(value = "/relatorio/periodo", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<List<Atendimento>> findByDataAtendimentoBetween(
+			@RequestParam(value = "aDataInicio") String aDataInicio,
+			@RequestParam(value = "aDataFinal") String aDataFinal) {
+
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date dataInicio = new Date();
 		Date dataFinal = new Date();
-		
+
 		try {
 			dataInicio = formatter.parse(aDataInicio);
 		} catch (ParseException e) {
-            e.printStackTrace();
-        }
-		
+			e.printStackTrace();
+		}
+
 		try {
 			dataFinal = formatter.parse(aDataFinal);
 		} catch (ParseException e) {
-            e.printStackTrace();
-        }
-		
-		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findByDataAtendimentoBetween(dataInicio, dataFinal));
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(atendimentoService.findByDataAtendimentoBetween(dataInicio, dataFinal));
 	}
 }

@@ -36,6 +36,22 @@ public class AtendimentoService {
 		return atendimentoRepository.findAll();
 	}
 
+	public List<Atendimento> findAdoecimentoAll() {
+		return atendimentoRepository.findAdoecimentoAll();
+	}
+	
+	public List<Atendimento> findAdoecimentoByMunicipioId(Long aId) {
+		return atendimentoRepository.findAdoecimentoByMunicipioId(aId);
+	}
+
+	public List<Atendimento> findAdoecimentoByUbsId(Long aId) {
+		return atendimentoRepository.findAdoecimentoByUbsId(aId);
+	}
+
+	public List<Atendimento> findAdoecimentoByDataAtendimentoBetween(Date aDataInicio, Date aDataFinal) {
+		return atendimentoRepository.findAdoecimentoByDataAtendimentoBetween(aDataInicio, aDataFinal);
+	}
+	
 	public Atendimento findById(Long aId) {
 		
 		Atendimento atendimento = atendimentoRepository.findOne(aId);
