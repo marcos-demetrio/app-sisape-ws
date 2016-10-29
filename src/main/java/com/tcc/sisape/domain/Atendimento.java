@@ -1,5 +1,6 @@
 package com.tcc.sisape.domain;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
@@ -111,7 +112,11 @@ public class Atendimento {
 	}
 
 	public void setHoraAtendimento(Date horaAtendimento) {
-		this.horaAtendimento = horaAtendimento;
+		Calendar calendar = Calendar.getInstance();
+        calendar.setTime(horaAtendimento);
+        calendar.set(Calendar.SECOND, 0);
+        
+		this.horaAtendimento = calendar.getTime();
 	}
 
 	public int getPressaoMaxima() {
