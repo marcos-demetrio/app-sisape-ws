@@ -1,6 +1,7 @@
 package com.tcc.sisape.domain;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
@@ -91,7 +92,11 @@ public class Agendamento implements Serializable {
 	}
 
 	public void setHoraAgendamento(Date horaAgendamento) {
-		this.horaAgendamento = horaAgendamento;
+		Calendar calendar = Calendar.getInstance();
+        calendar.setTime(horaAgendamento);
+        calendar.set(Calendar.SECOND, 0);
+        
+		this.horaAgendamento = calendar.getTime();
 	}
 
 	public String getQueixaPrincipal() {
