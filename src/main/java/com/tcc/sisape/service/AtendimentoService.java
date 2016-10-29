@@ -1,5 +1,6 @@
 package com.tcc.sisape.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,26 @@ public class AtendimentoService {
 
 	public List<Atendimento> findByProfissional(Long aId) {
 		List<Atendimento> atendimento = atendimentoRepository.findByProfissional(aId);
+
+		if (atendimento == null) {
+			throw new AtendimentoNaoEncontradoException("Atendimento não encontrado.");
+		}
+
+		return atendimento;
+	}
+	
+	public List<Atendimento> findByCidadao(Long aId) {
+		List<Atendimento> atendimento = atendimentoRepository.findByCidadao(aId);
+
+		if (atendimento == null) {
+			throw new AtendimentoNaoEncontradoException("Atendimento não encontrado.");
+		}
+
+		return atendimento;
+	}
+
+	public List<Atendimento> findByDataAtendimentoBetween(Date aDataInicio, Date aDataFinal) {
+		List<Atendimento> atendimento = atendimentoRepository.findByDataAtendimentoBetween(aDataInicio, aDataFinal);
 
 		if (atendimento == null) {
 			throw new AtendimentoNaoEncontradoException("Atendimento não encontrado.");

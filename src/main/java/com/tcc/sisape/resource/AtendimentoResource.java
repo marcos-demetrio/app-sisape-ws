@@ -1,6 +1,9 @@
 package com.tcc.sisape.resource;
 
 import java.net.URI;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -151,5 +155,35 @@ public class AtendimentoResource {
 	@RequestMapping(value = "/relatorio/profissional/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Atendimento>> findByProfissionalId(@PathVariable("id") Long aId) {
 		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findByProfissional(aId));
+	}
+	
+	@RequestMapping(value = "/relatorio/cidadao/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<List<Atendimento>> findByCidadaoId(@PathVariable("id") Long aId) {
+		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findByCidadao(aId));
+	}
+	
+	@RequestMapping(value = "/relatorio/periodo", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE })
+	/*public ResponseEntity<Void>findByDataAtendimentoBetween(@RequestParam(value = "aDataInicio") String aDataInicio,
+			  @RequestParam(value = "aDataFinal") String aDataFinal) {*/
+	public ResponseEntity<List<Atendimento>> findByDataAtendimentoBetween(@RequestParam(value = "aDataInicio") String aDataInicio,
+																		  @RequestParam(value = "aDataFinal") String aDataFinal) { 
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataInicio = new Date();
+		Date dataFinal = new Date();
+		
+		try {
+			dataInicio = formatter.parse(aDataInicio);
+		} catch (ParseException e) {
+            e.printStackTrace();
+        }
+		
+		try {
+			dataFinal = formatter.parse(aDataFinal);
+		} catch (ParseException e) {
+            e.printStackTrace();
+        }
+		
+		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findByDataAtendimentoBetween(dataInicio, dataFinal));
 	}
 }

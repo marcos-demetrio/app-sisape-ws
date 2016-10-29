@@ -28,4 +28,11 @@ public interface AtendimentoRepository extends JpaRepository<Atendimento, Long> 
 			+ " on profissional_lotacao.i_profissional_lotacao = agendamento.i_profissional_lotacao "
 			+ " where profissional_lotacao.i_profissional = ?1", nativeQuery = true)
 public List<Atendimento> findByProfissional(Long aId);
+
+	@Query(value = "select atendimento.* "
+			+ " from atendimento as atendimento inner join "
+			+ " agendamento as agendamento "
+			+ " on atendimento.i_agendamento = agendamento.i_agendamento "
+			+ " where agendamento.i_cidadao = ?1", nativeQuery = true)
+public List<Atendimento> findByCidadao(Long aId);
 }
