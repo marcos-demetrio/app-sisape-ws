@@ -31,6 +31,22 @@ public class Profissional {
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 15)
 	private String numeroCartaoNacionalSaude;
+	
+	@JsonInclude(Include.NON_EMPTY)
+	@Column(length = 50)
+	private String numeroRegistro;
+	
+	@JsonInclude(Include.NON_EMPTY)
+	@Column(length = 50)
+	private String conselhoClasse;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = false)
+	private Date dataRegistro;
+	
+	@JsonInclude(Include.NON_EMPTY)
+	@Column(length = 2)
+	private String ufConselhoRegistro;
 
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 11)
@@ -237,6 +253,38 @@ public class Profissional {
 
 	public void setPontoReferencia(String pontoReferencia) {
 		this.pontoReferencia = pontoReferencia;
+	}
+
+	public String getNumeroRegistro() {
+		return this.numeroRegistro;
+	}
+
+	public void setNumeroRegistro(String numeroRegistro) {
+		this.numeroRegistro = numeroRegistro;
+	}
+
+	public String getConselhoClasse() {
+		return this.conselhoClasse;
+	}
+
+	public void setConselhoClasse(String conselhoClasse) {
+		this.conselhoClasse = conselhoClasse;
+	}
+
+	public Date getDataRegistro() {
+		return this.dataRegistro;
+	}
+
+	public void setDataRegistro(Date dataRegistro) {
+		this.dataRegistro = dataRegistro;
+	}
+
+	public String getUfConselhoRegistro() {
+		return this.ufConselhoRegistro;
+	}
+
+	public void setUfConselhoRegistro(String ufConselhoRegistro) {
+		this.ufConselhoRegistro = ufConselhoRegistro;
 	}
 
 	@Override
