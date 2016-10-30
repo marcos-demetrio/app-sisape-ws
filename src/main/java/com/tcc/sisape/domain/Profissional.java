@@ -31,22 +31,26 @@ public class Profissional {
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 15)
 	private String numeroCartaoNacionalSaude;
-	
+
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 50)
 	private String numeroRegistro;
-	
+
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 50)
 	private String conselhoClasse;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
 	private Date dataRegistro;
-	
+
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 2)
 	private String ufConselhoRegistro;
+
+	@JsonInclude(Include.NON_EMPTY)
+	@Column(length = 1)
+	private String tipoUsuario;
 
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(length = 11)
@@ -149,6 +153,14 @@ public class Profissional {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getTipoUsuario() {
+		return this.tipoUsuario;
+	}
+
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
 	public Date getDataNascimento() {
