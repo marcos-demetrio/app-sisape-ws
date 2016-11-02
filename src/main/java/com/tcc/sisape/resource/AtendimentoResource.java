@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tcc.sisape.domain.Agendamento;
+import com.tcc.sisape.domain.AgendamentoSintoma;
 import com.tcc.sisape.domain.Atendimento;
 import com.tcc.sisape.domain.AtendimentoExame;
 import com.tcc.sisape.domain.AtendimentoMedicamento;
@@ -119,14 +119,15 @@ public class AtendimentoResource {
 			e.printStackTrace();
 		}
 
-		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findAdoecimentoByDataAtendimentoBetween(dataInicio, dataFinal));
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(atendimentoService.findAdoecimentoByDataAtendimentoBetween(dataInicio, dataFinal));
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> save(@Valid @RequestBody Atendimento aAtendimento) {
-		Set<AtendimentoExame> setAtendimentoExame = aAtendimento.getAtendimentoExame();
-		Set<AtendimentoMedicamento> setAtendimentoMedicamento = aAtendimento.getAtendimentoMedicamento();
-		Set<AtendimentoSintoma> setAtendimentoSintoma = aAtendimento.getAtendimentoSintoma();
+		List<AtendimentoExame> listAtendimentoExame = aAtendimento.getAtendimentoExame();
+		List<AtendimentoMedicamento> listAtendimentoMedicamento = aAtendimento.getAtendimentoMedicamento();
+		List<AtendimentoSintoma> listAtendimentoSintoma = aAtendimento.getAtendimentoSintoma();
 
 		aAtendimento.setAtendimentoExame(null);
 		aAtendimento.setAtendimentoMedicamento(null);
@@ -135,27 +136,31 @@ public class AtendimentoResource {
 		Agendamento agendamento = aAtendimento.getAgendamento();
 		agendamento.setAtendido(true);
 
+		for (AgendamentoSintoma agendamentoSintoma : agendamento.getAgendamentoSintoma()) {
+			agendamentoSintoma.setAgendamento(agendamento);
+		}
+
 		agendamentoService.update(agendamento);
 
 		aAtendimento.setAgendamento(agendamento);
 
 		aAtendimento = atendimentoService.create(aAtendimento);
 
-		for (AtendimentoExame atendimentoExame : setAtendimentoExame) {
+		for (AtendimentoExame atendimentoExame : listAtendimentoExame) {
 			atendimentoExame.setAtendimento(aAtendimento);
 		}
 
-		for (AtendimentoMedicamento atendimentoMedicamento : setAtendimentoMedicamento) {
+		for (AtendimentoMedicamento atendimentoMedicamento : listAtendimentoMedicamento) {
 			atendimentoMedicamento.setAtendimento(aAtendimento);
 		}
 
-		for (AtendimentoSintoma atendimentoSintoma : setAtendimentoSintoma) {
+		for (AtendimentoSintoma atendimentoSintoma : listAtendimentoSintoma) {
 			atendimentoSintoma.setAtendimento(aAtendimento);
 		}
 
-		aAtendimento.setAtendimentoExame(setAtendimentoExame);
-		aAtendimento.setAtendimentoMedicamento(setAtendimentoMedicamento);
-		aAtendimento.setAtendimentoSintoma(setAtendimentoSintoma);
+		aAtendimento.setAtendimentoExame(listAtendimentoExame);
+		aAtendimento.setAtendimentoMedicamento(listAtendimentoMedicamento);
+		aAtendimento.setAtendimentoSintoma(listAtendimentoSintoma);
 
 		atendimentoService.update(aAtendimento);
 

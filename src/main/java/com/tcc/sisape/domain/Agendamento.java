@@ -3,7 +3,7 @@ package com.tcc.sisape.domain;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -50,7 +50,7 @@ public class Agendamento implements Serializable {
 	private String queixaPrincipal;
 
 	@OneToMany(mappedBy = "agendamento", cascade = CascadeType.ALL)
-	private Set<AgendamentoSintoma> agendamentoSintoma;
+	private List<AgendamentoSintoma> agendamentoSintoma;
 
 	@Column(nullable = false)
 	private boolean atendido;
@@ -93,9 +93,9 @@ public class Agendamento implements Serializable {
 
 	public void setHoraAgendamento(Date horaAgendamento) {
 		Calendar calendar = Calendar.getInstance();
-        calendar.setTime(horaAgendamento);
-        calendar.set(Calendar.SECOND, 0);
-        
+		calendar.setTime(horaAgendamento);
+		calendar.set(Calendar.SECOND, 0);
+
 		this.horaAgendamento = calendar.getTime();
 	}
 
@@ -107,11 +107,11 @@ public class Agendamento implements Serializable {
 		this.queixaPrincipal = aQueixaPrincipal;
 	}
 
-	public Set<AgendamentoSintoma> getAgendamentoSintoma() {
+	public List<AgendamentoSintoma> getAgendamentoSintoma() {
 		return this.agendamentoSintoma;
 	}
 
-	public void setAgendamentoSintoma(Set<AgendamentoSintoma> agendamentoSintoma) {
+	public void setAgendamentoSintoma(List<AgendamentoSintoma> agendamentoSintoma) {
 		this.agendamentoSintoma = agendamentoSintoma;
 	}
 

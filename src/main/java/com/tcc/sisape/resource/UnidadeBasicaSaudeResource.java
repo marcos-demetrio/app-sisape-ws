@@ -2,7 +2,6 @@ package com.tcc.sisape.resource;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -68,7 +67,7 @@ public class UnidadeBasicaSaudeResource {
 	public ResponseEntity<Void> salvar(@Valid @RequestBody UnidadeBasicaSaude unidadeBasicaSaude) {
 
 		UnidadeBasicaSaudeParametro ubsParametro = unidadeBasicaSaude.getParametroUbs();
-		Set<UnidadeBasicaSaudeZonaAtendimento> setZonaAtendimento = unidadeBasicaSaude.getZonaAtendimento();
+		List<UnidadeBasicaSaudeZonaAtendimento> listZonaAtendimento = unidadeBasicaSaude.getZonaAtendimento();
 
 		unidadeBasicaSaude.setParametroUbs(null);
 		unidadeBasicaSaude.setZonaAtendimento(null);
@@ -77,12 +76,12 @@ public class UnidadeBasicaSaudeResource {
 
 		ubsParametro.setUnidadeBasicaSaude(unidadeBasicaSaude);
 
-		for (UnidadeBasicaSaudeZonaAtendimento zonaAtendimento : setZonaAtendimento) {
+		for (UnidadeBasicaSaudeZonaAtendimento zonaAtendimento : listZonaAtendimento) {
 			zonaAtendimento.setUnidadeBasicaSaude(unidadeBasicaSaude);
 		}
 
 		unidadeBasicaSaude.setParametroUbs(ubsParametro);
-		unidadeBasicaSaude.setZonaAtendimento(setZonaAtendimento);
+		unidadeBasicaSaude.setZonaAtendimento(listZonaAtendimento);
 
 		unidadeBasicaSaudeService.alterar(unidadeBasicaSaude);
 

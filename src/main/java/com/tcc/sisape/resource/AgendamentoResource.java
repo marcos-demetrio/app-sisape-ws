@@ -4,8 +4,6 @@ import java.net.URI;
 import java.util.List;
 import java.util.Set;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -67,18 +65,18 @@ public class AgendamentoResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> save(@Valid @RequestBody Agendamento aAgendamento) {
-		Set<AgendamentoSintoma> setAgendamentoSintoma = aAgendamento.getAgendamentoSintoma();
+	public ResponseEntity<Void> save(@RequestBody Agendamento aAgendamento) {
+		List<AgendamentoSintoma> listAgendamentoSintoma = aAgendamento.getAgendamentoSintoma();
 
 		aAgendamento.setAgendamentoSintoma(null);
 
 		aAgendamento = agendamentoService.create(aAgendamento);
 
-		for (AgendamentoSintoma agendamentoSintoma : setAgendamentoSintoma) {
+		for (AgendamentoSintoma agendamentoSintoma : listAgendamentoSintoma) {
 			agendamentoSintoma.setAgendamento(aAgendamento);
 		}
 
-		aAgendamento.setAgendamentoSintoma(setAgendamentoSintoma);
+		aAgendamento.setAgendamentoSintoma(listAgendamentoSintoma);
 
 		agendamentoService.update(aAgendamento);
 

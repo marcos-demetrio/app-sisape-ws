@@ -2,7 +2,7 @@ package com.tcc.sisape.domain;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -75,13 +75,13 @@ public class Atendimento {
 	private String plano;
 
 	@OneToMany(mappedBy = "atendimento", cascade = CascadeType.ALL)
-	private Set<AtendimentoExame> atendimentoExame;
+	private List<AtendimentoExame> atendimentoExame;
 
 	@OneToMany(mappedBy = "atendimento", cascade = CascadeType.ALL)
-	private Set<AtendimentoMedicamento> atendimentoMedicamento;
+	private List<AtendimentoMedicamento> atendimentoMedicamento;
 
 	@OneToMany(mappedBy = "atendimento", cascade = CascadeType.ALL)
-	private Set<AtendimentoSintoma> atendimentoSintoma;
+	private List<AtendimentoSintoma> atendimentoSintoma;
 
 	public Long getId() {
 		return id;
@@ -113,9 +113,9 @@ public class Atendimento {
 
 	public void setHoraAtendimento(Date horaAtendimento) {
 		Calendar calendar = Calendar.getInstance();
-        calendar.setTime(horaAtendimento);
-        calendar.set(Calendar.SECOND, 0);
-        
+		calendar.setTime(horaAtendimento);
+		calendar.set(Calendar.SECOND, 0);
+
 		this.horaAtendimento = calendar.getTime();
 	}
 
@@ -215,27 +215,27 @@ public class Atendimento {
 		this.plano = plano;
 	}
 
-	public Set<AtendimentoExame> getAtendimentoExame() {
+	public List<AtendimentoExame> getAtendimentoExame() {
 		return this.atendimentoExame;
 	}
 
-	public void setAtendimentoExame(Set<AtendimentoExame> atendimentoExame) {
+	public void setAtendimentoExame(List<AtendimentoExame> atendimentoExame) {
 		this.atendimentoExame = atendimentoExame;
 	}
 
-	public Set<AtendimentoMedicamento> getAtendimentoMedicamento() {
+	public List<AtendimentoMedicamento> getAtendimentoMedicamento() {
 		return this.atendimentoMedicamento;
 	}
 
-	public void setAtendimentoMedicamento(Set<AtendimentoMedicamento> atendimentoMedicamento) {
+	public void setAtendimentoMedicamento(List<AtendimentoMedicamento> atendimentoMedicamento) {
 		this.atendimentoMedicamento = atendimentoMedicamento;
 	}
 
-	public Set<AtendimentoSintoma> getAtendimentoSintoma() {
+	public List<AtendimentoSintoma> getAtendimentoSintoma() {
 		return this.atendimentoSintoma;
 	}
 
-	public void setAtendimentoSintoma(Set<AtendimentoSintoma> atendimentoSintoma) {
+	public void setAtendimentoSintoma(List<AtendimentoSintoma> atendimentoSintoma) {
 		this.atendimentoSintoma = atendimentoSintoma;
 	}
 

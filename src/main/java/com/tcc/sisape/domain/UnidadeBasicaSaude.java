@@ -1,6 +1,6 @@
 package com.tcc.sisape.domain;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -100,7 +100,7 @@ public class UnidadeBasicaSaude {
 	private Municipio municipio;
 
 	@OneToMany(mappedBy = "unidadeBasicaSaude", cascade = CascadeType.ALL)
-	private Set<UnidadeBasicaSaudeZonaAtendimento> zonaAtendimento;
+	private List<UnidadeBasicaSaudeZonaAtendimento> zonaAtendimento;
 
 	@OneToOne(mappedBy = "unidadeBasicaSaude", cascade = CascadeType.ALL)
 	private UnidadeBasicaSaudeParametro parametroUbs;
@@ -233,11 +233,11 @@ public class UnidadeBasicaSaude {
 		this.esferaAdministrativa = esferaAdministrativa;
 	}
 
-	public Set<UnidadeBasicaSaudeZonaAtendimento> getZonaAtendimento() {
+	public List<UnidadeBasicaSaudeZonaAtendimento> getZonaAtendimento() {
 		return this.zonaAtendimento;
 	}
 
-	public void setZonaAtendimento(Set<UnidadeBasicaSaudeZonaAtendimento> zonaAtendimento) {
+	public void setZonaAtendimento(List<UnidadeBasicaSaudeZonaAtendimento> zonaAtendimento) {
 		this.zonaAtendimento = zonaAtendimento;
 	}
 
