@@ -55,6 +55,12 @@ public class AtendimentoResource {
 		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findById(aId));
 	}
 
+	@RequestMapping(value = "/cidadao/{id}", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<List<Atendimento>> findByCidadao(@PathVariable("id") Long aId) {
+		return ResponseEntity.status(HttpStatus.OK).body(atendimentoService.findByCidadao(aId));
+	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable("id") Long aId) {
 		atendimentoService.delete(aId);

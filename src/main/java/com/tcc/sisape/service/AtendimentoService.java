@@ -39,7 +39,7 @@ public class AtendimentoService {
 	public List<Atendimento> findAdoecimentoAll() {
 		return atendimentoRepository.findAdoecimentoAll();
 	}
-	
+
 	public List<Atendimento> findAdoecimentoByMunicipioId(Long aId) {
 		return atendimentoRepository.findAdoecimentoByMunicipioId(aId);
 	}
@@ -51,9 +51,9 @@ public class AtendimentoService {
 	public List<Atendimento> findAdoecimentoByDataAtendimentoBetween(Date aDataInicio, Date aDataFinal) {
 		return atendimentoRepository.findAdoecimentoByDataAtendimentoBetween(aDataInicio, aDataFinal);
 	}
-	
+
 	public Atendimento findById(Long aId) {
-		
+
 		Atendimento atendimento = atendimentoRepository.findOne(aId);
 
 		if (atendimento == null) {
@@ -62,7 +62,7 @@ public class AtendimentoService {
 
 		return atendimento;
 	}
-	
+
 	public List<Atendimento> findByUnidadeBasicaSaude(Long aId) {
 		List<Atendimento> atendimento = atendimentoRepository.findByUnidadeBasicaSaude(aId);
 
@@ -82,7 +82,7 @@ public class AtendimentoService {
 
 		return atendimento;
 	}
-	
+
 	public List<Atendimento> findByCidadao(Long aId) {
 		List<Atendimento> atendimento = atendimentoRepository.findByCidadao(aId);
 
@@ -102,7 +102,7 @@ public class AtendimentoService {
 
 		return atendimento;
 	}
-	
+
 	public void delete(Long aId) {
 		try {
 			atendimentoRepository.delete(aId);
