@@ -240,7 +240,7 @@ public class AtendimentoResource {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(atendimentoService.findByDataAtendimentoBetween(dataInicio, dataFinal));
 	}
-	
+
 	@RequestMapping(value = "/print", method = RequestMethod.GET)
 	public ResponseEntity<Void> print() {
 		try {
@@ -249,7 +249,73 @@ public class AtendimentoResource {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/printUbs/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Void> printByUbsId(@PathVariable("id") Long aId) {
+		try {
+			atendimentoService.printByUnidadeBasicaSaude(aId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/printProfissional/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Void> printByProfissionalId(@PathVariable("id") Long aId) {
+		try {
+			atendimentoService.printByProfissional(aId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/printCidadao/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Void> printByCidadaoId(@PathVariable("id") Long aId) {
+		try {
+			atendimentoService.printByCidadao(aId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/printPeriodo", method = RequestMethod.GET)
+	public ResponseEntity<Void> printByDataAtendimentoBetween(@RequestParam(value = "aDataInicio") String aDataInicio,
+			@RequestParam(value = "aDataFinal") String aDataFinal) {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataInicio = new Date();
+		Date dataFinal = new Date();
+
+		try {
+			dataInicio = formatter.parse(aDataInicio);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			dataFinal = formatter.parse(aDataFinal);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			atendimentoService.printByDataAtendimentoBetween(dataInicio, dataFinal);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return ResponseEntity.noContent().build();
 	}
 }

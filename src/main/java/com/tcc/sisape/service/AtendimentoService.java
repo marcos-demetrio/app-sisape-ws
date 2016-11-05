@@ -166,19 +166,19 @@ public class AtendimentoService {
 		}
 	}
 	
-	public void printByProfissional(Long aUnidadeBasicaSaude) {
+	public void printByProfissional(Long aProfissional) {
 		try {
 			AtendimentoReport r = new AtendimentoReport();
-			r.imprimir(this.findByProfissional(aUnidadeBasicaSaude));
+			r.imprimir(this.findByProfissional(aProfissional));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
 	
-	public void printByCidadao(Long aUnidadeBasicaSaude) {
+	public void printByCidadao(Long aCidadao) {
 		try {
 			AtendimentoReport r = new AtendimentoReport();
-			r.imprimir(this.findByCidadao(aUnidadeBasicaSaude));
+			r.imprimir(this.findByCidadao(aCidadao));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
