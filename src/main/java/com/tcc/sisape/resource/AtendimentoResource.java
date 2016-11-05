@@ -240,4 +240,16 @@ public class AtendimentoResource {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(atendimentoService.findByDataAtendimentoBetween(dataInicio, dataFinal));
 	}
+	
+	@RequestMapping(value = "/print", method = RequestMethod.GET)
+	public ResponseEntity<Void> print() {
+		try {
+			atendimentoService.print();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ResponseEntity.noContent().build();
+	}
 }

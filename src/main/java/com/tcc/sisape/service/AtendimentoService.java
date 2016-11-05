@@ -8,6 +8,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.Atendimento;
+import com.tcc.sisape.report.AtendimentoReport;
 import com.tcc.sisape.repository.AtendimentoExameRepository;
 import com.tcc.sisape.repository.AtendimentoMedicamentoRepository;
 import com.tcc.sisape.repository.AtendimentoRepository;
@@ -147,4 +148,48 @@ public class AtendimentoService {
 		}
 	}
 
+	public void print() {
+		try {
+			AtendimentoReport r = new AtendimentoReport();
+			r.imprimir(this.findAll());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void printByUnidadeBasicaSaude(Long aUnidadeBasicaSaude) {
+		try {
+			AtendimentoReport r = new AtendimentoReport();
+			r.imprimir(this.findByUnidadeBasicaSaude(aUnidadeBasicaSaude));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void printByProfissional(Long aUnidadeBasicaSaude) {
+		try {
+			AtendimentoReport r = new AtendimentoReport();
+			r.imprimir(this.findByProfissional(aUnidadeBasicaSaude));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void printByCidadao(Long aUnidadeBasicaSaude) {
+		try {
+			AtendimentoReport r = new AtendimentoReport();
+			r.imprimir(this.findByCidadao(aUnidadeBasicaSaude));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void printByDataAtendimentoBetween(Date aDataInicio, Date aDataFinal) {
+		try {
+			AtendimentoReport r = new AtendimentoReport();
+			r.imprimir(this.findByDataAtendimentoBetween(aDataInicio, aDataFinal));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }
