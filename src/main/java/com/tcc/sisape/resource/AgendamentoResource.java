@@ -1,6 +1,7 @@
 package com.tcc.sisape.resource;
 
 import java.net.URI;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -31,12 +32,44 @@ public class AgendamentoResource {
 
 	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Agendamento>> findAll() {
-		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.findAll());
+		List<Agendamento> listAgendamento = agendamentoService.findAll();
+
+		Calendar calendarData = Calendar.getInstance();
+		Calendar calendarHora = Calendar.getInstance();
+
+		for (Agendamento a : listAgendamento) {
+			calendarData.setTime(a.getDataAgendamento());
+			calendarHora.setTime(a.getHoraAgendamento());
+
+			calendarData.set(Calendar.HOUR, calendarHora.get(Calendar.HOUR_OF_DAY));
+			calendarData.set(Calendar.MINUTE, calendarHora.get(Calendar.MINUTE));
+			calendarData.set(Calendar.SECOND, 0);
+
+			a.setDataAgendamento(calendarData.getTime());
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(listAgendamento);
 	}
 
 	@RequestMapping(value = "/naoatendido", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Agendamento>> findNaoAtendido() {
-		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.findAgendamentoNaoAtendido());
+		List<Agendamento> listAgendamento = agendamentoService.findAgendamentoNaoAtendido();
+
+		Calendar calendarData = Calendar.getInstance();
+		Calendar calendarHora = Calendar.getInstance();
+
+		for (Agendamento a : listAgendamento) {
+			calendarData.setTime(a.getDataAgendamento());
+			calendarHora.setTime(a.getHoraAgendamento());
+
+			calendarData.set(Calendar.HOUR, calendarHora.get(Calendar.HOUR_OF_DAY));
+			calendarData.set(Calendar.MINUTE, calendarHora.get(Calendar.MINUTE));
+			calendarData.set(Calendar.SECOND, 0);
+
+			a.setDataAgendamento(calendarData.getTime());
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(listAgendamento);
 	}
 
 	@RequestMapping(value = "/horarios/{id}", method = RequestMethod.GET, produces = {
