@@ -50,6 +50,12 @@ public class AgendamentoResource {
 		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.findById(aId));
 	}
 
+	@RequestMapping(value = "/cidadao/{id}", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<List<Agendamento>> findByCidadao(@PathVariable("id") Long aId) {
+		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.findByCidadao(aId));
+	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable("id") Long aId) {
 		agendamentoService.delete(aId);

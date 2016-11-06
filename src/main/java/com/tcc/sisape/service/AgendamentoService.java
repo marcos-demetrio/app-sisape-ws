@@ -11,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.Agendamento;
+import com.tcc.sisape.domain.Cidadao;
 import com.tcc.sisape.domain.UnidadeBasicaSaude;
 import com.tcc.sisape.domain.enumdados.PeriodoDia;
 import com.tcc.sisape.repository.AgendamentoRepository;
@@ -25,6 +26,9 @@ public class AgendamentoService {
 	private AgendamentoRepository agendamentoRepository;
 
 	@Autowired
+	private CidadaoService cidadaoService;
+
+	@Autowired
 	private AgendamentoSintomaRepository agendamentoSintomaRepository;
 
 	@Autowired
@@ -33,7 +37,13 @@ public class AgendamentoService {
 	public List<Agendamento> findAll() {
 		return agendamentoRepository.findAll();
 	}
-	
+
+	public List<Agendamento> findByCidadao(Long aId) {
+		Cidadao cidadao = cidadaoService.findById(aId);
+		
+		return agendamentoRepository.findByCidadao(cidadao);
+	}
+
 	public List<Agendamento> findAgendamentoNaoAtendido() {
 		return agendamentoRepository.findByAtendido(false);
 	}
