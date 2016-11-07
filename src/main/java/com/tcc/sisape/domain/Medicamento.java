@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -26,6 +28,10 @@ public class Medicamento implements Serializable {
 
 	@Column(nullable = false)
 	private boolean possuiEmEstoque;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "i_unidade_basica_saude", nullable = false)
+	private UnidadeBasicaSaude unidadeBasicaSaude;
 
 	public Long getId() {
 		return this.id;
@@ -49,6 +55,14 @@ public class Medicamento implements Serializable {
 
 	public void setPossuiEmEstoque(boolean possuiEmEstoque) {
 		this.possuiEmEstoque = possuiEmEstoque;
+	}
+
+	public UnidadeBasicaSaude getUnidadeBasicaSaude() {
+		return this.unidadeBasicaSaude;
+	}
+
+	public void setUnidadeBasicaSaude(UnidadeBasicaSaude unidadeBasicaSaude) {
+		this.unidadeBasicaSaude = unidadeBasicaSaude;
 	}
 
 	@Override
