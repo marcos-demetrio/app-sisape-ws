@@ -34,7 +34,7 @@ public class UsuarioService {
 
 		if (profissional != null) {
 			usuario = new Usuario(profissional.getId(), profissional.getNome(), profissional.getEmail(),
-					profissional.getSenha(), "P");
+					profissional.getSenha(), profissional.getTipoUsuario());
 		}
 
 		if (usuario == null) {
