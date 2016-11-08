@@ -30,6 +30,10 @@ public class Atendimento {
 	@JoinColumn(name = "i_agendamento", referencedColumnName = "i_agendamento")
 	private Agendamento agendamento;
 
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "i_profissional_lotacao", referencedColumnName = "i_profissional_lotacao", nullable = false)
+	private ProfissionalLotacao profissionalLotacao;
+
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
 	private Date dataAtendimento;
@@ -89,6 +93,14 @@ public class Atendimento {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public ProfissionalLotacao getProfissionalLotacao() {
+		return this.profissionalLotacao;
+	}
+
+	public void setProfissionalLotacao(ProfissionalLotacao profissionalLotacao) {
+		this.profissionalLotacao = profissionalLotacao;
 	}
 
 	public Agendamento getAgendamento() {

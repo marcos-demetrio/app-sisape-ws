@@ -86,7 +86,23 @@ public class AgendamentoResource {
 	@RequestMapping(value = "/cidadao/{id}", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Agendamento>> findByCidadao(@PathVariable("id") Long aId) {
-		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.findByCidadao(aId));
+		List<Agendamento> listAgendamento = agendamentoService.findByCidadao(aId);
+
+		Calendar calendarData = Calendar.getInstance();
+		Calendar calendarHora = Calendar.getInstance();
+
+		for (Agendamento a : listAgendamento) {
+			calendarData.setTime(a.getDataAgendamento());
+			calendarHora.setTime(a.getHoraAgendamento());
+
+			calendarData.set(Calendar.HOUR, calendarHora.get(Calendar.HOUR_OF_DAY));
+			calendarData.set(Calendar.MINUTE, calendarHora.get(Calendar.MINUTE));
+			calendarData.set(Calendar.SECOND, 0);
+
+			a.setDataAgendamento(calendarData.getTime());
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(listAgendamento);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
