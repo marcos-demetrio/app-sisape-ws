@@ -156,7 +156,7 @@ public class AtendimentoService {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public void printByUnidadeBasicaSaude(Long aUnidadeBasicaSaude) {
 		try {
 			AtendimentoReport r = new AtendimentoReport();
@@ -165,7 +165,7 @@ public class AtendimentoService {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public void printByProfissional(Long aProfissional) {
 		try {
 			AtendimentoReport r = new AtendimentoReport();
@@ -174,7 +174,7 @@ public class AtendimentoService {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public void printByCidadao(Long aCidadao) {
 		try {
 			AtendimentoReport r = new AtendimentoReport();
@@ -184,12 +184,7 @@ public class AtendimentoService {
 		}
 	}
 
-	public void printByDataAtendimentoBetween(Date aDataInicio, Date aDataFinal) {
-		try {
-			AtendimentoReport r = new AtendimentoReport();
-			r.imprimir(this.findByDataAtendimentoBetween(aDataInicio, aDataFinal));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Atendimento> printByDataAtendimentoBetween(Date aDataInicio, Date aDataFinal) {
+		return this.findByDataAtendimentoBetween(aDataInicio, aDataFinal);
 	}
 }

@@ -1,11 +1,16 @@
 package com.tcc.sisape.resource;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -30,6 +36,14 @@ import com.tcc.sisape.domain.AtendimentoSintoma;
 import com.tcc.sisape.service.AgendamentoService;
 import com.tcc.sisape.service.AtendimentoService;
 import com.tcc.sisape.service.UnidadeBasicaSaudeService;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @CrossOrigin
 @RestController
@@ -289,9 +303,35 @@ public class AtendimentoResource {
 		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/printPeriodo", method = RequestMethod.GET)
-	public ResponseEntity<Void> printByDataAtendimentoBetween(@RequestParam(value = "aDataInicio") String aDataInicio,
-			@RequestParam(value = "aDataFinal") String aDataFinal) {
+	/*
+	 * @RequestMapping(value = "/printPeriodo", method = RequestMethod.GET)
+	 * public ResponseEntity<Void>
+	 * printByDataAtendimentoBetween(@RequestParam(value = "aDataInicio") String
+	 * aDataInicio,
+	 * 
+	 * @RequestParam(value = "aDataFinal") String aDataFinal) {
+	 * 
+	 * SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); Date
+	 * dataInicio = new Date(); Date dataFinal = new Date();
+	 * 
+	 * try { dataInicio = formatter.parse(aDataInicio); } catch (ParseException
+	 * e) { e.printStackTrace(); }
+	 * 
+	 * try { dataFinal = formatter.parse(aDataFinal); } catch (ParseException e)
+	 * { e.printStackTrace(); }
+	 * 
+	 * try { atendimentoService.printByDataAtendimentoBetween(dataInicio,
+	 * dataFinal); } catch (Exception e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); }
+	 * 
+	 * return ResponseEntity.noContent().build(); }
+	 */
+
+	@RequestMapping(value = "printPeriodo", method = RequestMethod.GET)
+	@ResponseBody
+	public void getRpt1(HttpServletResponse response, @RequestParam(value = "aDataInicio") String aDataInicio,
+			@RequestParam(value = "aDataFinal") String aDataFinal) throws JRException, IOException {
+		Map<String, Object> params = new HashMap<>();
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date dataInicio = new Date();
@@ -309,13 +349,18 @@ public class AtendimentoResource {
 			e.printStackTrace();
 		}
 
-		try {
-			atendimentoService.printByDataAtendimentoBetween(dataInicio, dataFinal);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		List<Atendimento> listaAtendimento = atendimentoService.printByDataAtendimentoBetween(dataInicio, dataFinal);
 
-		return ResponseEntity.noContent().build();
+		JasperReport jasperReport = JasperCompileManager.compileReport(
+				this.getClass().getClassLoader().getResource("").getPath() + "/jasper/reportAtendimento.jrxml");
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params,
+				new JRBeanCollectionDataSource(listaAtendimento));
+
+		// response.setContentType("application/pdf");
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition", "inline; filename=Atendimento.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
 }
