@@ -21,8 +21,8 @@ public class ClassificacaoBrasileiraOcupacaoService {
 		return classificacaoBrasileiraOcupacaoRepository.findAll();
 	}
 
-	public List<ClassificacaoBrasileiraOcupacao> findByNomeContainingOrCodigoCbo(String aNome, Long aCodigoCbo) {
-		return classificacaoBrasileiraOcupacaoRepository.findByNomeContainingOrCodigoCbo(aNome, aCodigoCbo);
+	public List<ClassificacaoBrasileiraOcupacao> findByNomeContainingOrCodigoCbo(String aNome) {
+		return classificacaoBrasileiraOcupacaoRepository.findByNomeContaining(aNome);
 	}
 
 	public ClassificacaoBrasileiraOcupacao findByCodigoCbo(Long aCodigoCbo) {
@@ -73,7 +73,7 @@ public class ClassificacaoBrasileiraOcupacaoService {
 	public void print(String aNome, Long aCodigoCbo) {
 		try {
 			ClassificacaoBrasileiraOcupacaoReport r = new ClassificacaoBrasileiraOcupacaoReport();
-			r.imprimir(this.findByNomeContainingOrCodigoCbo(aNome, aCodigoCbo));
+			r.imprimir(this.findByNomeContainingOrCodigoCbo(aNome));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

@@ -8,7 +8,7 @@ import com.tcc.sisape.domain.ClassificacaoBrasileiraOcupacao;
 
 public interface ClassificacaoBrasileiraOcupacaoRepository
 		extends JpaRepository<ClassificacaoBrasileiraOcupacao, Long> {
-	public List<ClassificacaoBrasileiraOcupacao> findByNomeContainingOrCodigoCbo(String aNome, Long aCodigoCbo);
+	public List<ClassificacaoBrasileiraOcupacao> findByNomeContaining(String aNome);
 
 	public ClassificacaoBrasileiraOcupacao findByCodigoCbo(Long aCodigoCbo);
 }

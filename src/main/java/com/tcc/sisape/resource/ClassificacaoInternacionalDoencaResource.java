@@ -41,10 +41,9 @@ public class ClassificacaoInternacionalDoencaResource {
 
 	@RequestMapping(value = "/descricao", method = RequestMethod.GET)
 	public ResponseEntity<List<ClassificacaoInternacionalDoenca>> pesquisar(
-			@RequestParam(value = "codigoCid", defaultValue = "") String aCodigoCid,
 			@RequestParam(value = "descricao", defaultValue = "") String aDescricao) {
-		return ResponseEntity.status(HttpStatus.OK).body(classificacaoInternacionalDoencaService
-				.findByDescricaoContainingOrCodigoCidContaining(aDescricao, aCodigoCid));
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(classificacaoInternacionalDoencaService.findByDescricaoContaining(aDescricao));
 	}
 
 	@RequestMapping(value = "/cid/{codigoCid}", method = RequestMethod.GET, produces = {

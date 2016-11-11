@@ -8,8 +8,7 @@ import com.tcc.sisape.domain.ClassificacaoInternacionalDoenca;
 
 public interface ClassificacaoInternacionalDoencaRepository
 		extends JpaRepository<ClassificacaoInternacionalDoenca, Long> {
-	public List<ClassificacaoInternacionalDoenca> findByDescricaoContainingOrCodigoCidContaining(String aDescricao,
-			String aCodigoCid);
+	public List<ClassificacaoInternacionalDoenca> findByDescricaoContaining(String aDescricao);
 
 	public ClassificacaoInternacionalDoenca findByCodigoCidContaining(String aCodigoCid);
 }

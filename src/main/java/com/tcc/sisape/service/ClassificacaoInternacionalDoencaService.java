@@ -21,10 +21,8 @@ public class ClassificacaoInternacionalDoencaService {
 		return classificacaoInternacionalDoencaRepository.findAll();
 	}
 
-	public List<ClassificacaoInternacionalDoenca> findByDescricaoContainingOrCodigoCidContaining(String aDescricao,
-			String aCodigoCid) {
-		return classificacaoInternacionalDoencaRepository.findByDescricaoContainingOrCodigoCidContaining(aDescricao,
-				aCodigoCid);
+	public List<ClassificacaoInternacionalDoenca> findByDescricaoContaining(String aDescricao) {
+		return classificacaoInternacionalDoencaRepository.findByDescricaoContaining(aDescricao);
 	}
 
 	public ClassificacaoInternacionalDoenca findByCodigoCid(String aCodigoCid) {
@@ -75,7 +73,7 @@ public class ClassificacaoInternacionalDoencaService {
 	public void print(String aDescricao, String aCodigoCid) {
 		try {
 			ClassificacaoInternacionalDoencaReport r = new ClassificacaoInternacionalDoencaReport();
-			r.imprimir(this.findByDescricaoContainingOrCodigoCidContaining(aDescricao, aCodigoCid));
+			r.imprimir(this.findByDescricaoContaining(aDescricao));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

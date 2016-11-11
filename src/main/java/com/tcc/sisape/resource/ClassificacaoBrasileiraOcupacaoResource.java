@@ -48,10 +48,9 @@ public class ClassificacaoBrasileiraOcupacaoResource {
 
 	@RequestMapping(value = "/nome", method = RequestMethod.GET)
 	public ResponseEntity<List<ClassificacaoBrasileiraOcupacao>> pesquisar(
-			@RequestParam(value = "codigoCbo", defaultValue = "0") Long aCodigoCbo,
 			@RequestParam(value = "nome", defaultValue = "") String aNome) {
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(classificacaoBrasileiraOcupacaoService.findByNomeContainingOrCodigoCbo(aNome, aCodigoCbo));
+				.body(classificacaoBrasileiraOcupacaoService.findByNomeContainingOrCodigoCbo(aNome));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

@@ -39,7 +39,7 @@ public class ProfissionalResource {
 		return ResponseEntity.status(HttpStatus.OK).body(profissionalService.findById(id));
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/nome", method = RequestMethod.GET)
 	public ResponseEntity<List<Profissional>> pesquisar(@RequestParam(value = "nome", defaultValue = "") String aNome) {
 		return ResponseEntity.status(HttpStatus.OK).body(profissionalService.findByNome(aNome));
 	}
