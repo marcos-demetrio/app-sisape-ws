@@ -5,7 +5,6 @@ import java.util.Date;
 public class AgendamentoSenha {
 
 	private Date horario;
-	private int numero;
 	private boolean disponivel;
 
 	public Date getHorario() {
@@ -16,14 +15,6 @@ public class AgendamentoSenha {
 		this.horario = aHorario;
 	}
 
-	public int getNumero() {
-		return this.numero;
-	}
-
-	public void setNumero(int aNumero) {
-		this.numero = aNumero;
-	}
-
 	public boolean isDisponivel() {
 		return this.disponivel;
 	}
@@ -32,9 +23,8 @@ public class AgendamentoSenha {
 		this.disponivel = disponivel;
 	}
 
-	AgendamentoSenha(Date aHorario, int aNumero, boolean aDisponivel) {
+	AgendamentoSenha(Date aHorario, boolean aDisponivel) {
 		this.setHorario(aHorario);
-		this.setNumero(aNumero);
 		this.setDisponivel(aDisponivel);
 	}
 }

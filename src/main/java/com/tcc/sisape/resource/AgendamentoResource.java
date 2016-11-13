@@ -1,7 +1,10 @@
 package com.tcc.sisape.resource;
 
 import java.net.URI;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -72,10 +76,22 @@ public class AgendamentoResource {
 		return ResponseEntity.status(HttpStatus.OK).body(listAgendamento);
 	}
 
-	@RequestMapping(value = "/horarios/{id}", method = RequestMethod.GET, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Set<AgendamentoSenha>> gerarHorarios(@PathVariable("id") Long aIdUbs) {
-		return ResponseEntity.status(HttpStatus.OK).body(agendamentoService.gerarHorarios(aIdUbs));
+	@RequestMapping(value = "/horarios", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Set<AgendamentoSenha>> gerarHorarios(
+			@RequestParam(value = "i_ubs") Long aIdUnidadeBasicaSaude,
+			@RequestParam(value = "data_agendamento") String aDataAgendamento) {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataAgendamento = new Date();
+
+		try {
+			dataAgendamento = formatter.parse(aDataAgendamento);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(agendamentoService.gerarHorarios(aIdUnidadeBasicaSaude, dataAgendamento));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
