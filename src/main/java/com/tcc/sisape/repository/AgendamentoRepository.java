@@ -14,4 +14,6 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
 	public List<Agendamento> findByCidadao(Cidadao aCidadao);
 
 	public List<Agendamento> findByDataAgendamento(Date aData);
+
+	public Long countByAtendidoFalseAndCidadao(Cidadao aCidadao);
 }

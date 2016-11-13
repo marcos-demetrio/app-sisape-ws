@@ -169,4 +169,11 @@ public class AgendamentoResource {
 
 		return ResponseEntity.noContent().build();
 	}
+
+	@RequestMapping(value = "/totalagendamentonaoatendidoporcidadao/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Long> countByAtendidoFalseAndCidadao(@PathVariable("id") Long aIdCidadao) {
+		Long total = agendamentoService.countByAtendidoFalseAndCidadao(aIdCidadao);
+
+		return ResponseEntity.status(HttpStatus.OK).body(total);
+	}
 }

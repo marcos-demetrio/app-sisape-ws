@@ -190,4 +190,15 @@ public class AgendamentoService {
 
 		agendamentoRepository.save(aAgendamento);
 	}
+
+	public Long countByAtendidoFalseAndCidadao(Long aIdCidadao) {
+		Cidadao cidadao = cidadaoService.findById(aIdCidadao);
+		Long totalAgendamentosNaoAtendidos = 0L;
+
+		if (cidadao != null) {
+			totalAgendamentosNaoAtendidos = agendamentoRepository.countByAtendidoFalseAndCidadao(cidadao);
+		}
+
+		return totalAgendamentosNaoAtendidos;
+	}
 }
