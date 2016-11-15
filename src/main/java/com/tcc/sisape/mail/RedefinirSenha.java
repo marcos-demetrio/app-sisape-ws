@@ -13,19 +13,20 @@ public class RedefinirSenha {
 		// Email: sisape.tcc@gmail.com
 		// Senha: sisapeTCC
 
-		String toAddress = aEmail;
 		String fromAddress = "sisape.tcc@gmail.com";
 		String subject = "Nova senha - SISAPE";
 		String msgBody = "Sua nova senha no SISAPE é: " + aNovaSenha;
 
 		Mail mensagem = (Mail) context.getBean("mailSenha");
-		mensagem.sendMail(fromAddress, toAddress, subject, msgBody);
+		mensagem.sendMail(fromAddress, aEmail, subject, msgBody);
 	}
 
-	public void novaSenha(String toAddress) {
+	public String novaSenha(String toAddress) {
 		String senha = this.gerarSenhaAleatoria();
 
 		this.enviarEmail(toAddress, senha);
+
+		return senha;
 	}
 
 	private String gerarSenhaAleatoria() {
