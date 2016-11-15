@@ -363,4 +363,71 @@ public class AtendimentoResource {
 		final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
+
+	@RequestMapping(value = "/printAdoecimento", method = RequestMethod.GET)
+	public ResponseEntity<Void> printAdoecimento() {
+		try {
+			atendimentoService.printAdoecimento();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/printAdoecimentoMunicipio/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Void> printAdoecimentoByMunicipioId(@PathVariable("id") Long aId) {
+		try {
+			atendimentoService.printAdoecimentoByMunicipio(aId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/printAdoecimentoUbs/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Void> printAdoecimentoByUbsId(@PathVariable("id") Long aId) {
+		try {
+			atendimentoService.printAdoecimentoByUbs(aId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/printAdoecimentoPeriodo", method = RequestMethod.GET)
+	public ResponseEntity<Void> printAdoecimentoByDataAtendimentoBetween(@RequestParam(value = "aDataInicio") String aDataInicio,
+
+			@RequestParam(value = "aDataFinal") String aDataFinal) {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataInicio = new Date();
+		Date dataFinal = new Date();
+
+		try {
+			dataInicio = formatter.parse(aDataInicio);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			dataFinal = formatter.parse(aDataFinal);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			atendimentoService.printAdoecimentoByDataAtendimentoBetween(dataInicio, dataFinal);
+		} catch (Exception e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.noContent().build();
+	}
+
 }
