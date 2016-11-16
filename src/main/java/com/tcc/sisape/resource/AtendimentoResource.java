@@ -429,5 +429,41 @@ public class AtendimentoResource {
 
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(value = "/printAtestado/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Void> printAtestado(@PathVariable("id") Long aId) {
+		try {
+			atendimentoService.printAtestado(aId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/printReceita/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Void> printReceita(@PathVariable("id") Long aId) {
+		try {
+			atendimentoService.printReceita(aId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value = "/printExame/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Void> printExame(@PathVariable("id") Long aId) {
+		try {
+			atendimentoService.printExame(aId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.noContent().build();
+	}
+	
 }

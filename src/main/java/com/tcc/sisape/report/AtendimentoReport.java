@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.tcc.sisape.domain.Atendimento;
+import com.tcc.sisape.domain.AtendimentoExame;
+import com.tcc.sisape.domain.AtendimentoMedicamento;
 import com.tcc.sisape.domain.AtendimentoSintoma;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -37,15 +39,17 @@ public class AtendimentoReport {
 		List<AdoecimentoReportData> retorno = new ArrayList<AdoecimentoReportData>();
 
 		for (Atendimento atendimento : lista) {
-			String municipioNome = atendimento.getAgendamento().getProfissionalLotacao().getUnidadeBasicaSaude().getMunicipio().getNome();
-			String unidadeBasicaSaudeNome = atendimento.getAgendamento().getProfissionalLotacao().getUnidadeBasicaSaude().getNome();
+			String municipioNome = atendimento.getAgendamento().getProfissionalLotacao().getUnidadeBasicaSaude()
+					.getMunicipio().getNome();
+			String unidadeBasicaSaudeNome = atendimento.getAgendamento().getProfissionalLotacao()
+					.getUnidadeBasicaSaude().getNome();
 
 			List<AtendimentoSintoma> sintoma = atendimento.getAtendimentoSintoma();
 
 			for (AtendimentoSintoma atendimentoSintoma : sintoma) {
 				String cidCodigo = atendimentoSintoma.getCid().getCodigoCid();
 				String cidDescricao = atendimentoSintoma.getCid().getDescricao();
-				
+
 				AdoecimentoReportData a = null;
 				for (AdoecimentoReportData adoecimento : retorno) {
 					if (adoecimento.getMunicipioNome() == municipioNome
@@ -86,6 +90,95 @@ public class AtendimentoReport {
 				.compileReport(this.getPathToReportPackage() + "reportAdoecimento.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(adoecimento));
+
+		JasperExportManager.exportReportToPdfFile(print, Math.abs(rand.nextInt()) + ".pdf");
+	}
+
+	public List<AtendimentoAtestadoReportData> getAtestado(Atendimento atendimento) {
+		List<AtendimentoAtestadoReportData> retorno = new ArrayList<AtendimentoAtestadoReportData>();
+
+		AtendimentoAtestadoReportData atestado = new AtendimentoAtestadoReportData();
+
+		atestado.setCidadaoNome(atendimento.getAgendamento().getCidadao().getNomeCompleto());
+		atestado.setCidadaoCpf(atendimento.getAgendamento().getCidadao().getCpf());
+		atestado.setProfissionalNome(atendimento.getProfissionalLotacao().getProfissional().getNome());
+
+		retorno.add(atestado);
+
+		return retorno;
+	}
+
+	public List<AtendimentoRequisicaoExameReportData> getRequisicaoExame(Atendimento atendimento) {
+		List<AtendimentoRequisicaoExameReportData> retorno = new ArrayList<AtendimentoRequisicaoExameReportData>();
+		
+		List<AtendimentoExame> exame = atendimento.getAtendimentoExame();
+		for (AtendimentoExame atendimentoExame : exame) {
+			AtendimentoRequisicaoExameReportData a = new AtendimentoRequisicaoExameReportData();
+
+			a.setCidadaoNome(atendimento.getAgendamento().getCidadao().getNomeCompleto());
+			a.setCidadaoCpf(atendimento.getAgendamento().getCidadao().getCpf());
+			a.setProfissionalNome(atendimento.getProfissionalLotacao().getProfissional().getNome());
+			a.setExameNome(atendimentoExame.getExame().getNome());
+
+			retorno.add(a);
+		}
+
+		return retorno;
+	}
+	
+	public List<AtendimentoRequisicaoMedicamentoReportData> getRequisicaoMedicamento(Atendimento atendimento) {
+		List<AtendimentoRequisicaoMedicamentoReportData> retorno = new ArrayList<AtendimentoRequisicaoMedicamentoReportData>();
+		
+		List<AtendimentoMedicamento> medicamento = atendimento.getAtendimentoMedicamento();
+		for (AtendimentoMedicamento atendimentoMedicamento : medicamento) {
+			AtendimentoRequisicaoMedicamentoReportData a = new AtendimentoRequisicaoMedicamentoReportData();
+
+			a.setCidadaoNome(atendimento.getAgendamento().getCidadao().getNomeCompleto());
+			a.setCidadaoCpf(atendimento.getAgendamento().getCidadao().getCpf());
+			a.setProfissionalNome(atendimento.getProfissionalLotacao().getProfissional().getNome());
+			a.setMedicamentoNome(atendimentoMedicamento.getMedicamento().getNome());
+			a.setMedicamentoPosologia(atendimentoMedicamento.getPosologia());
+
+			retorno.add(a);
+		}
+
+		return retorno;
+	}
+
+	public void imprimirAtestado(Atendimento atendimento) throws Exception {
+		Random rand = new Random();
+
+		List<AtendimentoAtestadoReportData> lista = getAtestado(atendimento);
+
+		JasperReport report = JasperCompileManager
+				.compileReport(this.getPathToReportPackage() + "reportAtestado.jrxml");
+
+		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
+
+		JasperExportManager.exportReportToPdfFile(print, Math.abs(rand.nextInt()) + ".pdf");
+	}
+
+	public void imprimirReceita(Atendimento atendimento) throws Exception {
+		Random rand = new Random();
+
+		List<AtendimentoRequisicaoMedicamentoReportData> lista = getRequisicaoMedicamento(atendimento);
+
+		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "reportRequisicaoMedicamento.jrxml");
+
+		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
+
+		JasperExportManager.exportReportToPdfFile(print, Math.abs(rand.nextInt()) + ".pdf");
+	}
+
+	public void imprimirExame(Atendimento atendimento) throws Exception {
+		Random rand = new Random();
+
+		List<AtendimentoRequisicaoExameReportData> lista = getRequisicaoExame(atendimento);
+
+		JasperReport report = JasperCompileManager
+				.compileReport(this.getPathToReportPackage() + "reportRequisicaoExame.jrxml");
+
+		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
 
 		JasperExportManager.exportReportToPdfFile(print, Math.abs(rand.nextInt()) + ".pdf");
 	}

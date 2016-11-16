@@ -187,7 +187,7 @@ public class AtendimentoService {
 	public List<Atendimento> printByDataAtendimentoBetween(Date aDataInicio, Date aDataFinal) {
 		return this.findByDataAtendimentoBetween(aDataInicio, aDataFinal);
 	}
-	
+
 	public void printAdoecimento() {
 		try {
 			AtendimentoReport r = new AtendimentoReport();
@@ -198,7 +198,7 @@ public class AtendimentoService {
 	}
 
 	public void printAdoecimentoByMunicipio(Long aMunicipio) {
-		
+
 		try {
 			AtendimentoReport r = new AtendimentoReport();
 			r.imprimirAdoecimento(this.findAdoecimentoByMunicipioId(aMunicipio));
@@ -220,6 +220,33 @@ public class AtendimentoService {
 		try {
 			AtendimentoReport r = new AtendimentoReport();
 			r.imprimirAdoecimento(this.findAdoecimentoByDataAtendimentoBetween(aDataInicio, aDataFinal));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void printAtestado(Long aId) {
+		try {
+			AtendimentoReport r = new AtendimentoReport();
+			r.imprimirAtestado(this.findById(aId));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void printReceita(Long aId) {
+		try {
+			AtendimentoReport r = new AtendimentoReport();
+			r.imprimirReceita(this.findById(aId));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void printExame(Long aId) {
+		try {
+			AtendimentoReport r = new AtendimentoReport();
+			r.imprimirExame(this.findById(aId));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

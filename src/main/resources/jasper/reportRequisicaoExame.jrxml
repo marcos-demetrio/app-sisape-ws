@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportRequisicaoExame" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a2792ac8-425f-4c69-bf2c-9361a99b05d7">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="60"/>
+	<property name="ireport.y" value="0"/>
+	<field name="cidadaoNome" class="java.lang.String"/>
+	<field name="cidadaoCpf" class="java.lang.String"/>
+	<field name="profissionalNome" class="java.lang.String"/>
+	<field name="exameNome" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="dc9aacec-68ad-444f-95a7-868e96b95c24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Requisição de Exames]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="502" y="20" width="53" height="20" uuid="89fc12ec-3769-45af-b5b0-5e3588282f38"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="452" y="20" width="50" height="20" uuid="fcd7bb88-3ba0-44eb-b958-f15337796b39"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Emissão:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="502" y="40" width="22" height="20" uuid="1c8f645f-5a9f-4c99-826b-5c27aab06da7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="452" y="40" width="50" height="20" uuid="3b5b2d6b-1cb1-411c-90a4-c1354b9499f2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Página:]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="524" y="40" width="31" height="20" uuid="6f93196a-c04e-44ea-b7a7-364216a100c4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["/" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="40" width="420" height="40" uuid="3bfef6c9-3c10-45be-98ca-f94c40f5cc9b"/>
+				<textFieldExpression><![CDATA["Solicito os Exames abaixo ao(a) Sr.(a) "$F{cidadaoNome}", portador do CPF: "$F{cidadaoCpf}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" uuid="30ea7033-3a2d-4766-9325-03767e5181e6"/>
+				<textFieldExpression><![CDATA[$F{exameNome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="60">
+			<textField>
+				<reportElement x="85" y="20" width="400" height="20" uuid="f00d4f3f-c448-4ce9-9135-bf4102373f7d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{profissionalNome}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="160" y="19" width="260" height="1" uuid="0dd4bc2a-4e81-4c76-b26a-df1d67e76415"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
