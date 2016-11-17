@@ -2,7 +2,6 @@ package com.tcc.sisape.resource;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tcc.sisape.domain.Agendamento;
 import com.tcc.sisape.domain.AgendamentoSintoma;
@@ -144,7 +142,7 @@ public class AtendimentoResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> save(@Valid @RequestBody Atendimento aAtendimento) {
+	public Long save(@Valid @RequestBody Atendimento aAtendimento) {
 		List<AtendimentoExame> listAtendimentoExame = aAtendimento.getAtendimentoExame();
 		List<AtendimentoMedicamento> listAtendimentoMedicamento = aAtendimento.getAtendimentoMedicamento();
 		List<AtendimentoSintoma> listAtendimentoSintoma = aAtendimento.getAtendimentoSintoma();
@@ -184,10 +182,7 @@ public class AtendimentoResource {
 
 		atendimentoService.update(aAtendimento);
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aAtendimento.getId())
-				.toUri();
-
-		return ResponseEntity.created(uri).build();
+		return aAtendimento.getId();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -401,7 +396,8 @@ public class AtendimentoResource {
 	}
 
 	@RequestMapping(value = "/printAdoecimentoPeriodo", method = RequestMethod.GET)
-	public ResponseEntity<Void> printAdoecimentoByDataAtendimentoBetween(@RequestParam(value = "aDataInicio") String aDataInicio,
+	public ResponseEntity<Void> printAdoecimentoByDataAtendimentoBetween(
+			@RequestParam(value = "aDataInicio") String aDataInicio,
 
 			@RequestParam(value = "aDataFinal") String aDataFinal) {
 
@@ -429,7 +425,7 @@ public class AtendimentoResource {
 
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(value = "/printAtestado/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Void> printAtestado(@PathVariable("id") Long aId) {
 		try {
@@ -453,7 +449,7 @@ public class AtendimentoResource {
 
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(value = "/printExame/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Void> printExame(@PathVariable("id") Long aId) {
 		try {
@@ -465,5 +461,5 @@ public class AtendimentoResource {
 
 		return ResponseEntity.noContent().build();
 	}
-	
+
 }
