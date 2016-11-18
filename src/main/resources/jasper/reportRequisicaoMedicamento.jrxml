@@ -47,7 +47,7 @@
 			</textField>
 			<textField>
 				<reportElement x="0" y="40" width="420" height="40" uuid="3bfef6c9-3c10-45be-98ca-f94c40f5cc9b"/>
-				<textFieldExpression><![CDATA["Solicito os Medicamentos abaixo para o(a) Sr.(a) "$F{cidadaoNome}", portador do CPF: "$F{cidadaoCpf}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Solicito os Medicamentos abaixo para o(a) Sr.(a) " + $F{cidadaoNome} + ", portador do CPF: " + $F{cidadaoCpf}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

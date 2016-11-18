@@ -50,7 +50,7 @@
 			<textField>
 				<reportElement x="77" y="49" width="400" height="67" uuid="aa477a26-b6c8-477d-9832-ae5ba1256a3c"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA["Atesto para os devidos fins, que o(a) Sr.(a) "$F{cidadaoNome}", portador do CPF: "$F{cidadaoCpf}", esteve em consulta médica nesta data, devendo ser afasto(a) das atividades por ____ dias.]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Atesto para os devidos fins, que o(a) Sr.(a) " + $F{cidadaoNome} + ", portador do CPF: " + $F{cidadaoCpf} + ", esteve em consulta médica nesta data, devendo ser afastado(a) das atividades por ____ dias."]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="77" y="182" width="400" height="20" uuid="f00d4f3f-c448-4ce9-9135-bf4102373f7d"/>
