@@ -7,7 +7,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.Exame;
-import com.tcc.sisape.report.ExameReport;
 import com.tcc.sisape.repository.ExameRepository;
 import com.tcc.sisape.service.exceptions.ExameNaoEncontradoException;
 
@@ -55,12 +54,7 @@ public class ExameService {
 		exameRepository.save(aExame);
 	}
 
-	public void print(String aNome) {
-		try {
-			ExameReport r = new ExameReport();
-			r.imprimir(this.findByNome(aNome));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Exame> print(String aNome) {
+		return this.findByNome(aNome);
 	}
 }

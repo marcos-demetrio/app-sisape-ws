@@ -3,6 +3,7 @@ package com.tcc.sisape.resource;
 import java.net.URI;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tcc.sisape.domain.ClassificacaoInternacionalDoenca;
+import com.tcc.sisape.report.ClassificacaoInternacionalDoencaReport;
 import com.tcc.sisape.service.ClassificacaoInternacionalDoencaService;
 
 @CrossOrigin
@@ -83,16 +86,16 @@ public class ClassificacaoInternacionalDoencaResource {
 		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/print", method = RequestMethod.GET)
-	public ResponseEntity<Void> print(@RequestParam(value = "codigoCid", defaultValue = "") String aCodigoCid,
+	@RequestMapping(value = "print", method = RequestMethod.GET)
+	@ResponseBody
+	public void print(HttpServletResponse response, @RequestParam(value = "codigoCid", defaultValue = "") String aCodigoCid,
 			@RequestParam(value = "descricao", defaultValue = "") String aDescricao) {
+		ClassificacaoInternacionalDoencaReport report = new ClassificacaoInternacionalDoencaReport();
 		try {
-			classificacaoInternacionalDoencaService.print(aDescricao, aCodigoCid);
+			report.imprimir(response, classificacaoInternacionalDoencaService.print(aDescricao, aCodigoCid));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return ResponseEntity.noContent().build();
 	}
 }

@@ -1,7 +1,9 @@
 package com.tcc.sisape.report;
 
+import java.io.OutputStream;
 import java.util.List;
-import java.util.Random;
+
+import javax.servlet.http.HttpServletResponse;
 
 import com.tcc.sisape.domain.UnidadeBasicaSaude;
 
@@ -19,14 +21,16 @@ public class UnidadeBasicaSaudeReport {
 		this.pathToReportPackage = this.getClass().getClassLoader().getResource("").getPath() + "/jasper/";
 	}
 
-	public void imprimir(List<UnidadeBasicaSaude> lista) throws Exception {
-		Random rand = new Random();
-
+	public void imprimir(HttpServletResponse response, List<UnidadeBasicaSaude> lista) throws Exception {
 		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "reportUBS.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
 
-		JasperExportManager.exportReportToPdfFile(print, Math.abs(rand.nextInt()) + ".pdf");
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition", "inline; filename=ubs.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(print, outStream);
 	}
 
 	public String getPathToReportPackage() {

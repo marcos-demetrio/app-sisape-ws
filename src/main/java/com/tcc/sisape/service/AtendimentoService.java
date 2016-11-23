@@ -8,7 +8,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.Atendimento;
-import com.tcc.sisape.report.AtendimentoReport;
 import com.tcc.sisape.repository.AtendimentoExameRepository;
 import com.tcc.sisape.repository.AtendimentoMedicamentoRepository;
 import com.tcc.sisape.repository.AtendimentoRepository;
@@ -148,107 +147,51 @@ public class AtendimentoService {
 		}
 	}
 
-	public void print() {
-		try {
-			AtendimentoReport r = new AtendimentoReport();
-			r.imprimir(this.findAll());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Atendimento> print() {
+		return this.findAll();
 	}
 
-	public void printByUnidadeBasicaSaude(Long aUnidadeBasicaSaude) {
-		try {
-			AtendimentoReport r = new AtendimentoReport();
-			r.imprimir(this.findByUnidadeBasicaSaude(aUnidadeBasicaSaude));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Atendimento> printByUnidadeBasicaSaude(Long aUnidadeBasicaSaude) {
+		return this.findByUnidadeBasicaSaude(aUnidadeBasicaSaude);
 	}
 
-	public void printByProfissional(Long aProfissional) {
-		try {
-			AtendimentoReport r = new AtendimentoReport();
-			r.imprimir(this.findByProfissional(aProfissional));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Atendimento> printByProfissional(Long aProfissional) {
+		return this.findByProfissional(aProfissional);
 	}
 
-	public void printByCidadao(Long aCidadao) {
-		try {
-			AtendimentoReport r = new AtendimentoReport();
-			r.imprimir(this.findByCidadao(aCidadao));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Atendimento> printByCidadao(Long aCidadao) {
+		return this.findByCidadao(aCidadao);
 	}
 
 	public List<Atendimento> printByDataAtendimentoBetween(Date aDataInicio, Date aDataFinal) {
 		return this.findByDataAtendimentoBetween(aDataInicio, aDataFinal);
 	}
 
-	public void printAdoecimento() {
-		try {
-			AtendimentoReport r = new AtendimentoReport();
-			r.imprimirAdoecimento(this.findAdoecimentoAll());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Atendimento> printAdoecimento() {
+		return this.findAdoecimentoAll();
 	}
 
-	public void printAdoecimentoByMunicipio(Long aMunicipio) {
-
-		try {
-			AtendimentoReport r = new AtendimentoReport();
-			r.imprimirAdoecimento(this.findAdoecimentoByMunicipioId(aMunicipio));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Atendimento> printAdoecimentoByMunicipio(Long aMunicipio) {
+		return this.findAdoecimentoByMunicipioId(aMunicipio);
 	}
 
-	public void printAdoecimentoByUbs(Long aUnidadeBasicaSaude) {
-		try {
-			AtendimentoReport r = new AtendimentoReport();
-			r.imprimirAdoecimento(this.findAdoecimentoByUbsId(aUnidadeBasicaSaude));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Atendimento> printAdoecimentoByUbs(Long aUnidadeBasicaSaude) {
+		return this.findAdoecimentoByUbsId(aUnidadeBasicaSaude);
 	}
 
-	public void printAdoecimentoByDataAtendimentoBetween(Date aDataInicio, Date aDataFinal) {
-		try {
-			AtendimentoReport r = new AtendimentoReport();
-			r.imprimirAdoecimento(this.findAdoecimentoByDataAtendimentoBetween(aDataInicio, aDataFinal));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Atendimento> printAdoecimentoByDataAtendimentoBetween(Date aDataInicio, Date aDataFinal) {
+		return this.findAdoecimentoByDataAtendimentoBetween(aDataInicio, aDataFinal);
 	}
 
-	public void printAtestado(Long aId) {
-		try {
-			AtendimentoReport r = new AtendimentoReport();
-			r.imprimirAtestado(this.findById(aId));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public Atendimento printAtestado(Long aId) {
+		return this.findById(aId);
 	}
 	
-	public void printReceita(Long aId) {
-		try {
-			AtendimentoReport r = new AtendimentoReport();
-			r.imprimirReceita(this.findById(aId));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public Atendimento printReceita(Long aId) {
+		return this.findById(aId);
 	}
 	
-	public void printExame(Long aId) {
-		try {
-			AtendimentoReport r = new AtendimentoReport();
-			r.imprimirExame(this.findById(aId));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public Atendimento printExame(Long aId) {
+		return this.findById(aId);
 	}
 }

@@ -3,6 +3,7 @@ package com.tcc.sisape.resource;
 import java.net.URI;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tcc.sisape.domain.Cidadao;
+import com.tcc.sisape.report.CidadaoReport;
 import com.tcc.sisape.service.CidadaoService;
 
 @CrossOrigin
@@ -70,15 +73,15 @@ public class CidadaoResource {
 		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/print", method = RequestMethod.GET)
-	public ResponseEntity<Void> print(@RequestParam(value = "nome", defaultValue = "") String aNome) {
+	@RequestMapping(value = "print", method = RequestMethod.GET)
+	@ResponseBody
+	public void print(HttpServletResponse response, @RequestParam(value = "nome", defaultValue = "") String aNome) {
+		CidadaoReport report = new CidadaoReport();
 		try {
-			cidadaoService.print(aNome);
+			report.imprimir(response, cidadaoService.print(aNome));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return ResponseEntity.noContent().build();
 	}
 }

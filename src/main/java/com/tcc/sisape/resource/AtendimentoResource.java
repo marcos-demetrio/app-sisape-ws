@@ -1,13 +1,10 @@
 package com.tcc.sisape.resource;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -31,17 +28,12 @@ import com.tcc.sisape.domain.Atendimento;
 import com.tcc.sisape.domain.AtendimentoExame;
 import com.tcc.sisape.domain.AtendimentoMedicamento;
 import com.tcc.sisape.domain.AtendimentoSintoma;
+import com.tcc.sisape.report.AtendimentoReport;
 import com.tcc.sisape.service.AgendamentoService;
 import com.tcc.sisape.service.AtendimentoService;
 import com.tcc.sisape.service.UnidadeBasicaSaudeService;
 
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @CrossOrigin
 @RestController
@@ -250,84 +242,59 @@ public class AtendimentoResource {
 				.body(atendimentoService.findByDataAtendimentoBetween(dataInicio, dataFinal));
 	}
 
-	@RequestMapping(value = "/print", method = RequestMethod.GET)
-	public ResponseEntity<Void> print() {
+	@RequestMapping(value = "print", method = RequestMethod.GET)
+	@ResponseBody
+	public void print(HttpServletResponse response) {
+		AtendimentoReport report = new AtendimentoReport();
 		try {
-			atendimentoService.print();
+			report.imprimir(response, atendimentoService.print());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/printUbs/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Void> printByUbsId(@PathVariable("id") Long aId) {
+	@RequestMapping(value = "printUbs/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void printByUbsId(HttpServletResponse response, @PathVariable("id") Long aId) {
+		AtendimentoReport report = new AtendimentoReport();
 		try {
-			atendimentoService.printByUnidadeBasicaSaude(aId);
+			report.imprimir(response, atendimentoService.printByUnidadeBasicaSaude(aId));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/printProfissional/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Void> printByProfissionalId(@PathVariable("id") Long aId) {
+	@RequestMapping(value = "printProfissional/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void printByProfissionalId(HttpServletResponse response, @PathVariable("id") Long aId) {
+		AtendimentoReport report = new AtendimentoReport();
 		try {
-			atendimentoService.printByProfissional(aId);
+			report.imprimir(response, atendimentoService.printByProfissional(aId));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/printCidadao/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Void> printByCidadaoId(@PathVariable("id") Long aId) {
+	@RequestMapping(value = "printCidadao/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void printByCidadaoId(HttpServletResponse response, @PathVariable("id") Long aId) {
+		AtendimentoReport report = new AtendimentoReport();
 		try {
-			atendimentoService.printByCidadao(aId);
+			report.imprimir(response, atendimentoService.printByCidadao(aId));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return ResponseEntity.noContent().build();
 	}
-
-	/*
-	 * @RequestMapping(value = "/printPeriodo", method = RequestMethod.GET)
-	 * public ResponseEntity<Void>
-	 * printByDataAtendimentoBetween(@RequestParam(value = "aDataInicio") String
-	 * aDataInicio,
-	 * 
-	 * @RequestParam(value = "aDataFinal") String aDataFinal) {
-	 * 
-	 * SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); Date
-	 * dataInicio = new Date(); Date dataFinal = new Date();
-	 * 
-	 * try { dataInicio = formatter.parse(aDataInicio); } catch (ParseException
-	 * e) { e.printStackTrace(); }
-	 * 
-	 * try { dataFinal = formatter.parse(aDataFinal); } catch (ParseException e)
-	 * { e.printStackTrace(); }
-	 * 
-	 * try { atendimentoService.printByDataAtendimentoBetween(dataInicio,
-	 * dataFinal); } catch (Exception e) { // TODO Auto-generated catch block
-	 * e.printStackTrace(); }
-	 * 
-	 * return ResponseEntity.noContent().build(); }
-	 */
 
 	@RequestMapping(value = "printPeriodo", method = RequestMethod.GET)
 	@ResponseBody
 	public void getRpt1(HttpServletResponse response, @RequestParam(value = "aDataInicio") String aDataInicio,
 			@RequestParam(value = "aDataFinal") String aDataFinal) throws JRException, IOException {
-		Map<String, Object> params = new HashMap<>();
-
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date dataInicio = new Date();
 		Date dataFinal = new Date();
@@ -343,60 +310,55 @@ public class AtendimentoResource {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
-		List<Atendimento> listaAtendimento = atendimentoService.printByDataAtendimentoBetween(dataInicio, dataFinal);
-
-		JasperReport jasperReport = JasperCompileManager.compileReport(
-				this.getClass().getClassLoader().getResource("").getPath() + "/jasper/reportAtendimento.jrxml");
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params,
-				new JRBeanCollectionDataSource(listaAtendimento));
-
-		// response.setContentType("application/pdf");
-		response.setContentType("application/x-pdf");
-		response.setHeader("Content-disposition", "inline; filename=Atendimento.pdf");
-
-		final OutputStream outStream = response.getOutputStream();
-		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
-	}
-
-	@RequestMapping(value = "/printAdoecimento", method = RequestMethod.GET)
-	public ResponseEntity<Void> printAdoecimento() {
+		
+		AtendimentoReport report = new AtendimentoReport();
 		try {
-			atendimentoService.printAdoecimento();
+			report.imprimir(response, atendimentoService.printByDataAtendimentoBetween(dataInicio, dataFinal));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/printAdoecimentoMunicipio/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Void> printAdoecimentoByMunicipioId(@PathVariable("id") Long aId) {
+	@RequestMapping(value = "printAdoecimento", method = RequestMethod.GET)
+	@ResponseBody
+	public void printAdoecimento(HttpServletResponse response) {
+		AtendimentoReport report = new AtendimentoReport();
 		try {
-			atendimentoService.printAdoecimentoByMunicipio(aId);
+			report.imprimirAdoecimento(response, atendimentoService.printAdoecimento());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/printAdoecimentoUbs/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Void> printAdoecimentoByUbsId(@PathVariable("id") Long aId) {
+	@RequestMapping(value = "printAdoecimentoMunicipio/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void printAdoecimentoByMunicipioId(HttpServletResponse response, @PathVariable("id") Long aId) {
+		AtendimentoReport report = new AtendimentoReport();
 		try {
-			atendimentoService.printAdoecimentoByUbs(aId);
+			report.imprimirAdoecimento(response, atendimentoService.printAdoecimentoByMunicipio(aId));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/printAdoecimentoPeriodo", method = RequestMethod.GET)
-	public ResponseEntity<Void> printAdoecimentoByDataAtendimentoBetween(
+	@RequestMapping(value = "printAdoecimentoUbs/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void printAdoecimentoByUbsId(HttpServletResponse response, @PathVariable("id") Long aId) {
+		AtendimentoReport report = new AtendimentoReport();
+		try {
+			report.imprimirAdoecimento(response, atendimentoService.printAdoecimentoByUbs(aId));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value = "printAdoecimentoPeriodo", method = RequestMethod.GET)
+	@ResponseBody
+	public void printAdoecimentoByDataAtendimentoBetween(HttpServletResponse response,
 			@RequestParam(value = "aDataInicio") String aDataInicio,
 
 			@RequestParam(value = "aDataFinal") String aDataFinal) {
@@ -417,49 +379,49 @@ public class AtendimentoResource {
 			e.printStackTrace();
 		}
 
+		AtendimentoReport report = new AtendimentoReport();
 		try {
-			atendimentoService.printAdoecimentoByDataAtendimentoBetween(dataInicio, dataFinal);
-		} catch (Exception e) { // TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return ResponseEntity.noContent().build();
-	}
-
-	@RequestMapping(value = "/printAtestado/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Void> printAtestado(@PathVariable("id") Long aId) {
-		try {
-			atendimentoService.printAtestado(aId);
+			report.imprimirAdoecimento(response, atendimentoService.printAdoecimentoByDataAtendimentoBetween(dataInicio, dataFinal));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/printReceita/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Void> printReceita(@PathVariable("id") Long aId) {
+	@RequestMapping(value = "printAtestado/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void printAtestado(HttpServletResponse response, @PathVariable("id") Long aId) {
+		AtendimentoReport report = new AtendimentoReport();
 		try {
-			atendimentoService.printReceita(aId);
+			report.imprimirAtestado(response, atendimentoService.printAtestado(aId));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/printExame/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Void> printExame(@PathVariable("id") Long aId) {
+	@RequestMapping(value = "printReceita/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void printReceita(HttpServletResponse response, @PathVariable("id") Long aId) {
+		AtendimentoReport report = new AtendimentoReport();
 		try {
-			atendimentoService.printExame(aId);
+			report.imprimirReceita(response, atendimentoService.printReceita(aId));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
 
-		return ResponseEntity.noContent().build();
+	@RequestMapping(value = "printExame/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void printExame(HttpServletResponse response, @PathVariable("id") Long aId) {
+		AtendimentoReport report = new AtendimentoReport();
+		try {
+			report.imprimirExame(response, atendimentoService.printExame(aId));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

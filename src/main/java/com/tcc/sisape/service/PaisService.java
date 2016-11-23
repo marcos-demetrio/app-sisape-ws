@@ -7,7 +7,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.Pais;
-import com.tcc.sisape.report.PaisReport;
 import com.tcc.sisape.repository.PaisRepository;
 import com.tcc.sisape.service.exceptions.PaisNaoEncontradoException;
 
@@ -55,12 +54,7 @@ public class PaisService {
 		paisRepository.save(aPais);
 	}
 
-	public void print(String aNome) {
-		try {
-			PaisReport r = new PaisReport();
-			r.imprimir(this.findByNome(aNome));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Pais> print(String aNome) {
+		return this.findByNome(aNome);
 	}
 }

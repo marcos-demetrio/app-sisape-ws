@@ -7,7 +7,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.Cidadao;
-import com.tcc.sisape.report.CidadaoReport;
 import com.tcc.sisape.repository.CidadaoRepository;
 import com.tcc.sisape.service.exceptions.CidadaoNaoEncontradoException;
 
@@ -55,12 +54,7 @@ public class CidadaoService {
 		cidadaoRepository.save(cidadao);
 	}
 
-	public void print(String aNome) {
-		try {
-			CidadaoReport r = new CidadaoReport();
-			r.imprimir(this.findByNome(aNome));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Cidadao> print(String aNome) {
+		return this.findByNome(aNome);
 	}
 }

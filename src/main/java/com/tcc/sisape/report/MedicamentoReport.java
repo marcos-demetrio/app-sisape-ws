@@ -1,7 +1,9 @@
 package com.tcc.sisape.report;
 
+import java.io.OutputStream;
 import java.util.List;
-import java.util.Random;
+
+import javax.servlet.http.HttpServletResponse;
 
 import com.tcc.sisape.domain.Medicamento;
 
@@ -19,15 +21,17 @@ public class MedicamentoReport {
 		this.pathToReportPackage = this.getClass().getClassLoader().getResource("").getPath() + "/jasper/";
 	}
 
-	public void imprimir(List<Medicamento> lista) throws Exception {
-		Random rand = new Random();
-
+	public void imprimir(HttpServletResponse response, List<Medicamento> lista) throws Exception {
 		JasperReport report = JasperCompileManager
 				.compileReport(this.getPathToReportPackage() + "reportMedicamento.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
 
-		JasperExportManager.exportReportToPdfFile(print, Math.abs(rand.nextInt()) + ".pdf");
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition", "inline; filename=medicamento.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(print, outStream);
 	}
 
 	public String getPathToReportPackage() {

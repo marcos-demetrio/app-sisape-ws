@@ -7,7 +7,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.ClassificacaoBrasileiraOcupacao;
-import com.tcc.sisape.report.ClassificacaoBrasileiraOcupacaoReport;
 import com.tcc.sisape.repository.ClassificacaoBrasileiraOcupacaoRepository;
 import com.tcc.sisape.service.exceptions.ClassificacaoBrasileiraOcupacaoNaoEncontradoException;
 
@@ -70,12 +69,7 @@ public class ClassificacaoBrasileiraOcupacaoService {
 		classificacaoBrasileiraOcupacaoRepository.save(aClassificacaoBrasileiraOcupacao);
 	}
 
-	public void print(String aNome, Long aCodigoCbo) {
-		try {
-			ClassificacaoBrasileiraOcupacaoReport r = new ClassificacaoBrasileiraOcupacaoReport();
-			r.imprimir(this.findByNomeContainingOrCodigoCbo(aNome));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<ClassificacaoBrasileiraOcupacao> print(String aNome, Long aCodigoCbo) {
+		return this.findByNomeContainingOrCodigoCbo(aNome);
 	}
 }

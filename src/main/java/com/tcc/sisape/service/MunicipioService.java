@@ -7,7 +7,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.Municipio;
-import com.tcc.sisape.report.MunicipioReport;
 import com.tcc.sisape.repository.MunicipioRepository;
 import com.tcc.sisape.service.exceptions.MunicipioNaoEncontradoException;
 
@@ -55,12 +54,7 @@ public class MunicipioService {
 		municipioRepository.save(aMunicipio);
 	}
 
-	public void print(String aNome) {
-		try {
-			MunicipioReport r = new MunicipioReport();
-			r.imprimir(this.findByNome(aNome));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Municipio> print(String aNome) {
+		return this.findByNome(aNome);
 	}
 }

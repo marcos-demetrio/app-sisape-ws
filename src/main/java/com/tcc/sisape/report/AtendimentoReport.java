@@ -1,8 +1,10 @@
 package com.tcc.sisape.report;
 
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import javax.servlet.http.HttpServletResponse;
 
 import com.tcc.sisape.domain.Atendimento;
 import com.tcc.sisape.domain.AtendimentoExame;
@@ -21,17 +23,6 @@ public class AtendimentoReport {
 
 	public AtendimentoReport() {
 		this.pathToReportPackage = this.getClass().getClassLoader().getResource("").getPath() + "/jasper/";
-	}
-
-	public void imprimir(List<Atendimento> lista) throws Exception {
-		Random rand = new Random();
-
-		JasperReport report = JasperCompileManager
-				.compileReport(this.getPathToReportPackage() + "reportAtendimento.jrxml");
-
-		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
-
-		JasperExportManager.exportReportToPdfFile(print, Math.abs(rand.nextInt()) + ".pdf");
 	}
 
 	public List<AdoecimentoReportData> getAdoecimento(List<Atendimento> lista) {
@@ -81,19 +72,6 @@ public class AtendimentoReport {
 		return retorno;
 	}
 
-	public void imprimirAdoecimento(List<Atendimento> lista) throws Exception {
-		Random rand = new Random();
-
-		List<AdoecimentoReportData> adoecimento = getAdoecimento(lista);
-
-		JasperReport report = JasperCompileManager
-				.compileReport(this.getPathToReportPackage() + "reportAdoecimento.jrxml");
-
-		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(adoecimento));
-
-		JasperExportManager.exportReportToPdfFile(print, Math.abs(rand.nextInt()) + ".pdf");
-	}
-
 	public List<AtendimentoAtestadoReportData> getAtestado(Atendimento atendimento) {
 		List<AtendimentoAtestadoReportData> retorno = new ArrayList<AtendimentoAtestadoReportData>();
 
@@ -110,7 +88,7 @@ public class AtendimentoReport {
 
 	public List<AtendimentoRequisicaoExameReportData> getRequisicaoExame(Atendimento atendimento) {
 		List<AtendimentoRequisicaoExameReportData> retorno = new ArrayList<AtendimentoRequisicaoExameReportData>();
-		
+
 		List<AtendimentoExame> exame = atendimento.getAtendimentoExame();
 		for (AtendimentoExame atendimentoExame : exame) {
 			AtendimentoRequisicaoExameReportData a = new AtendimentoRequisicaoExameReportData();
@@ -125,10 +103,10 @@ public class AtendimentoReport {
 
 		return retorno;
 	}
-	
+
 	public List<AtendimentoRequisicaoMedicamentoReportData> getRequisicaoMedicamento(Atendimento atendimento) {
 		List<AtendimentoRequisicaoMedicamentoReportData> retorno = new ArrayList<AtendimentoRequisicaoMedicamentoReportData>();
-		
+
 		List<AtendimentoMedicamento> medicamento = atendimento.getAtendimentoMedicamento();
 		for (AtendimentoMedicamento atendimentoMedicamento : medicamento) {
 			AtendimentoRequisicaoMedicamentoReportData a = new AtendimentoRequisicaoMedicamentoReportData();
@@ -145,9 +123,35 @@ public class AtendimentoReport {
 		return retorno;
 	}
 
-	public void imprimirAtestado(Atendimento atendimento) throws Exception {
-		Random rand = new Random();
+	public void imprimir(HttpServletResponse response, List<Atendimento> lista) throws Exception {
+		JasperReport report = JasperCompileManager
+				.compileReport(this.getPathToReportPackage() + "reportAtendimento.jrxml");
 
+		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
+
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition", "inline; filename=atendimento.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(print, outStream);
+	}
+
+	public void imprimirAdoecimento(HttpServletResponse response, List<Atendimento> lista) throws Exception {
+		List<AdoecimentoReportData> adoecimento = getAdoecimento(lista);
+
+		JasperReport report = JasperCompileManager
+				.compileReport(this.getPathToReportPackage() + "reportAdoecimento.jrxml");
+
+		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(adoecimento));
+
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition", "inline; filename=adoecimento.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(print, outStream);
+	}
+
+	public void imprimirAtestado(HttpServletResponse response, Atendimento atendimento) throws Exception {
 		List<AtendimentoAtestadoReportData> lista = getAtestado(atendimento);
 
 		JasperReport report = JasperCompileManager
@@ -155,24 +159,29 @@ public class AtendimentoReport {
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
 
-		JasperExportManager.exportReportToPdfFile(print, Math.abs(rand.nextInt()) + ".pdf");
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition", "inline; filename=atestado.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(print, outStream);
 	}
 
-	public void imprimirReceita(Atendimento atendimento) throws Exception {
-		Random rand = new Random();
-
+	public void imprimirReceita(HttpServletResponse response, Atendimento atendimento) throws Exception {
 		List<AtendimentoRequisicaoMedicamentoReportData> lista = getRequisicaoMedicamento(atendimento);
 
-		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "reportRequisicaoMedicamento.jrxml");
+		JasperReport report = JasperCompileManager
+				.compileReport(this.getPathToReportPackage() + "reportRequisicaoMedicamento.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
 
-		JasperExportManager.exportReportToPdfFile(print, Math.abs(rand.nextInt()) + ".pdf");
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition", "inline; filename=receita.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(print, outStream);
 	}
 
-	public void imprimirExame(Atendimento atendimento) throws Exception {
-		Random rand = new Random();
-
+	public void imprimirExame(HttpServletResponse response, Atendimento atendimento) throws Exception {
 		List<AtendimentoRequisicaoExameReportData> lista = getRequisicaoExame(atendimento);
 
 		JasperReport report = JasperCompileManager
@@ -180,7 +189,11 @@ public class AtendimentoReport {
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
 
-		JasperExportManager.exportReportToPdfFile(print, Math.abs(rand.nextInt()) + ".pdf");
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition", "inline; filename=exame.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(print, outStream);
 	}
 
 	public String getPathToReportPackage() {

@@ -7,7 +7,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.sisape.domain.Medicamento;
-import com.tcc.sisape.report.MedicamentoReport;
 import com.tcc.sisape.repository.MedicamentoRepository;
 import com.tcc.sisape.service.exceptions.MedicamentoNaoEncontradoException;
 
@@ -55,12 +54,7 @@ public class MedicamentoService {
 		medicamentoRepository.save(aMedicamento);
 	}
 
-	public void print(String aNome) {
-		try {
-			MedicamentoReport r = new MedicamentoReport();
-			r.imprimir(this.findByNome(aNome));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public List<Medicamento> print(String aNome) {
+		return this.findByNome(aNome);
 	}
 }
