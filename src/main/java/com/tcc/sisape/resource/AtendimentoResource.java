@@ -254,36 +254,36 @@ public class AtendimentoResource {
 		}
 	}
 
-	@RequestMapping(value = "printUbs/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "printUbs", method = RequestMethod.GET)
 	@ResponseBody
-	public void printByUbsId(HttpServletResponse response, @PathVariable("id") Long aId) {
+	public void printByUbsId(HttpServletResponse response, @RequestParam(value = "aUnidadeBasicaSaude") Long aUnidadeBasicaSaude) {
 		AtendimentoReport report = new AtendimentoReport();
 		try {
-			report.imprimir(response, atendimentoService.printByUnidadeBasicaSaude(aId));
+			report.imprimir(response, atendimentoService.printByUnidadeBasicaSaude(aUnidadeBasicaSaude));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	@RequestMapping(value = "printProfissional/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "printProfissional", method = RequestMethod.GET)
 	@ResponseBody
-	public void printByProfissionalId(HttpServletResponse response, @PathVariable("id") Long aId) {
+	public void printByProfissionalId(HttpServletResponse response, @RequestParam(value = "aProfissional") Long aProfissional) {
 		AtendimentoReport report = new AtendimentoReport();
 		try {
-			report.imprimir(response, atendimentoService.printByProfissional(aId));
+			report.imprimir(response, atendimentoService.printByProfissional(aProfissional));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	@RequestMapping(value = "printCidadao/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "printCidadao", method = RequestMethod.GET)
 	@ResponseBody
-	public void printByCidadaoId(HttpServletResponse response, @PathVariable("id") Long aId) {
+	public void printByCidadaoId(HttpServletResponse response, @RequestParam(value = "aCidadao") Long aCidadao) {
 		AtendimentoReport report = new AtendimentoReport();
 		try {
-			report.imprimir(response, atendimentoService.printByCidadao(aId));
+			report.imprimir(response, atendimentoService.printByCidadao(aCidadao));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -332,24 +332,24 @@ public class AtendimentoResource {
 		}
 	}
 
-	@RequestMapping(value = "printAdoecimentoMunicipio/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "printAdoecimentoMunicipio", method = RequestMethod.GET)
 	@ResponseBody
-	public void printAdoecimentoByMunicipioId(HttpServletResponse response, @PathVariable("id") Long aId) {
+	public void printAdoecimentoByMunicipioId(HttpServletResponse response, @RequestParam(value = "aMunicipio") Long aMunicipio) {
 		AtendimentoReport report = new AtendimentoReport();
 		try {
-			report.imprimirAdoecimento(response, atendimentoService.printAdoecimentoByMunicipio(aId));
+			report.imprimirAdoecimento(response, atendimentoService.printAdoecimentoByMunicipio(aMunicipio));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	@RequestMapping(value = "printAdoecimentoUbs/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "printAdoecimentoUbs", method = RequestMethod.GET)
 	@ResponseBody
-	public void printAdoecimentoByUbsId(HttpServletResponse response, @PathVariable("id") Long aId) {
+	public void printAdoecimentoByUbsId(HttpServletResponse response, @RequestParam(value = "aUnidadeBasicaSaude") Long aUnidadeBasicaSaude) {
 		AtendimentoReport report = new AtendimentoReport();
 		try {
-			report.imprimirAdoecimento(response, atendimentoService.printAdoecimentoByUbs(aId));
+			report.imprimirAdoecimento(response, atendimentoService.printAdoecimentoByUbs(aUnidadeBasicaSaude));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -388,36 +388,36 @@ public class AtendimentoResource {
 		}
 	}
 
-	@RequestMapping(value = "printAtestado/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "printAtestado", method = RequestMethod.GET)
 	@ResponseBody
-	public void printAtestado(HttpServletResponse response, @PathVariable("id") Long aId) {
+	public void printAtestado(HttpServletResponse response, @RequestParam(value = "aAtendimento") Long aAtendimento) {
 		AtendimentoReport report = new AtendimentoReport();
 		try {
-			report.imprimirAtestado(response, atendimentoService.printAtestado(aId));
+			report.imprimirAtestado(response, atendimentoService.printAtestado(aAtendimento));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	@RequestMapping(value = "printReceita/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "printReceita", method = RequestMethod.GET)
 	@ResponseBody
-	public void printReceita(HttpServletResponse response, @PathVariable("id") Long aId) {
+	public void printReceita(HttpServletResponse response, @RequestParam(value = "aAtendimento") Long aAtendimento) {
 		AtendimentoReport report = new AtendimentoReport();
 		try {
-			report.imprimirReceita(response, atendimentoService.printReceita(aId));
+			report.imprimirReceita(response, atendimentoService.printReceita(aAtendimento));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	@RequestMapping(value = "printExame/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "printExame", method = RequestMethod.GET)
 	@ResponseBody
-	public void printExame(HttpServletResponse response, @PathVariable("id") Long aId) {
+	public void printExame(HttpServletResponse response, @RequestParam(value = "aAtendimento") Long aAtendimento) {
 		AtendimentoReport report = new AtendimentoReport();
 		try {
-			report.imprimirExame(response, atendimentoService.printExame(aId));
+			report.imprimirExame(response, atendimentoService.printExame(aAtendimento));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

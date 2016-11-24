@@ -5,7 +5,7 @@
 	<property name="ireport.y" value="0"/>
 	<field name="nome" class="java.lang.String"/>
 	<field name="sigla" class="java.lang.String"/>
-	<field name="pais" class="java.lang.String"/>
+	<field name="pais.nome" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
